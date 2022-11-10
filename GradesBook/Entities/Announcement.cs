@@ -1,10 +1,10 @@
 ﻿namespace GradesBook.Entities
 {
-    public class Anaucement
+    public class Announcement
     {
         public int Id { get; set; }
         public string Value { get; set; }
         public  DateTime Date { get; set; }
-        public  string Type { get; set; }
+        public  string TypeId { get; set; }
       }
 }
