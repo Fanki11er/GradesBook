@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradesBook.Migrations
 {
     [DbContext(typeof(GradesBookDbContext))]
-    [Migration("20221110222415_Init")]
+    [Migration("20221111125555_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -33,6 +33,9 @@ namespace GradesBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AnnouncementTypeId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -45,6 +48,8 @@ namespace GradesBook.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AnnouncementTypeId");
 
                     b.ToTable("Announcements");
                 });
@@ -79,13 +84,13 @@ namespace GradesBook.Migrations
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
-                    b.Property<int>("PrgoramId")
+                    b.Property<int?>("PrgoramId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProgramId")
+                    b.Property<int?>("ProgramId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupervisingteacherId")
+                    b.Property<int?>("SupervisingteacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -106,9 +111,11 @@ namespace GradesBook.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("getutcdate()");
 
-                    b.Property<int?>("StudentId")
+                    b.Property<int>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -120,6 +127,8 @@ namespace GradesBook.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("StudentId");
+
+                    b.HasIndex("SubjectId");
 
                     b.ToTable("Grades");
                 });
@@ -178,7 +187,7 @@ namespace GradesBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ClassId")
+                    b.Property<int?>("ClassId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -193,6 +202,9 @@ namespace GradesBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ParentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ParrentId")
                         .HasColumnType("int");
 
@@ -203,6 +215,8 @@ namespace GradesBook.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Students");
                 });
@@ -220,12 +234,7 @@ namespace GradesBook.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("ProgramId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProgramId");
 
                     b.ToTable("Subjects");
                 });
@@ -254,24 +263,53 @@ namespace GradesBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SubjectId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("SubjectId")
+                        .IsUnique()
+                        .HasFilter("[SubjectId] IS NOT NULL");
+
                     b.ToTable("Teacher");
+                });
+
+            modelBuilder.Entity("ProgramSubject", b =>
+                {
+                    b.Property<int>("ProgramsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProgramsId", "SubjectsId");
+
+                    b.HasIndex("SubjectsId");
+
+                    b.ToTable("ProgramSubject");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.Announcement", b =>
+                {
+                    b.HasOne("GradesBook.Entities.AnnouncementType", "AnnouncementType")
+                        .WithMany("Announcements")
+                        .HasForeignKey("AnnouncementTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AnnouncementType");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Class", b =>
                 {
                     b.HasOne("GradesBook.Entities.Program", "Program")
-                        .WithMany()
-                        .HasForeignKey("ProgramId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("Classs")
+                        .HasForeignKey("ProgramId");
 
                     b.HasOne("GradesBook.Entities.Teacher", "Supervisingteacher")
-                        .WithMany()
-                        .HasForeignKey("SupervisingteacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("SupervisingClasses")
+                        .HasForeignKey("SupervisingteacherId");
 
                     b.Navigation("Program");
 
@@ -280,25 +318,66 @@ namespace GradesBook.Migrations
 
             modelBuilder.Entity("GradesBook.Entities.Grade", b =>
                 {
-                    b.HasOne("GradesBook.Entities.Student", null)
+                    b.HasOne("GradesBook.Entities.Student", "Student")
                         .WithMany("Grades")
-                        .HasForeignKey("StudentId");
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GradesBook.Entities.Subject", "Subject")
+                        .WithMany("Grades")
+                        .HasForeignKey("SubjectId")
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Subject");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Student", b =>
                 {
-                    b.HasOne("GradesBook.Entities.Class", null)
+                    b.HasOne("GradesBook.Entities.Class", "StudentClass")
                         .WithMany("Students")
-                        .HasForeignKey("ClassId")
+                        .HasForeignKey("ClassId");
+
+                    b.HasOne("GradesBook.Entities.Parent", "Parent")
+                        .WithMany("Students")
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("StudentClass");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.Teacher", b =>
+                {
+                    b.HasOne("GradesBook.Entities.Subject", "Subject")
+                        .WithOne("Teacher")
+                        .HasForeignKey("GradesBook.Entities.Teacher", "SubjectId");
+
+                    b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("ProgramSubject", b =>
+                {
+                    b.HasOne("GradesBook.Entities.Program", null)
+                        .WithMany()
+                        .HasForeignKey("ProgramsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GradesBook.Entities.Subject", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("GradesBook.Entities.Subject", b =>
+            modelBuilder.Entity("GradesBook.Entities.AnnouncementType", b =>
                 {
-                    b.HasOne("GradesBook.Entities.Program", null)
-                        .WithMany("Subjects")
-                        .HasForeignKey("ProgramId");
+                    b.Navigation("Announcements");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Class", b =>
@@ -306,14 +385,31 @@ namespace GradesBook.Migrations
                     b.Navigation("Students");
                 });
 
+            modelBuilder.Entity("GradesBook.Entities.Parent", b =>
+                {
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("GradesBook.Entities.Program", b =>
                 {
-                    b.Navigation("Subjects");
+                    b.Navigation("Classs");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Student", b =>
                 {
                     b.Navigation("Grades");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.Subject", b =>
+                {
+                    b.Navigation("Grades");
+
+                    b.Navigation("Teacher");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.Teacher", b =>
+                {
+                    b.Navigation("SupervisingClasses");
                 });
 #pragma warning restore 612, 618
         }

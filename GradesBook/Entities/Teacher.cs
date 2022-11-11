@@ -4,10 +4,11 @@ namespace GradesBook.Entities
 {
     public class Teacher :User
     {
-        /*public Teacher(string firstName, string lastName, string email, string password) : base(firstName, lastName, email, password)
-        {
+        public List<Class> SupervisingClasses { get; set; } = new List<Class>();
+        public int? SubjectId { get; set; }
+        public Subject? Subject { get; set; }    
 
-        */
+
 
 
     }

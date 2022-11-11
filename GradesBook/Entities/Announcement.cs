@@ -6,5 +6,7 @@
         public string Value { get; set; }
         public  DateTime Date { get; set; }
         public  string TypeId { get; set; }
+
+        public AnnouncementType AnnouncementType { get; set; }
       }
 }
