@@ -1,5 +1,8 @@
 export const routes = {
   baseRoute: "/",
   loginPage: "/Login",
-  registerPage: "Register",
+  registerPage: "/Register",
+  classes: "/Class",
+  program: "/Program",
+  setting: "/Setting",
 };
