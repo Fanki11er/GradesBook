@@ -113,7 +113,7 @@ namespace GradesBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teacher",
+                name: "Teachers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -126,9 +126,9 @@ namespace GradesBook.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teacher", x => x.Id);
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teacher_Subjects_SubjectId",
+                        name: "FK_Teachers_Subjects_SubjectId",
                         column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id");
@@ -154,9 +154,9 @@ namespace GradesBook.Migrations
                         principalTable: "Programs",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Classes_Teacher_SupervisingteacherId",
+                        name: "FK_Classes_Teachers_SupervisingteacherId",
                         column: x => x.SupervisingteacherId,
-                        principalTable: "Teacher",
+                        principalTable: "Teachers",
                         principalColumn: "Id");
                 });
 
@@ -258,8 +258,8 @@ namespace GradesBook.Migrations
                 column: "ParentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teacher_SubjectId",
-                table: "Teacher",
+                name: "IX_Teachers_SubjectId",
+                table: "Teachers",
                 column: "SubjectId",
                 unique: true,
                 filter: "[SubjectId] IS NOT NULL");
@@ -293,7 +293,7 @@ namespace GradesBook.Migrations
                 name: "Programs");
 
             migrationBuilder.DropTable(
-                name: "Teacher");
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "Subjects");

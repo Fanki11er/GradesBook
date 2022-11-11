@@ -13,6 +13,7 @@ builder.Services.AddDbContext<GradesBookDbContext>(
     );
 
 builder.Services.AddScoped<DatabaseSeeder, DatabaseSeeder>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

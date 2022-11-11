@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradesBook.Migrations
 {
     [DbContext(typeof(GradesBookDbContext))]
-    [Migration("20221111125555_Init")]
+    [Migration("20221111161418_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -272,7 +272,7 @@ namespace GradesBook.Migrations
                         .IsUnique()
                         .HasFilter("[SubjectId] IS NOT NULL");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("ProgramSubject", b =>

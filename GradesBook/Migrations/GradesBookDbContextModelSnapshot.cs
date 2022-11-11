@@ -269,7 +269,7 @@ namespace GradesBook.Migrations
                         .IsUnique()
                         .HasFilter("[SubjectId] IS NOT NULL");
 
-                    b.ToTable("Teacher");
+                    b.ToTable("Teachers");
                 });
 
             modelBuilder.Entity("ProgramSubject", b =>
