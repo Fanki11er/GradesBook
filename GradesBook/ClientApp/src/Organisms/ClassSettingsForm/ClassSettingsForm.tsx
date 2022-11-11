@@ -19,7 +19,7 @@ const ClassSettingsForm = () => {
 
   useEffect(() => {
     axios
-      .get("https://192.168.1.129:7291/Class")
+      .get("https://localhost:7291/Class/Settings/1")
       .then((d) => {
         console.log(d.data);
       })
