@@ -15,12 +15,13 @@ namespace GradesBook.Controllers
 
         public ClassesController(GradesBookDbContext dbContext, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _dbContext = dbContext; 
             _mapper = mapper;
         }
 
         public ActionResult<IEnumerable<Class>> GetAll()
         {
+            
             var classes = _dbContext.Classes
                .ToList();
             return Ok(classes);
