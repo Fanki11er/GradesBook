@@ -1,8 +1,12 @@
 import { Routes, Route, Outlet } from "react-router-dom";
 import { routes } from "./Routes/routes";
+import ClassesView from "./View/ClassesView/ClassesView";
+import ClassSettings from "./View/ClassSettings/ClassSettings";
+import ProgramsView from "./View/ProgramsView/ProgramsView";
 
 const App = () => {
-  const { baseRoute, loginPage, registerPage } = routes;
+  const { baseRoute, loginPage, registerPage, classes, program, setting } =
+    routes;
   return (
     <Routes>
       <Route
@@ -13,6 +17,9 @@ const App = () => {
         }
       >
         <Route index path={baseRoute} element={<div>Landing page</div>} />
+        <Route path={classes} element={<ClassesView />} />
+        <Route path={program} element={<ProgramsView />} />
+        <Route path={setting} element={<ClassSettings />} />
         <Route path={loginPage} element={<div>Login page</div>} />
         <Route path={registerPage} element={<div>RegisterPage</div>} />
         <Route path={"*"} element={<div>LandingPage</div>} />
