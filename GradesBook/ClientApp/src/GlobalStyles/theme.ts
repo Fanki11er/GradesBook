@@ -1,5 +1,21 @@
+const colorsSchemes: ColorsSchemes = {
+  light: {
+    mainBackground: "white",
+    menuBackground: "rgba(217, 217, 217, 1)",
+  },
+  dark: {
+    mainBackground: "rgba(47, 46, 65, 1)",
+    menuBackground: "gray",
+  },
+};
+
+export type Colors = {
+  mainBackground: string;
+  menuBackground: string;
+};
+
 export const theme: Theme = {
-  colors: {},
+  colors: colorsSchemes.dark,
   fontSizes: {},
 
   devices: {
@@ -10,7 +26,7 @@ export const theme: Theme = {
 };
 
 export type Theme = {
-  colors: {};
+  colors: Colors;
   fontSizes: {};
 
   devices: {
@@ -23,3 +39,16 @@ export type Theme = {
 export type StyledTheme = {
   theme: Theme;
 };
+
+export type ColorsSchemes = {
+  light: Colors;
+  dark: Colors;
+};
+
+type ColorSchemasTypes = "light" | "dark";
+
+export const setColorsSchema = (scheme: ColorSchemasTypes) => {
+  theme.colors = colorsSchemes[scheme];
+};
+
+//setColorsSchema("dark");

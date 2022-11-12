@@ -33,3 +33,8 @@ export const ButtonAdded = styled.button`
   height: 60px;
   background-color: rgba(217, 217, 217, 1);
 `;
+
+export const SideMenuButton = styled(Button)`
+  width: 170px;
+  height: 40px;
+`;

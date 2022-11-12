@@ -5,4 +5,5 @@ export const routes = {
   classes: "/Class",
   program: "/Program",
   setting: "/Setting",
+  parentView: "/Parent",
 };
