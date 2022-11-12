@@ -10,7 +10,8 @@ namespace GradesBook.MappingProfiles
         {
             CreateMap<CreateClassDto, Class>();
 
-            CreateMap<Class, ClassStuentsSettingsDto>();
+            CreateMap<Class, ClassStuentsSettingsDto>()
+                .ForMember(x => x.SupervisingTeacherName, m => m.MapFrom(t => t.Supervisingteacher != null ? t.Supervisingteacher.FirstName + " " + t.Supervisingteacher.LastName: "" ));
 
             CreateMap<Student, LightStudentDto>().ForMember(s => s.StudentName, m => m.MapFrom(x => x.FirstName + " " + x.LastName));
 
@@ -24,6 +25,10 @@ namespace GradesBook.MappingProfiles
                 .ForMember(c => c.ClassId, m => m.MapFrom(v => v.Id))
                 .ForMember(c => c.ProgramName, m => m.MapFrom(v => v.Program != null ? v.Program.Name : null))
                 .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.Supervisingteacher != null ? v.Supervisingteacher.FirstName + " " + v.Supervisingteacher.LastName : null));
+
+            CreateMap<Class, ClassNameWithSupervisorDto>()
+                .ForMember(c => c.SupervisorName, m => m.MapFrom(s => s.Supervisingteacher != null ? s.Supervisingteacher.FirstName + " " + s.Supervisingteacher.LastName : " "))
+                .ForMember(c => c.StudentsNumber, m => m.MapFrom(s => s.Students != null? s.Students.Count() : 0   ));
         }
     }
 }
