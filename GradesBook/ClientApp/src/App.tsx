@@ -2,6 +2,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { routes } from "./Routes/routes";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
+import LandingPage from "./View/LandingPage/LandingPage";
 import ParentView from "./View/ParentView/ParentView";
 import ProgramsView from "./View/ProgramsView/ProgramsView";
 
@@ -24,7 +25,7 @@ const App = () => {
           </div>
         }
       >
-        <Route index path={baseRoute} element={<div>Landing page</div>} />
+        <Route index path={baseRoute} element={<LandingPage />} />
         <Route path={classes} element={<ClassesView />} />
         <Route path={program} element={<ProgramsView />} />
         <Route path={setting} element={<ClassSettings />} />

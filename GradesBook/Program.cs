@@ -16,6 +16,9 @@ builder.Services.AddDbContext<GradesBookDbContext>(
 builder.Services.AddScoped<DatabaseSeeder, DatabaseSeeder>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IClassService, ClassService>();
+builder.Services.AddScoped<IStuentService, ParenntService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IProgramService, ProgramService>();
 
 var app = builder.Build();
 

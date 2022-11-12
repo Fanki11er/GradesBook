@@ -2,16 +2,19 @@ const colorsSchemes: ColorsSchemes = {
   light: {
     mainBackground: "white",
     menuBackground: "rgba(217, 217, 217, 1)",
+    transparentBlack: "rgba(255, 255, 255, 0.5)",
   },
   dark: {
     mainBackground: "rgba(47, 46, 65, 1)",
     menuBackground: "gray",
+    transparentBlack: "rgba(0, 0, 0, 0.7)",
   },
 };
 
 export type Colors = {
   mainBackground: string;
   menuBackground: string;
+  transparentBlack: string;
 };
 
 export const theme: Theme = {

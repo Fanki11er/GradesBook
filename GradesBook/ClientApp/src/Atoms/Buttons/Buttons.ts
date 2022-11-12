@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Button = styled.button`
@@ -6,6 +7,11 @@ export const Button = styled.button`
   border-radius: 10px;
   border: 2px solid black;
   background-color: rgba(217, 217, 217, 1);
+  transition: all 0.5s;
+  :hover {
+    border: 2px solid orange;
+    cursor: pointer;
+  }
 `;
 
 export const ButtonEdit = styled(Button)`
@@ -37,4 +43,16 @@ export const ButtonAdded = styled.button`
 export const SideMenuButton = styled(Button)`
   width: 170px;
   height: 40px;
+`;
+
+export const LinkButton = styled(Link)`
+  width: 120px;
+  height: 35px;
+  border-radius: 8px;
+  border: 2px solid orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: orange;
 `;

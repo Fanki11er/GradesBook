@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ParentViewWrapper = styled.div`
+  position: relative;
   width: 100%;
   min-height: 100vh;
   background-color: ${(props: StyledTheme) =>

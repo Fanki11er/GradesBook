@@ -1,29 +1,30 @@
 ﻿using GradesBook.Entities;
+using GradesBook.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GradesBook.Controllers
 {
+    [Route("Program")]
     public class ProgramsController : ControllerBase
     {
 
-        private readonly GradesBookDbContext _dbContext;
+        private readonly IProgramService _programService;
 
-        public ProgramsController(GradesBookDbContext dbContext)
+        public ProgramsController(IProgramService programService)
         {
-            _dbContext = dbContext;
+            _programService = programService;
         }
 
         public ActionResult<IEnumerable<Entities.Program>> GetAll()
         {
-            var programs = _dbContext.Programs.ToList();
-            return Ok(programs);
+            return Ok(_programService.GetAllPrograms());
         }
         [HttpGet("{id}")]
         public ActionResult<Entities.Program> Get([FromRoute] int id)
         {
-            var program = _dbContext.Programs.FirstOrDefault((c) => c.Id == id);
+            var program = _programService.GetProgram(id);
 
-            if (program == null)
+            if (program is null)
             {
                 return NotFound();
             }

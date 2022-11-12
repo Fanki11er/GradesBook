@@ -11,14 +11,11 @@ namespace GradesBook.Controllers
     public class ClassesController : ControllerBase
     {
         
-        //private readonly GradesBookDbContext _dbContext;
-        //private readonly IMapper _mapper;
         private readonly IClassService _classService;
 
         public ClassesController(GradesBookDbContext dbContext, IMapper mapper, IClassService classService)
         {
-            //_dbContext = dbContext; 
-            //_mapper = mapper;
+            
             _classService = classService;
         }
 
@@ -30,7 +27,6 @@ namespace GradesBook.Controllers
 
         }
 
-       
 
         [HttpGet("{id}")]
         public ActionResult<Class> Get([FromRoute] int id)
@@ -54,12 +50,7 @@ namespace GradesBook.Controllers
             {
                 return NotFound();
             }
-           
-
-
-
-                return Ok(selectedClass);
-            
+                return Ok(selectedClass); 
         }
        
 
