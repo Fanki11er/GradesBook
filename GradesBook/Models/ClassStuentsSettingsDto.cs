@@ -7,10 +7,10 @@ namespace GradesBook.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<Student> Students { get; set; }
-        public List<Student> FreeStudents { get; set; }
+        public List<LightStudentDto> StudentsLIst { get; set; }
+        public List<LightStudentDto> FreeStudentsList { get; set; }
 
-        public Teacher? Supervisingteacher { get; set; }
+        public string? SupervisingTeacherName { get; set; }
 
 
     }

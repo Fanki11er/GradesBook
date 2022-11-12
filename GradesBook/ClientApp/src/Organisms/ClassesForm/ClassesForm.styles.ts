@@ -6,7 +6,7 @@ export const ClassesFormWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 500px;
-  height: 500px;
+  height: auto;
   background-color: rgba(217, 217, 217, 1);
 `;
 

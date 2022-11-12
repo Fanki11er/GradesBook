@@ -1,15 +1,13 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import {
   ButtonEdit,
-  ButtonGrades,
   ButtonItemList,
   ButtonSend,
 } from "../../Atoms/Buttons/Buttons";
-import {
-  ClassStudentListsFormWrapper,
-  RateCircle,
-  StudentList,
-  StudentText,
-} from "../ClassStudentListsForm/ClassStudentListsForm.styles";
+import { ClassWithStudentsAndProgram } from "../../Types/Types";
+import ClassStudentListsForm from "../ClassStudentListsForm/ClassStudentListsForm";
+
 import {
   ImgPrograms,
   ProgramsFormWrapper,
@@ -19,36 +17,44 @@ import {
 } from "./ProgramsForm.styles";
 
 const ProgramsForm = () => {
+  const [data, setData] = useState<ClassWithStudentsAndProgram | null>(null);
+
+  useEffect(() => {
+    axios
+      .get("https://localhost:7291/Class/ClassStudentsInfo/1")
+      .then((response) => {
+        const data = response.data as ClassWithStudentsAndProgram;
+        setData(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
     <ProgramsFormWrapper>
       <ProgramsHeaderWrapper>
-        <ProgramsHeaderText>Klasa 1A</ProgramsHeaderText>
+        <ProgramsHeaderText>{`Klasa: ${
+          data ? data.className : ""
+        }`}</ProgramsHeaderText>
         <ImgPrograms />
-        <ProgramsText>Jan Kowalski</ProgramsText>
+        <ProgramsText>{`Wychowawca: ${
+          data && data.supervisingTeacher
+            ? data.supervisingTeacher
+            : "Jan KOwalski"
+        }`}</ProgramsText>
         <ButtonEdit>Edytuj</ButtonEdit>
       </ProgramsHeaderWrapper>
-      <ButtonItemList>Program: Lista Przedmiotów</ButtonItemList>
+
+      <ButtonItemList>{`Program: ${
+        data && data.programName ? data.programName : ""
+      }`}</ButtonItemList>
+
       <ButtonSend>Wyślij ogłoszenie</ButtonSend>
-      <ClassStudentListsFormWrapper>
-        <StudentList>
-          <RateCircle>2.3</RateCircle>
-          <StudentText>Jan Kowalski</StudentText>
-          <ButtonGrades>Oceń</ButtonGrades>
-          <ButtonGrades>Oceny</ButtonGrades>
-        </StudentList>
-        <StudentList>
-          <RateCircle>2.3</RateCircle>
-          <StudentText>Jan Kowalski</StudentText>
-          <ButtonGrades>Oceń</ButtonGrades>
-          <ButtonGrades>Oceny</ButtonGrades>
-        </StudentList>
-        <StudentList>
-          <RateCircle>2.3</RateCircle>
-          <StudentText>Jan Kowalski</StudentText>
-          <ButtonGrades>Oceń</ButtonGrades>
-          <ButtonGrades>Oceny</ButtonGrades>
-        </StudentList>
-      </ClassStudentListsFormWrapper>
+
+      <ClassStudentListsForm
+        studentsWithGradesAverages={data ? data.studentsList : []}
+      />
     </ProgramsFormWrapper>
   );
 };

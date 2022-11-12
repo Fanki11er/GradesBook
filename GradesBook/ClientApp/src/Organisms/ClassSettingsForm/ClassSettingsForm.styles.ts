@@ -19,6 +19,9 @@ export const ClassSettingHeaderWrapper = styled.div`
 `;
 
 export const ClassSettingHeaderText = styled.h2`
+  display: flex;
+  align-items: flex-start;
+  width: 150px;
   color: white;
 `;
 
@@ -33,11 +36,14 @@ export const TeacherInfoWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: 400px;
   padding: 0 20px;
 `;
 
 export const ClassSettingText = styled.span`
+  display: flex;
+  align-items: flex-start;
+  width: 270px;
   color: white;
 `;
 
@@ -49,9 +55,7 @@ export const ListsWrapper = styled.div`
   grid-template-rows: 1fr;
   align-items: center;
   justify-content: center;
-  ///justify-self: center;
   justify-items: center;
-  background-color: red;
 `;
 
 export const ButtonWrapper = styled.div`

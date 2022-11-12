@@ -54,15 +54,31 @@ namespace GradesBook.Controllers
             }
             else
             {
-               var settings =  _mapper.Map<ClassStuentsSettingsDto>(selectedClass);
 
-               settings.FreeStudents = _dbContext.Students.Where(s => s.StudentClass != null).ToList();
+
+                var freeStudents = _dbContext.Students.Where(s => s.StudentClass != null);
+                var classStudents = _dbContext.Students.Where(s => s.StudentClass.Id == id);
+
+                var settings = _mapper.Map<ClassStuentsSettingsDto>(selectedClass);
+
+                settings.StudentsLIst = classStudents.Select(s => _mapper.Map<LightStudentDto>(s)).ToList();
+                settings.FreeStudentsList = freeStudents.Select(s => _mapper.Map<LightStudentDto>(s)).ToList();
+
+
+                if (selectedClass.Supervisingteacher != null)
+                {
+                    settings.SupervisingTeacherName = selectedClass.Supervisingteacher.FirstName + " " + selectedClass.Supervisingteacher.LastName;
+                }
+                else
+                {
+                    settings.SupervisingTeacherName = null;
+                }
+
+
 
                 return Ok(settings);
             }
         }
-
-        [HttpGet("Settings{id}")]
        
 
         [HttpGet("LightClassInfo")]
@@ -93,6 +109,31 @@ namespace GradesBook.Controllers
             return Conflict();
            
             
+        }
+
+        [HttpGet("ClassStudentsInfo/{id}")]
+        public ActionResult<ClassWithStudentsAndProgramDto> GetClassStudentsInfo([FromRoute] int id)
+        {
+            var selectedClass = _dbContext.Classes.FirstOrDefault((c) => c.Id == id);
+
+            if (selectedClass == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+
+
+                var classStudents = _dbContext.Students.Where(s => s.StudentClass.Id == id);
+
+                var classStudentsWithGradesAverages = classStudents.Select(s => _mapper.Map<StudentWithGradesAverageDto>(s)).ToList();
+
+                var classStudentsInfo = _mapper.Map<ClassWithStudentsAndProgramDto>(selectedClass);
+
+                classStudentsInfo.StudentsList = classStudentsWithGradesAverages;
+
+                return Ok(classStudentsInfo);
+            }
         }
 
     }
