@@ -5,6 +5,6 @@ export const ClassesViewWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: rgba(47, 46, 65, 1);
 `;
