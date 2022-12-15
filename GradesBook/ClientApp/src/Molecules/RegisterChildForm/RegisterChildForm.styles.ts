@@ -6,14 +6,14 @@ export const RegisterChildFormWrapper = styled(Form)`
   display: grid;
   justify-content: center;
   align-items: center;
-  padding: 25px;
-  grid-template-rows: 50px 1fr 50px;
+  padding: 40px 25px;
+  grid-auto-rows: auto;
   width: 450px;
   height: auto;
   border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
-  row-gap: 30px; ;
+  row-gap: 40px; ;
 `;
 
 export const RegisterChildFormInputsWrapper = styled.div`

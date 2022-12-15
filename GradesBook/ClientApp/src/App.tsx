@@ -9,25 +9,28 @@ import ProgramsView from "./View/ProgramsView/ProgramsView";
 import RegistrationView from "./View/RegistrationView/RegistrationView";
 import Template from "./View/Template/Template";
 import AuthenticatedTemplate from "./View/Template/AuthenticatedTemplate/AuthenticatedTemplate";
+import UserProvider from "./Providers/UserProvider";
 
 const App = () => {
   const { baseRoute, classes, program, setting, register, login, parentView } =
     routes;
   return (
-    <Routes>
-      <Route element={<Template />}>
-        <Route index path={baseRoute} element={<LandingPage />} />
-        <Route path={login} element={<LoginView />} />
-        <Route path={register} element={<RegistrationView />} />
-        <Route element={<AuthenticatedTemplate />}>
-          <Route path={classes} element={<ClassesView />} />
-          <Route path={program} element={<ProgramsView />} />
-          <Route path={setting} element={<ClassSettings />} />
-          <Route path={parentView} element={<ParentView />} />
+    <UserProvider>
+      <Routes>
+        <Route element={<Template />}>
+          <Route index path={baseRoute} element={<LandingPage />} />
+          <Route path={login} element={<LoginView />} />
+          <Route path={register} element={<RegistrationView />} />
+          <Route element={<AuthenticatedTemplate />}>
+            <Route path={classes} element={<ClassesView />} />
+            <Route path={program} element={<ProgramsView />} />
+            <Route path={setting} element={<ClassSettings />} />
+            <Route path={parentView} element={<ParentView />} />
+          </Route>
+          <Route path={"*"} element={<LandingPage />} />
         </Route>
-        <Route path={"*"} element={<LandingPage />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </UserProvider>
   );
 };
 

@@ -6,7 +6,7 @@ export const ParentViewChildrenListElement = styled.li`
   height: 45px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   display: grid;
-  grid-template-columns: 40px 1fr 80px;
+  grid-template-columns: 40px 1fr 100px 80px;
   grid-column-gap: 10px;
   padding: 0 15px;
   border-radius: 10px;
@@ -30,3 +30,5 @@ export const StudentNameInfo = styled.span`
   height: 100%;
   align-items: center;
 `;
+
+export const StudentClassInfo = styled(StudentNameInfo)``;

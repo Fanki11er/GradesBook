@@ -8,29 +8,38 @@ import {
   ParentViewWrapper,
   SectionsWrapper,
 } from "./ParentView.styles";
-import { StudentsWithGradesAverage } from "../../Types/Types";
-import axios from "axios";
+import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
 import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
+import axios from "../../Api/axios";
+import { endpoints } from "../../Api/Endpoints";
 
 const ParentView = () => {
-  const [childrenList, setChildrenList] = useState<StudentsWithGradesAverage[]>(
-    []
-  );
+  const { getParentsChildren } = endpoints;
+  const [childrenList, setChildrenList] = useState<
+    StudentsWithClassAndGradesAverage[]
+  >([]);
   const { isOpened, handleToggleModal } = useModal();
 
-  useEffect(() => {
+  const getData = () => {
     axios
-      .get("https://localhost:7291/Student/1")
+      .get(getParentsChildren)
       .then((response) => {
-        const data = response.data as StudentsWithGradesAverage[];
+        const data = response.data as StudentsWithClassAndGradesAverage[];
 
         setChildrenList(data);
       })
       .catch((e) => {
         console.log(e);
       });
+  };
+
+  useEffect(() => {
+    //!!!!!!!!!!!!!!!! Change to axios Private
+    getData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -51,7 +60,10 @@ const ParentView = () => {
       </SectionsWrapper>
 
       <Modal isModalOpened={isOpened}>
-        <RegisterChildForm handleModalToggle={handleToggleModal} />
+        <RegisterChildForm
+          handleModalToggle={handleToggleModal}
+          refreshData={getData}
+        />
       </Modal>
     </ParentViewWrapper>
   );

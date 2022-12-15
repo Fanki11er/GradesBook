@@ -9,6 +9,7 @@ const colorsSchemes: ColorsSchemes = {
     red: "rgba(203, 133, 129, 1)",
     green: "rgba(143, 203, 128, 1)",
     yellow: "rgba(225, 216, 136, 1)",
+    errorRed: "rgba(255, 131, 131, 1)",
   },
   dark: {
     mainBackground: "rgba(47, 46, 65, 1)",
@@ -20,6 +21,7 @@ const colorsSchemes: ColorsSchemes = {
     red: "",
     green: "",
     yellow: "",
+    errorRed: "",
   },
 };
 
@@ -33,6 +35,7 @@ export type Colors = {
   red: string;
   green: string;
   yellow: string;
+  errorRed: string;
 };
 
 export const theme: Theme = {

@@ -1,31 +1,42 @@
 import { ButtonGrades } from "../../../Atoms/Buttons/Buttons";
 import { DefaultListWrapper } from "../../../Atoms/DefaultListWrapper/DefaultListWrapper";
-import { StudentsWithGradesAverage } from "../../../Types/Types";
+import { EmptyListInfo } from "../../../Atoms/EmptyListInfo/EmptyListInfo";
+import { StudentsWithClassAndGradesAverage } from "../../../Types/Types";
 import {
   ParentViewChildrenListElement,
   StudentAverageInfo,
+  StudentClassInfo,
   StudentNameInfo,
 } from "./ParentViewChildrenList.styles";
 
 type Props = {
-  childrenList: StudentsWithGradesAverage[];
+  childrenList: StudentsWithClassAndGradesAverage[];
 };
 
 const ParentViewChildrenList = (props: Props) => {
   const { childrenList } = props;
-  const renderChildrenList = (childrenList: StudentsWithGradesAverage[]) => {
+  const renderChildrenList = (
+    childrenList: StudentsWithClassAndGradesAverage[]
+  ) => {
     return childrenList.map((children) => {
       return (
         <ParentViewChildrenListElement key={children.studentId}>
           <StudentAverageInfo>{children.gradesAverage}</StudentAverageInfo>
           <StudentNameInfo>{children.studentName}</StudentNameInfo>
+          <StudentClassInfo>{children.class}</StudentClassInfo>
           <ButtonGrades>Oceny</ButtonGrades>
         </ParentViewChildrenListElement>
       );
     });
   };
   return (
-    <DefaultListWrapper>{renderChildrenList(childrenList)}</DefaultListWrapper>
+    <DefaultListWrapper>
+      {childrenList.length ? (
+        renderChildrenList(childrenList)
+      ) : (
+        <EmptyListInfo>No children registered</EmptyListInfo>
+      )}
+    </DefaultListWrapper>
   );
 };
 
