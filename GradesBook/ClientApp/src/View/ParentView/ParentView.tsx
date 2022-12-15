@@ -14,24 +14,33 @@ import useModal from "../../Hooks/useModal";
 import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
 import axios from "../../Api/axios";
 import { endpoints } from "../../Api/Endpoints";
+import useLoader from "../../Hooks/useLoader";
+import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
+import { AxiosError } from "axios";
+import useUser from "../../Hooks/useUser";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
+
+  const { error, isConnecting, handleConnect, handleError, handleFinished } =
+    useLoader();
   const [childrenList, setChildrenList] = useState<
     StudentsWithClassAndGradesAverage[]
   >([]);
+  const { user } = useUser();
   const { isOpened, handleToggleModal } = useModal();
 
   const getData = () => {
+    handleConnect();
     axios
-      .get(getParentsChildren)
+      .get(`${getParentsChildren}/${user?.id}`)
       .then((response) => {
         const data = response.data as StudentsWithClassAndGradesAverage[];
-
         setChildrenList(data);
+        handleFinished();
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((e: AxiosError) => {
+        handleError(e.message);
       });
   };
 
@@ -52,7 +61,11 @@ const ParentView = () => {
       </ParentViewSideMenu>
       <SectionsWrapper>
         <ParentViewSection label={"Zarejestrowane dzieci"}>
-          <ParentViewChildrenList childrenList={childrenList} />
+          {isConnecting && <SmallLoader />}
+          {error && <div>Error</div>}
+          {!isConnecting && !error && (
+            <ParentViewChildrenList childrenList={childrenList} />
+          )}
         </ParentViewSection>
         <ParentViewSection label={"Tablica ogłoszeń"}>
           <ParentViewAnnouncementsList />

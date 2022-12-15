@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string Type { get; set; }
 
-        public List<Announcement> Announcements { get; set; } =  new List<Announcement>();
+        virtual  public List<Announcement> Announcements { get; set; } =  new List<Announcement>();
     }
 }

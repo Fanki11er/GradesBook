@@ -6,8 +6,8 @@
         public string Name { get; set; }
         public int? PrgoramId { get; set; }
         public int? SupervisingteacherId { get; set; }
-        public  List<Student> Students { get; set; } = new List<Student>();
-        public  Program? Program { get; set; }
-        public  Teacher? Supervisingteacher { get; set; }
+        virtual public  List<Student> Students { get; set; } = new List<Student>();
+        virtual public  Program? Program { get; set; }
+        virtual public  Teacher? Supervisingteacher { get; set; }
     }
 }

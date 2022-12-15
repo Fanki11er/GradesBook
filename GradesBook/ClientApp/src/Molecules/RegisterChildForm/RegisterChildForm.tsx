@@ -62,23 +62,24 @@ const RegisterChildForm = (props: Props) => {
     }
 
     if (!values.email.match(/.+@student.school.pl/)) {
-      handleError("Wymagana domena @student.school.com ");
+      handleError("Wymagana domena @student.school.pl ");
       return;
     }
   };
 
   const handleSubmit = (values: MyFormValues) => {
     validateFormValues(values);
-
+    console.log(values);
     //!!!!!!!!!!!!!!!! Change to axios Private
     if (!error) {
       handleConnect();
       axios
-        .post(registerParentsChildren, {
-          name: values.name,
-          surname: values.surname,
-          password: values.password,
-          repeatedPassword: values.repeatedPassword,
+        .post(`${registerParentsChildren}/1`, {
+          FirstName: values.name,
+          LastName: values.surname,
+          Email: values.email,
+          Password: values.password,
+          RepeatedPassword: values.repeatedPassword,
         } as RegisterUserDto)
         .then(() => {
           handleFinished();
@@ -104,11 +105,7 @@ const RegisterChildForm = (props: Props) => {
         {error && <FormError>{"Error"}</FormError>}
         <RegisterChildFormInputsWrapper>
           <InputField name="name" placeholder="Imię" label="Imię" />
-          <InputField
-            name="surnamedName"
-            placeholder="Nazwisko"
-            label="Nazwisko"
-          />
+          <InputField name="surname" placeholder="Nazwisko" label="Nazwisko" />
           <InputField
             name="email"
             placeholder="example@student.school.com"
@@ -122,7 +119,7 @@ const RegisterChildForm = (props: Props) => {
             type="password"
           />
           <InputField
-            name="repeatpassword"
+            name="repeatedPassword"
             placeholder="Powtórz hasło"
             label="Powtórz hasło"
             type="password"

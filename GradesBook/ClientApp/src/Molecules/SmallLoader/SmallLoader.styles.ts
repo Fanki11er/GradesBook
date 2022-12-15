@@ -5,6 +5,7 @@ export const SmallLoaderWrapper = styled.div`
   height: 60px;
   display: flex;
   justify-content: center;
+  justify-items: center;
   align-items: center;
   animation-name: show;
   animation-duration: 1s;

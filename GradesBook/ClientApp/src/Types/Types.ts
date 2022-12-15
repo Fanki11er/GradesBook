@@ -28,7 +28,7 @@ export type StudentsWithClassAndGradesAverage = {
   studentName: string;
   studentId: number;
   gradesAverage: number;
-  class: string;
+  className: string;
 };
 
 export type ClassWithStudentsAndProgram = {
@@ -48,9 +48,9 @@ export type User = {
 };
 
 export type RegisterUserDto = {
-  name: string;
-  surname: string;
-  email: string;
-  password: string;
-  repeatedPassword: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Password: string;
+  RepeatedPassword: string;
 };

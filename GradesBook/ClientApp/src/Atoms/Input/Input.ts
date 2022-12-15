@@ -1,7 +1,8 @@
+import { Field } from "formik";
 import styled from "styled-components";
 import { StyledTheme } from "../../GlobalStyles/theme";
 
-export const InputWrapper = styled.input`
+export const InputWrapper = styled(Field)`
   border: 2px solid ${(props: StyledTheme) => props.theme.colors.menuBackground};
   border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};

@@ -199,9 +199,6 @@ namespace GradesBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ParrentId")
                         .HasColumnType("int");
 
@@ -213,7 +210,7 @@ namespace GradesBook.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParrentId");
 
                     b.ToTable("Students");
                 });
@@ -339,7 +336,7 @@ namespace GradesBook.Migrations
 
                     b.HasOne("GradesBook.Entities.Parent", "Parent")
                         .WithMany("Students")
-                        .HasForeignKey("ParentId")
+                        .HasForeignKey("ParrentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

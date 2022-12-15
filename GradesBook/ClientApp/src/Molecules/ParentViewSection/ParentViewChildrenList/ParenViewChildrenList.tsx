@@ -23,7 +23,9 @@ const ParentViewChildrenList = (props: Props) => {
         <ParentViewChildrenListElement key={children.studentId}>
           <StudentAverageInfo>{children.gradesAverage}</StudentAverageInfo>
           <StudentNameInfo>{children.studentName}</StudentNameInfo>
-          <StudentClassInfo>{children.class}</StudentClassInfo>
+          <StudentClassInfo>
+            {children.className ? children.className : ""}
+          </StudentClassInfo>
           <ButtonGrades>Oceny</ButtonGrades>
         </ParentViewChildrenListElement>
       );
