@@ -2,11 +2,23 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import { routes } from "./Routes/routes";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
+import LoginView from "./View/LoginView/LoginView";
 import ProgramsView from "./View/ProgramsView/ProgramsView";
+import RegistrationView from "./View/RegistrationView/RegistrationView";
+import Template from "./View/Template/Template";
 
 const App = () => {
-  const { baseRoute, loginPage, registerPage, classes, program, setting } =
-    routes;
+  const {
+    baseRoute,
+    loginPage,
+    registerPage,
+    classes,
+    program,
+    setting,
+    register,
+    login,
+    template,
+  } = routes;
   return (
     <Routes>
       <Route
@@ -20,6 +32,9 @@ const App = () => {
         <Route path={classes} element={<ClassesView />} />
         <Route path={program} element={<ProgramsView />} />
         <Route path={setting} element={<ClassSettings />} />
+        <Route path={register} element={<RegistrationView />} />
+        <Route path={login} element={<LoginView />} />
+        <Route path={template} element={<Template />} />
         <Route path={loginPage} element={<div>Login page</div>} />
         <Route path={registerPage} element={<div>RegisterPage</div>} />
         <Route path={"*"} element={<div>LandingPage</div>} />

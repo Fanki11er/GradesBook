@@ -33,3 +33,9 @@ export const ButtonAdded = styled.button`
   height: 60px;
   background-color: rgba(217, 217, 217, 1);
 `;
+
+export const ButtonLogOut = styled(Button)`
+  width: 80px;
+  height: 30px;
+  background-color: rgba(217, 217, 217, 1);
+`;
