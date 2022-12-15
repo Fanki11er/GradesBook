@@ -37,7 +37,6 @@ const App = () => {
         <Route path={login} element={<LoginView />} />
         <Route path={template} element={<Template />} />
         <Route path={parentView} element={<ParentView />} />
-
         <Route path={"*"} element={<LandingPage />} />
       </Route>
     </Routes>
