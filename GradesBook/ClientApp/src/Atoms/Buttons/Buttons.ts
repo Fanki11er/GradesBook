@@ -40,6 +40,12 @@ export const ButtonAdded = styled.button`
   background-color: rgba(217, 217, 217, 1);
 `;
 
+export const ButtonLogOut = styled(Button)`
+  width: 80px;
+  height: 30px;
+  background-color: rgba(217, 217, 217, 1);
+`;
+
 export const SideMenuButton = styled(Button)`
   width: 170px;
   height: 40px;

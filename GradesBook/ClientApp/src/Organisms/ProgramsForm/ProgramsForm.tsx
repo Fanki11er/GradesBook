@@ -1,16 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import {
-  ButtonEdit,
-  ButtonItemList,
-  ButtonSend,
-} from "../../Atoms/Buttons/Buttons";
+import { ButtonEdit, ButtonSend } from "../../Atoms/Buttons/Buttons";
 import { ClassWithStudentsAndProgram } from "../../Types/Types";
 import ClassStudentListsForm from "../ClassStudentListsForm/ClassStudentListsForm";
 
 import {
   ImgPrograms,
   ProgramsFormWrapper,
+  ProgramsHeaderSmall,
   ProgramsHeaderText,
   ProgramsHeaderWrapper,
   ProgramsText,
@@ -47,9 +44,9 @@ const ProgramsForm = () => {
         <ButtonEdit>Edytuj</ButtonEdit>
       </ProgramsHeaderWrapper>
 
-      <ButtonItemList>{`Program: ${
+      <ProgramsHeaderSmall>{`Program: ${
         data && data.programName ? data.programName : ""
-      }`}</ButtonItemList>
+      }`}</ProgramsHeaderSmall>
 
       <ButtonSend>Wyślij ogłoszenie</ButtonSend>
 
