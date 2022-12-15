@@ -1,9 +1,7 @@
-import { ParentViewAnnouncementsListWrapper } from "./PanelViewAnnouncementsList.styles";
+import { DefaultListWrapper } from "../../Atoms/DefaultListWrapper/DefaultListWrapper";
 
 const ParentViewAnnouncementsList = () => {
-  return (
-    <ParentViewAnnouncementsListWrapper></ParentViewAnnouncementsListWrapper>
-  );
+  return <DefaultListWrapper></DefaultListWrapper>;
 };
 
 export default ParentViewAnnouncementsList;

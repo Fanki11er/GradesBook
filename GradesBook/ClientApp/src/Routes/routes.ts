@@ -5,6 +5,5 @@ export const routes = {
   setting: "/Setting",
   register: "/Register",
   login: "/Login",
-  template: "/Template",
   parentView: "/Parent",
 };

@@ -1,8 +1,8 @@
 import { ButtonGrades } from "../../../Atoms/Buttons/Buttons";
+import { DefaultListWrapper } from "../../../Atoms/DefaultListWrapper/DefaultListWrapper";
 import { StudentsWithGradesAverage } from "../../../Types/Types";
 import {
   ParentViewChildrenListElement,
-  ParentViewChildrenListWrapper,
   StudentAverageInfo,
   StudentNameInfo,
 } from "./ParentViewChildrenList.styles";
@@ -25,9 +25,7 @@ const ParentViewChildrenList = (props: Props) => {
     });
   };
   return (
-    <ParentViewChildrenListWrapper>
-      {renderChildrenList(childrenList)}
-    </ParentViewChildrenListWrapper>
+    <DefaultListWrapper>{renderChildrenList(childrenList)}</DefaultListWrapper>
   );
 };
 

@@ -3,12 +3,16 @@ import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import ParentViewChildrenList from "../../Molecules/ParentViewSection/ParentViewChildrenList/ParenViewChildrenList";
 import ParentViewSection from "../../Molecules/ParentViewSection/ParentViewSection";
 import ParentViewAnnouncementsList from "../../Molecules/ParenViewAnnouncementsList/ParentViewAnnoucementsList";
-import { ParentViewSideMenu, ParentViewWrapper } from "./ParentView.styles";
+import {
+  ParentViewSideMenu,
+  ParentViewWrapper,
+  SectionsWrapper,
+} from "./ParentView.styles";
 import { StudentsWithGradesAverage } from "../../Types/Types";
 import axios from "axios";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
-import RegisterChildrenForm from "../../Organisms/RegisterChildrenForm/RegisterChildrenForm";
+import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
 
 const ParentView = () => {
   const [childrenList, setChildrenList] = useState<StudentsWithGradesAverage[]>(
@@ -37,15 +41,17 @@ const ParentView = () => {
           Zarejestruj dziecko
         </SideMenuButton>
       </ParentViewSideMenu>
-      <ParentViewSection label={"Zarejestrowane dzieci"}>
-        <ParentViewChildrenList childrenList={childrenList} />
-      </ParentViewSection>
-      <ParentViewSection label={"Tablica ogłoszeń"}>
-        <ParentViewAnnouncementsList />
-      </ParentViewSection>
+      <SectionsWrapper>
+        <ParentViewSection label={"Zarejestrowane dzieci"}>
+          <ParentViewChildrenList childrenList={childrenList} />
+        </ParentViewSection>
+        <ParentViewSection label={"Tablica ogłoszeń"}>
+          <ParentViewAnnouncementsList />
+        </ParentViewSection>
+      </SectionsWrapper>
 
       <Modal isModalOpened={isOpened}>
-        <RegisterChildrenForm handleModalToggle={handleToggleModal} />
+        <RegisterChildForm handleModalToggle={handleToggleModal} />
       </Modal>
     </ParentViewWrapper>
   );
