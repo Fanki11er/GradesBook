@@ -5,4 +5,7 @@ export const routes = {
   classes: "/Class",
   program: "/Program",
   setting: "/Setting",
+  register: "/Register",
+  login: "/Login",
+  template: "/Template",
 };

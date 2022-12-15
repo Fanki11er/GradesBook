@@ -25,3 +25,7 @@ export const ImgPrograms = styled.img``;
 export const ProgramsText = styled.span`
   color: white;
 `;
+
+export const ProgramsHeaderSmall = styled.h3`
+  color: white;
+`;
