@@ -38,6 +38,9 @@ export const ButtonGrades = styled(Button)`
   width: 60px;
   height: 30px;
   border-radius: 8px;
+  border: 2px solid transparent;
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonsGray};
+  color: ${(props: StyledTheme) => props.theme.colors.white};
 `;
 
 export const ButtonAdded = styled.button`

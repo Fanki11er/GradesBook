@@ -21,7 +21,9 @@ const ParentViewChildrenList = (props: Props) => {
     return childrenList.map((children) => {
       return (
         <ParentViewChildrenListElement key={children.studentId}>
-          <StudentAverageInfo>{children.gradesAverage}</StudentAverageInfo>
+          <StudentAverageInfo average={children.gradesAverage}>
+            {children.gradesAverage}
+          </StudentAverageInfo>
           <StudentNameInfo>{children.studentName}</StudentNameInfo>
           <StudentClassInfo>
             {children.className ? children.className : ""}

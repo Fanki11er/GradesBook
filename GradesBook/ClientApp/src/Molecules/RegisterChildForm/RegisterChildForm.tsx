@@ -69,7 +69,6 @@ const RegisterChildForm = (props: Props) => {
 
   const handleSubmit = (values: MyFormValues) => {
     validateFormValues(values);
-    console.log(values);
     //!!!!!!!!!!!!!!!! Change to axios Private
     if (!error) {
       handleConnect();
@@ -102,7 +101,7 @@ const RegisterChildForm = (props: Props) => {
     >
       <RegisterChildFormWrapper>
         <FormHeader>Register children</FormHeader>
-        {error && <FormError>{"Error"}</FormError>}
+        {error && <FormError>{error}</FormError>}
         <RegisterChildFormInputsWrapper>
           <InputField name="name" placeholder="Imię" label="Imię" />
           <InputField name="surname" placeholder="Nazwisko" label="Nazwisko" />
@@ -130,7 +129,13 @@ const RegisterChildForm = (props: Props) => {
         ) : (
           <FormButtonsWrapper>
             <FormButtonOk type={"submit"}>Register</FormButtonOk>
-            <FormButtonCancel onClick={handleModalToggle}>
+            <FormButtonCancel
+              type="button"
+              onClick={() => {
+                handleResetError();
+                handleModalToggle();
+              }}
+            >
               Back
             </FormButtonCancel>
           </FormButtonsWrapper>

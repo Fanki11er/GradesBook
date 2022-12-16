@@ -6,7 +6,7 @@ export const DefaultListWrapper = styled.ul`
   height: 400px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-auto-rows: 45px;
+  grid-auto-rows: 60px;
   row-gap: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   align-self: center;
