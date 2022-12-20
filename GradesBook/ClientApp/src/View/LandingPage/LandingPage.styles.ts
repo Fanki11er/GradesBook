@@ -3,9 +3,10 @@ import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const LandingPageWrapper = styled.div`
   width: 100%;
-  min-height: 100vh;
-  background-color: ${(props: StyledTheme) =>
-    props.theme.colors.mainBackground};
+  height: 100%;
+  /*background-color: ${(props: StyledTheme) =>
+    props.theme.colors.mainBackground};*/
+  background-color: rgba(47, 46, 65, 1);
   display: grid;
   grid-template-columns: repeat(12);
 `;

@@ -3,30 +3,52 @@ import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import ParentViewChildrenList from "../../Molecules/ParentViewSection/ParentViewChildrenList/ParenViewChildrenList";
 import ParentViewSection from "../../Molecules/ParentViewSection/ParentViewSection";
 import ParentViewAnnouncementsList from "../../Molecules/ParenViewAnnouncementsList/ParentViewAnnoucementsList";
-import { ParentViewSideMenu, ParentViewWrapper } from "./ParentView.styles";
-import { StudentsWithGradesAverage } from "../../Types/Types";
-import axios from "axios";
+import {
+  ParentViewSideMenu,
+  ParentViewWrapper,
+  SectionsWrapper,
+} from "./ParentView.styles";
+import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
-import RegisterChildrenForm from "../../Organisms/RegisterChildrenForm/RegisterChildrenForm";
+import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
+import axios from "../../Api/axios";
+import { endpoints } from "../../Api/Endpoints";
+import useLoader from "../../Hooks/useLoader";
+import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
+import { AxiosError } from "axios";
+import useUser from "../../Hooks/useUser";
 
 const ParentView = () => {
-  const [childrenList, setChildrenList] = useState<StudentsWithGradesAverage[]>(
-    []
-  );
+  const { getParentsChildren } = endpoints;
+
+  const { error, isConnecting, handleConnect, handleError, handleFinished } =
+    useLoader();
+  const [childrenList, setChildrenList] = useState<
+    StudentsWithClassAndGradesAverage[]
+  >([]);
+  const { user } = useUser();
   const { isOpened, handleToggleModal } = useModal();
 
-  useEffect(() => {
+  const getData = () => {
+    handleConnect();
     axios
-      .get("https://localhost:7291/Student/1")
+      .get(`${getParentsChildren}/${user?.id}`)
       .then((response) => {
-        const data = response.data as StudentsWithGradesAverage[];
-
+        const data = response.data as StudentsWithClassAndGradesAverage[];
         setChildrenList(data);
+        handleFinished();
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((e: AxiosError) => {
+        handleError(e.message);
       });
+  };
+
+  useEffect(() => {
+    //!!!!!!!!!!!!!!!! Change to axios Private
+    getData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -37,15 +59,24 @@ const ParentView = () => {
           Zarejestruj dziecko
         </SideMenuButton>
       </ParentViewSideMenu>
-      <ParentViewSection label={"Zarejestrowane dzieci"}>
-        <ParentViewChildrenList childrenList={childrenList} />
-      </ParentViewSection>
-      <ParentViewSection label={"Tablica ogłoszeń"}>
-        <ParentViewAnnouncementsList />
-      </ParentViewSection>
+      <SectionsWrapper>
+        <ParentViewSection label={"Zarejestrowane dzieci"}>
+          {isConnecting && <SmallLoader />}
+          {error && <div>Error</div>}
+          {!isConnecting && !error && (
+            <ParentViewChildrenList childrenList={childrenList} />
+          )}
+        </ParentViewSection>
+        <ParentViewSection label={"Tablica ogłoszeń"}>
+          <ParentViewAnnouncementsList />
+        </ParentViewSection>
+      </SectionsWrapper>
 
       <Modal isModalOpened={isOpened}>
-        <RegisterChildrenForm handleModalToggle={handleToggleModal} />
+        <RegisterChildForm
+          handleModalToggle={handleToggleModal}
+          refreshData={getData}
+        />
       </Modal>
     </ParentViewWrapper>
   );

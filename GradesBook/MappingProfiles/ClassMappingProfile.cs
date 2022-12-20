@@ -18,7 +18,7 @@ namespace GradesBook.MappingProfiles
             CreateMap<Student, StudentWithGradesAverageDto>()
                 .ForMember(s => s.StudentId, m => m.MapFrom(x => x.Id))
                 .ForMember(s => s.StudentName, m => m.MapFrom(x => x.FirstName + " " + x.LastName))
-                .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Average(a => a.Value)));
+                .ForMember(s => s.GradesAverage, m => m.MapFrom(x=> x.Grades.Count() == 0 ? 0 : x.Grades.Average(a => a.Value)));
 
             CreateMap<Class, ClassWithStudentsAndProgramDto>()
                 .ForMember(c => c.ClassName, m => m.MapFrom(v => v.Name))
@@ -29,6 +29,18 @@ namespace GradesBook.MappingProfiles
             CreateMap<Class, ClassNameWithSupervisorDto>()
                 .ForMember(c => c.SupervisorName, m => m.MapFrom(s => s.Supervisingteacher != null ? s.Supervisingteacher.FirstName + " " + s.Supervisingteacher.LastName : " "))
                 .ForMember(c => c.StudentsNumber, m => m.MapFrom(s => s.Students != null? s.Students.Count() : 0   ));
+
+            CreateMap<Student, StudentWithClassAndGradesAverageDto>()
+                .ForMember(s => s.StudentId, m => m.MapFrom(x => x.Id))
+                .ForMember(s => s.StudentName, m => m.MapFrom(x => x.FirstName + " " + x.LastName))
+                .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Count() == 0? 0 : x.Grades.Average(a => a.Value)))
+                .ForMember(s => s.ClassName, m => m.MapFrom(x => x.StudentClass == null ? "" : x.StudentClass.Name));
+
+            CreateMap<CreateUserDto, Student>();
+                
+                
         }
+
+
     }
 }

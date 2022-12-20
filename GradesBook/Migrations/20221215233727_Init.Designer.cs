@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradesBook.Migrations
 {
     [DbContext(typeof(GradesBookDbContext))]
-    [Migration("20221111161418_Init")]
+    [Migration("20221215233727_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -202,9 +202,6 @@ namespace GradesBook.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ParrentId")
                         .HasColumnType("int");
 
@@ -216,7 +213,7 @@ namespace GradesBook.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.HasIndex("ParentId");
+                    b.HasIndex("ParrentId");
 
                     b.ToTable("Students");
                 });
@@ -342,7 +339,7 @@ namespace GradesBook.Migrations
 
                     b.HasOne("GradesBook.Entities.Parent", "Parent")
                         .WithMany("Students")
-                        .HasForeignKey("ParentId")
+                        .HasForeignKey("ParrentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

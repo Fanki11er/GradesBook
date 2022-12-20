@@ -1,8 +1,11 @@
-import { ParentViewAnnouncementsListWrapper } from "./PanelViewAnnouncementsList.styles";
+import { DefaultListWrapper } from "../../Atoms/DefaultListWrapper/DefaultListWrapper";
+import { EmptyListInfo } from "../../Atoms/EmptyListInfo/EmptyListInfo";
 
 const ParentViewAnnouncementsList = () => {
   return (
-    <ParentViewAnnouncementsListWrapper></ParentViewAnnouncementsListWrapper>
+    <DefaultListWrapper>
+      <EmptyListInfo>Brak ogłoszeń</EmptyListInfo>
+    </DefaultListWrapper>
   );
 };
 

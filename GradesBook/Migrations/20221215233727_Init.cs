@@ -168,7 +168,6 @@ namespace GradesBook.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ClassId = table.Column<int>(type: "int", nullable: true),
                     ParrentId = table.Column<int>(type: "int", nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -183,8 +182,8 @@ namespace GradesBook.Migrations
                         principalTable: "Classes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Students_Parents_ParentId",
-                        column: x => x.ParentId,
+                        name: "FK_Students_Parents_ParrentId",
+                        column: x => x.ParrentId,
                         principalTable: "Parents",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -253,9 +252,9 @@ namespace GradesBook.Migrations
                 column: "ClassId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_ParentId",
+                name: "IX_Students_ParrentId",
                 table: "Students",
-                column: "ParentId");
+                column: "ParrentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teachers_SubjectId",

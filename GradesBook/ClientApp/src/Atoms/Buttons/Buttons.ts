@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const Button = styled.button`
   width: 200px;
@@ -8,8 +9,13 @@ export const Button = styled.button`
   border: 2px solid black;
   background-color: rgba(217, 217, 217, 1);
   transition: all 0.5s;
+  outline: none;
   :hover {
-    border: 2px solid orange;
+    //border: 2px solid orange;
+    background-color: ${(props: StyledTheme) =>
+      props.theme.colors.menuBackground};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
     cursor: pointer;
   }
 `;
@@ -32,6 +38,9 @@ export const ButtonGrades = styled(Button)`
   width: 60px;
   height: 30px;
   border-radius: 8px;
+  border: 2px solid transparent;
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonsGray};
+  color: ${(props: StyledTheme) => props.theme.colors.white};
 `;
 
 export const ButtonAdded = styled.button`
@@ -49,6 +58,13 @@ export const ButtonLogOut = styled(Button)`
 export const SideMenuButton = styled(Button)`
   width: 170px;
   height: 40px;
+  border: none;
+
+  :hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
+  }
 `;
 
 export const LinkButton = styled(Link)`
@@ -61,4 +77,21 @@ export const LinkButton = styled(Link)`
   align-items: center;
   text-decoration: none;
   color: orange;
+`;
+
+export const FormButtonOk = styled(Button)`
+  width: 150px;
+  height: 35px;
+  text-align: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  background-color: ${(props: StyledTheme) => props.theme.colors.green};
+  color: ${(props: StyledTheme) => props.theme.colors.white};
+  font-weight: bold;
+`;
+
+export const FormButtonCancel = styled(FormButtonOk)`
+  background-color: ${(props: StyledTheme) => props.theme.colors.red};
 `;

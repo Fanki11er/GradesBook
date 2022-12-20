@@ -13,30 +13,37 @@ namespace GradesBook.DatabaseSeaders
 
         public void Seed()
         {
-            bool areChanges = false;
 
+            
             if (_dbContext.Database.CanConnect())
             {
                 if (!_dbContext.Subjects.Any())
                 {
                     var subjects = GetSubjects();
                     _dbContext.Subjects.AddRange(subjects);
-                    areChanges = true;
-                   
+                    _dbContext.SaveChanges();
+
                 }
 
                 if (!_dbContext.Classes.Any())
                 {
                     var classes = GetClasses();
                     _dbContext.Classes.AddRange(classes);
-                    areChanges = true;
-                    
+                    _dbContext.SaveChanges();
+
                 }
 
-                if(areChanges == true)
+                if (!_dbContext.Parents.Any())
                 {
+                    var parents = GetParents();
+                    _dbContext.Parents.AddRange(parents);
                     _dbContext.SaveChanges();
+
                 }
+
+
+
+
             }
         }
 
@@ -74,5 +81,25 @@ namespace GradesBook.DatabaseSeaders
             return classes;
 
         }
+
+        private IEnumerable<Parent> GetParents()
+        {
+            var parents = new List<Parent>()
+            {
+                new Parent()
+                {
+                    FirstName = "Krzysztof",
+                    LastName = "Kapusta",
+                    Email = "kapusta@parent.school.pl",
+                    Password = "qwerty"
+                }
+
+
+            };
+            return parents;
+
+        }
+            
+        
     }
 }

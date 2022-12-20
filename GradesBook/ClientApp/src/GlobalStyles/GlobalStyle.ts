@@ -4,6 +4,11 @@ export const GlobalStyles = createGlobalStyle`
 
 html{
     box-sizing: border-box;
+    
+    margin: 0; 
+    padding: 0 ;
+    font-family: 'Montserrat' ;
+
 }
 
 *,*::after, *::before{
@@ -15,6 +20,7 @@ body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+
     //width: 100%;
     //height: 100%;
     //::-webkit-scrollbar {

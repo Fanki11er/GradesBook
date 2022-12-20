@@ -21,7 +21,7 @@ namespace GradesBook.Entities
             modelBuilder.Entity<Student>(eb =>
             {
                 eb.HasMany(st => st.Grades).WithOne(gr => gr.Student);
-                eb.HasOne(st => st.Parent).WithMany(pr => pr.Students);
+                eb.HasOne(st => st.Parent).WithMany(pr => pr.Students).HasForeignKey(k => k.ParrentId);
             });
 
             modelBuilder.Entity<Announcement>(eb =>

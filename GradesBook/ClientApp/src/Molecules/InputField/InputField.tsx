@@ -6,11 +6,10 @@ type InputProps = {
   label: string;
   placeholder: string;
   type?: string;
-  inputRef?: React.RefObject<HTMLInputElement>;
 };
 
 const InputField = (props: InputProps) => {
-  const { name, label, placeholder, type, inputRef } = props;
+  const { name, label, placeholder, type } = props;
   return (
     <InputFieldWrapper>
       <InputLabel>{label}</InputLabel>
