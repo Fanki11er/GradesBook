@@ -1,4 +1,5 @@
 import { createContext, PropsWithChildren, useCallback, useState } from "react";
+import {} from "../GlobalStyles/theme";
 import { User } from "../Types/Types";
 
 export const UserContext = createContext({
