@@ -10,6 +10,7 @@ namespace GradesBook.Services
     {
         public IEnumerable<StudentWithClassAndGradesAverageDto> GetParentsChildren(int id);
         public int RegisterChild(CreateUserDto dto, int id);
+        public UserCurrentSettingsDto GetCurrentUserSettings(int id);
     }
 
     public class ParenntService: IParentService
@@ -44,6 +45,17 @@ namespace GradesBook.Services
 
             return student.Id;
             
+        }
+
+       public UserCurrentSettingsDto GetCurrentUserSettings(int id)
+        {
+            var user = _dbContext.Parents.FirstOrDefault(p=> p.Id == id);
+            if(user != null)
+            {
+                var settings = _mapper.Map<UserCurrentSettingsDto>(user);
+                return settings;
+            }
+            return null;
         }
     }
 }

@@ -12,7 +12,7 @@ const UserProvider = (props: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>({
     id: 1,
     token: "T",
-    role: "parent",
+    role: "Parent",
     //!!!!!!!!!!!!!!!!!!!!!
   });
 

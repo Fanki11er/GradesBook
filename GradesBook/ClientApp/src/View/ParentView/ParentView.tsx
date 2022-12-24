@@ -3,11 +3,7 @@ import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import ParentViewChildrenList from "../../Molecules/ParentViewSection/ParentViewChildrenList/ParenViewChildrenList";
 import ParentViewSection from "../../Molecules/ParentViewSection/ParentViewSection";
 import ParentViewAnnouncementsList from "../../Molecules/ParenViewAnnouncementsList/ParentViewAnnoucementsList";
-import {
-  ParentViewSideMenu,
-  ParentViewWrapper,
-  SectionsWrapper,
-} from "./ParentView.styles";
+import { ParentViewWrapper, SectionsWrapper } from "./ParentView.styles";
 import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
@@ -18,6 +14,11 @@ import useLoader from "../../Hooks/useLoader";
 import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
 import { AxiosError } from "axios";
 import useUser from "../../Hooks/useUser";
+import {
+  SpecificOptionsWrapper,
+  ViewSideMenu,
+} from "../../Atoms/SideMenu/SideMenu";
+import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
@@ -53,12 +54,14 @@ const ParentView = () => {
 
   return (
     <ParentViewWrapper>
-      <ParentViewSideMenu>
-        <SideMenuButton>Edytuj konto</SideMenuButton>
-        <SideMenuButton onClick={handleToggleModal}>
-          Zarejestruj dziecko
-        </SideMenuButton>
-      </ParentViewSideMenu>
+      <ViewSideMenu>
+        <SideMenuNavigation />
+        <SpecificOptionsWrapper>
+          <SideMenuButton onClick={handleToggleModal}>
+            Zarejestruj dziecko
+          </SideMenuButton>
+        </SpecificOptionsWrapper>
+      </ViewSideMenu>
       <SectionsWrapper>
         <ParentViewSection label={"Zarejestrowane dzieci"}>
           {isConnecting && <SmallLoader />}

@@ -39,7 +39,7 @@ export type ClassWithStudentsAndProgram = {
   studentsList: StudentsWithGradesAverage[];
 };
 
-export type Roles = "teacher" | "parent" | "student";
+export type Roles = "Teacher" | "Parent" | "Student";
 
 export type User = {
   id: number;
@@ -53,4 +53,20 @@ export type RegisterUserDto = {
   Email: string;
   Password: string;
   RepeatedPassword: string;
+};
+
+export type UserCurrentSettingsDto = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
+export type NewUserSettingsDto = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  oldPassword: string;
+  password: string;
+  repeatedPassword: string;
 };

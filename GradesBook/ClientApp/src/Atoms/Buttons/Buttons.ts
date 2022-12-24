@@ -59,11 +59,23 @@ export const SideMenuButton = styled(Button)`
   width: 170px;
   height: 40px;
   border: none;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   :hover {
     background-color: ${(props: StyledTheme) => props.theme.colors.green};
     color: ${(props: StyledTheme) => props.theme.colors.white};
     font-weight: bold;
+  }
+  &.active {
+    background-color: ${(props: StyledTheme) => props.theme.colors.transparent};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
+    border: 2px solid ${(props: StyledTheme) => props.theme.colors.buttonsGray};
+    cursor: not-allowed;
   }
 `;
 

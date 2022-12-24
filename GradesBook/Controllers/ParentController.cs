@@ -47,6 +47,19 @@ namespace GradesBook.Controllers
             return BadRequest();
            
         }
+
+        [HttpGet("Settings/{id}")]
+        public ActionResult<UserCurrentSettingsDto> GetCurrentUserSettings ([FromRoute] int id)
+        {
+            var settings = _parentService.GetCurrentUserSettings(id);
+            if(settings == null)
+            {
+                return BadRequest();
+            }
+            return Ok(settings);
+
+          
+        }
     }
 
 

@@ -37,8 +37,11 @@ namespace GradesBook.MappingProfiles
                 .ForMember(s => s.ClassName, m => m.MapFrom(x => x.StudentClass == null ? "" : x.StudentClass.Name));
 
             CreateMap<CreateUserDto, Student>();
+
+
+            CreateMap<User, UserCurrentSettingsDto>();
                 
-                
+
         }
 
 
