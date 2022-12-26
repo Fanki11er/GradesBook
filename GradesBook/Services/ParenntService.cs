@@ -11,6 +11,7 @@ namespace GradesBook.Services
         public IEnumerable<StudentWithClassAndGradesAverageDto> GetParentsChildren(int id);
         public int RegisterChild(CreateUserDto dto, int id);
         public UserCurrentSettingsDto GetCurrentUserSettings(int id);
+        public bool UpdateUserSettings(int id, NewUserSettingsDto dto);
     }
 
     public class ParenntService: IParentService
@@ -56,6 +57,41 @@ namespace GradesBook.Services
                 return settings;
             }
             return null;
+        }
+
+        public bool UpdateUserSettings(int id,NewUserSettingsDto dto)
+        {
+            if(dto.Password != dto.RepeatedPassword)
+            {
+                return false;
+            }
+
+            var user = _dbContext.Parents.FirstOrDefault(u=> u.Id == id);
+
+            if(user == null)
+            {
+                return false;
+            }
+            if(user.FirstName != dto.FirstName)
+            {
+                user.FirstName = dto.FirstName;
+            }
+            if(user.LastName != dto.LastName)
+            {
+                user.LastName = dto.LastName;
+            }
+            if(dto.Email != dto.Email)
+            {
+                dto.Email = dto.Email;
+            }
+            _dbContext.Update(user);
+           var changes = _dbContext.SaveChanges();
+
+           if(changes == 0)
+            {
+                return false;
+            }
+           return true;
         }
     }
 }

@@ -60,6 +60,20 @@ namespace GradesBook.Controllers
 
           
         }
+
+        [HttpPost("Settings/{id}")]
+        public ActionResult UpdateUserSettings([FromRoute] int id, [FromBody] NewUserSettingsDto dto)
+        {
+            var result = _parentService.UpdateUserSettings(id, dto);
+            if(result == false)
+            {
+                return BadRequest();
+            }
+            return Ok();
+            
+
+
+        }
     }
 
 

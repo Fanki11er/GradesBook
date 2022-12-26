@@ -1,6 +1,9 @@
 import { Formik } from "formik";
 import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import { FormError } from "../../Atoms/FormError/FormError";
+import useLoader from "../../Hooks/useLoader";
+import useUser from "../../Hooks/useUser";
+import useUserSettings from "../../Hooks/useUserSettings";
 import InputField from "../../Molecules/InputField/InputField";
 import { UserCurrentSettingsDto } from "../../Types/Types";
 import {
@@ -25,6 +28,18 @@ const PersonalDataChangeForm = (props: Props) => {
   const {
     currentSettings: { email, firstName, lastName },
   } = props;
+
+  const {
+    handleConnect,
+    error,
+    handleFinished,
+    handleError,
+    handleResetError,
+    isConnecting,
+  } = useLoader();
+
+  const { handleSetNewUserSettings } = useUserSettings();
+  const { handleLogout } = useUser();
   const initialValues: MyFormValues = {
     email: email,
     firstName: firstName,
@@ -33,19 +48,66 @@ const PersonalDataChangeForm = (props: Props) => {
     oldPassword: "",
     repeatedPassword: "",
   };
-  const handleSubmit = (values: MyFormValues) => {};
+  const handleSubmit = (values: MyFormValues) => {
+    handleResetError();
+    handleConnect();
+    handleSetNewUserSettings({
+      Email: values.email,
+      FirstName: values.firstName,
+      LastName: values.lastName,
+      Password: values.password,
+      RepeatedPassword: values.repeatedPassword,
+      OldPassword: values.oldPassword,
+    })
+      .then(() => {
+        handleFinished();
+      })
+      .catch((e) => {
+        handleError(e.message);
+      });
+  };
+
+  const validateForm = (values: MyFormValues) => {
+    handleResetError();
+    if (values.password !== values.repeatedPassword) {
+      handleError("Hasła muszą się zgadzać");
+      return false;
+    }
+    if (
+      values.email === email &&
+      values.firstName === firstName &&
+      values.lastName === lastName
+    ) {
+      handleError("Nie dokonano żadnych zmian");
+      return false;
+    }
+    const entries = Object.values(values);
+    for (let i = 0; i < entries.length; i++) {
+      if (!entries[i]) {
+        handleError("Wszystkie pola są wymagane");
+        return false;
+      }
+    }
+    return true;
+  };
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
-        handleSubmit(values);
+        if (validateForm(values)) {
+          handleSubmit(values);
+          if (!isConnecting && !error) {
+            handleLogout();
+          }
+        }
+
         actions.setSubmitting(false);
       }}
     >
       <PersonalDataChangeFormWrapper>
         <PersonalDataChangeFormHeader>Zmień dane</PersonalDataChangeFormHeader>
-        {false ? <FormError>Podane dane są nieprawidłowe.</FormError> : null}
+        {error ? <FormError>{error}</FormError> : null}
         <PersonalDataChangeFormInputsWrapper>
           <InputField name="firstName" placeholder="Imię" label="Imię" />
           <InputField name="lastName" placeholder="Nazwisko" label="Nazwisko" />

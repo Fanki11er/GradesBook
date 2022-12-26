@@ -7,4 +7,7 @@ export const endpoints = {
   getUserCurrentSettings: (role: Roles, id: number) => {
     return `/${role}/Settings/${id}`;
   },
+  setUserCurrentSettings: (role: Roles, id: number) => {
+    return `/${role}/SetSettings/${id}`;
+  },
 };
