@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using GradesBook.Entities;
+using GradesBook.Models;
 
 namespace GradesBook.Services
 {
 
    public interface IProgramService {
-        public IEnumerable<Entities.Program> GetAllPrograms();
+        public IEnumerable<SelectOption> GetAllPrograms();
         public Entities.Program GetProgram(int id);
     }
 
@@ -19,9 +20,9 @@ namespace GradesBook.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<Entities.Program> GetAllPrograms()
+        public IEnumerable<SelectOption> GetAllPrograms()
         {
-            var programs = _dbContext.Programs.ToList();
+            var programs = _mapper.Map<IEnumerable<SelectOption>>(_dbContext.Programs);
             return programs;
         }
 

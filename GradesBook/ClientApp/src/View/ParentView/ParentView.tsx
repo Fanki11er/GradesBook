@@ -19,16 +19,19 @@ import {
   ViewSideMenu,
 } from "../../Atoms/SideMenu/SideMenu";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
+import { Navigate } from "react-router-dom";
+import { routes } from "../../Routes/routes";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
+  const { login } = routes;
+  const { user } = useUser();
 
   const { error, isConnecting, handleConnect, handleError, handleFinished } =
     useLoader();
   const [childrenList, setChildrenList] = useState<
     StudentsWithClassAndGradesAverage[]
   >([]);
-  const { user } = useUser();
   const { isOpened, handleToggleModal } = useModal();
 
   const getData = () => {
@@ -52,7 +55,7 @@ const ParentView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return user && user?.role === "Parent" ? (
     <ParentViewWrapper>
       <ViewSideMenu>
         <SideMenuNavigation />
@@ -82,6 +85,8 @@ const ParentView = () => {
         />
       </Modal>
     </ParentViewWrapper>
+  ) : (
+    <Navigate to={user ? `/${user.role}` : login} />
   );
 };
 

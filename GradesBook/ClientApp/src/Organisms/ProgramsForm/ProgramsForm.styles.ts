@@ -1,15 +1,80 @@
+import { Form } from "formik";
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
-export const ProgramsFormWrapper = styled.div`
+export const AddProgramFormWrapper = styled(Form)`
   display: grid;
-  grid-template-rows: 70px 70px 70px 1fr;
-  grid-template-columns: 1fr;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
-  width: 500px;
+  padding: 40px 25px;
+  grid-template-rows: 30px 1fr 30px;
+  grid-template-columns: 1fr;
+  width: 450px;
+  height: fit-content;
+  max-height: 550px;
+  border-radius: 10px;
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
+  row-gap: 40px;
+  box-shadow: -5px 5px 5px 1px
+    ${(props: StyledTheme) => props.theme.colors.shadow};
 `;
 
-export const ProgramsHeaderWrapper = styled.div`
+export const AddProgramFormHeader = styled.h2`
+  margin: 0;
+  font-size: ${(props: StyledTheme) => props.theme.fontSizes.large};
+`;
+
+export const AddProgramFormInputsWrapper = styled.div`
+  width: 90%;
+  min-width: 200px;
+  height: 100%;
+  display: grid;
+  grid-auto-rows: auto;
+  row-gap: 10px;
+  grid-template-columns: 100%;
+  justify-self: center;
+  padding: 0 15px;
+  overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 20px;
+    background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props: StyledTheme) =>
+      props.theme.colors.menuBackground};
+    border-radius: 15px;
+    border: 1px solid;
+  }
+`;
+
+export const SubjectCheckboxWrapper = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 120px 50px;
+  justify-items: center;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: 100%;
+  list-style: none;
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  column-gap: 10px;
+  padding: 0 15px;
+  border-bottom: 2px solid
+    ${(props: StyledTheme) => props.theme.colors.lightBorder};
+  align-items: center;
+  transition: all 0.3s;
+
+  /*:hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    border-radius: 10px;
+    cursor: pointer;
+  }*/
+`;
+
+/*export const ProgramsHeaderWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -28,4 +93,4 @@ export const ProgramsText = styled.span`
 
 export const ProgramsHeaderSmall = styled.h3`
   color: white;
-`;
+`;*/

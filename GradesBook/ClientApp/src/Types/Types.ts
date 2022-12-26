@@ -63,10 +63,15 @@ export type UserCurrentSettingsDto = {
 };
 
 export type NewUserSettingsDto = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  oldPassword: string;
-  password: string;
-  repeatedPassword: string;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  OldPassword: string;
+  Password: string;
+  RepeatedPassword: string;
+};
+
+export type SelectOption = {
+  id: number;
+  value: string;
 };

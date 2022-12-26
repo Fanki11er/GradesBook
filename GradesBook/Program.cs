@@ -19,6 +19,7 @@ builder.Services.AddScoped<IClassService, ClassService>();
 builder.Services.AddScoped<IParentService, ParenntService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IProgramService, ProgramService>();
+builder.Services.AddScoped<ISubjetcsService, SubjectsService>();
 
 var app = builder.Build();
 

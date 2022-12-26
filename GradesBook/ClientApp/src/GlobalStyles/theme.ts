@@ -32,6 +32,7 @@ const colorsSchemes: ColorsSchemes = {
 const fontSizes = {
   normal: "16px",
   medium: "20px",
+  large: "26px",
 };
 
 const devices = {
@@ -88,6 +89,7 @@ export type Theme = {
   fontSizes: {
     normal: string;
     medium: string;
+    large: string;
   };
 
   devices: {

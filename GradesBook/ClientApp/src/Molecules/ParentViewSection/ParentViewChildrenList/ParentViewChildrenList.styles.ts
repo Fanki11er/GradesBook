@@ -28,7 +28,7 @@ export const ParentViewChildrenListElement = styled.li`
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   display: grid;
   grid-template-columns: 40px 1fr 100px 80px;
-  grid-column-gap: 10px;
+  column-gap: 10px;
   padding: 0 15px;
   border-bottom: 2px solid
     ${(props: StyledTheme) => props.theme.colors.lightBorder};

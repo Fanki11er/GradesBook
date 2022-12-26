@@ -1,37 +1,75 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { ButtonEdit, ButtonSend } from "../../Atoms/Buttons/Buttons";
-import { ClassWithStudentsAndProgram } from "../../Types/Types";
-import ClassStudentListsForm from "../ClassStudentListsForm/ClassStudentListsForm";
+import { Formik } from "formik";
+import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
+import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
+import InputField from "../../Molecules/InputField/InputField";
+import { SelectOption } from "../../Types/Types";
 
 import {
-  ImgPrograms,
-  ProgramsFormWrapper,
-  ProgramsHeaderSmall,
-  ProgramsHeaderText,
-  ProgramsHeaderWrapper,
-  ProgramsText,
+  AddProgramFormHeader,
+  AddProgramFormInputsWrapper,
+  AddProgramFormWrapper,
 } from "./ProgramsForm.styles";
 
-//!! Bad route bad content or name
-const ProgramsForm = () => {
-  const [data, setData] = useState<ClassWithStudentsAndProgram | null>(null);
+type Props = {
+  subjects: SelectOption[];
+};
 
-  useEffect(() => {
-    axios
-      .get("https://localhost:7291/Class/ClassStudentsInfo/1")
-      .then((response) => {
-        const data = response.data as ClassWithStudentsAndProgram;
-        setData(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+type MyFormValues = {
+  programName: string;
+  addedSubjects: number[];
+};
 
+const ProgramsForm = (props: Props) => {
+  const { subjects } = props;
+
+  const initialValues: MyFormValues = {
+    programName: "",
+    addedSubjects: [],
+  };
+
+  const renderSubjectsList = (subjects: SelectOption[]) => {
+    return subjects.map((subject) => {
+      return (
+        <CheckboxField
+          key={subject.id}
+          label={subject.value}
+          name={"addedSubjects"}
+          value={subject.id.toString()}
+        />
+      );
+    });
+  };
+
+  const handleSubmit = (values: MyFormValues) => {
+    console.log(values);
+  };
   return (
-    <ProgramsFormWrapper>
-      <ProgramsHeaderWrapper>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(values) => {
+        handleSubmit(values);
+      }}
+    >
+      <AddProgramFormWrapper>
+        <AddProgramFormHeader>Nowa lista</AddProgramFormHeader>
+        <AddProgramFormInputsWrapper>
+          <InputField
+            label={"Nazwa listy"}
+            name={"programName"}
+            placeholder={"Nazwa listy"}
+          />
+          {renderSubjectsList(subjects)}
+        </AddProgramFormInputsWrapper>
+        <FormButtonOk type={"submit"}>Stwórz</FormButtonOk>
+      </AddProgramFormWrapper>
+    </Formik>
+  );
+};
+
+export default ProgramsForm;
+
+/*
+ <ProgramsHeaderWrapper>
         <ProgramsHeaderText>{`Klasa: ${
           data ? data.className : ""
         }`}</ProgramsHeaderText>
@@ -53,8 +91,4 @@ const ProgramsForm = () => {
       <ClassStudentListsForm
         studentsWithGradesAverages={data ? data.studentsList : []}
       />
-    </ProgramsFormWrapper>
-  );
-};
-
-export default ProgramsForm;
+*/

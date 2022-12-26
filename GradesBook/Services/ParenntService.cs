@@ -35,6 +35,9 @@ namespace GradesBook.Services
         {
 
             var parent = _dbContext.Parents.FirstOrDefault(p => p.Id == id);
+            if (parent == null) {
+                return -1;
+            }
 
             var student = _mapper.Map<Student>(dto);
             student.Parent = parent;
