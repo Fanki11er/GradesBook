@@ -1,17 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
+import axios from "../../Api/axios";
+import { endpoints } from "../../Api/Endpoints";
+
 import { ClassNameWithSupervisor } from "../../Types/Types";
+
 import ClassesList from "../ClassesList/ClassesList";
-import { ButtonLoginWrapper } from "../LoginForm/LoginForm.styles";
-import { ClassesFormWrapper, ClassesText } from "./ClassesForm.styles";
+import { ClassesFormWrapper, ClassSectionHeader } from "./ClassesForm.styles";
 
 const ClassesForm = () => {
+  const { getClassesList } = endpoints;
   const [data, setData] = useState<ClassNameWithSupervisor[] | null>(null);
 
   useEffect(() => {
     axios
-      .get("https://localhost:7291/Class/LightClassInfo")
+      .get(getClassesList)
       .then((response) => {
         const data = response.data as ClassNameWithSupervisor[];
         setData(data);
@@ -19,15 +21,13 @@ const ClassesForm = () => {
       .catch((e) => {
         console.log(e);
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <ClassesFormWrapper>
-      <ClassesText>Klasy</ClassesText>
-      <ButtonLoginWrapper>
-        <SideMenuButton>Utwórz nową</SideMenuButton>
-      </ButtonLoginWrapper>
-
+      <ClassSectionHeader>Klasy</ClassSectionHeader>
       <ClassesList classList={data ? data : []} />
     </ClassesFormWrapper>
   );

@@ -3,11 +3,7 @@ import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import ParentViewChildrenList from "../../Molecules/ParentViewSection/ParentViewChildrenList/ParenViewChildrenList";
 import ParentViewSection from "../../Molecules/ParentViewSection/ParentViewSection";
 import ParentViewAnnouncementsList from "../../Molecules/ParenViewAnnouncementsList/ParentViewAnnoucementsList";
-import {
-  ParentViewSideMenu,
-  ParentViewWrapper,
-  SectionsWrapper,
-} from "./ParentView.styles";
+import { ParentViewWrapper, SectionsWrapper } from "./ParentView.styles";
 import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
@@ -18,16 +14,24 @@ import useLoader from "../../Hooks/useLoader";
 import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
 import { AxiosError } from "axios";
 import useUser from "../../Hooks/useUser";
+import {
+  SpecificOptionsWrapper,
+  ViewSideMenu,
+} from "../../Atoms/SideMenu/SideMenu";
+import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
+import { Navigate } from "react-router-dom";
+import { routes } from "../../Routes/routes";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
+  const { login } = routes;
+  const { user } = useUser();
 
   const { error, isConnecting, handleConnect, handleError, handleFinished } =
     useLoader();
   const [childrenList, setChildrenList] = useState<
     StudentsWithClassAndGradesAverage[]
   >([]);
-  const { user } = useUser();
   const { isOpened, handleToggleModal } = useModal();
 
   const getData = () => {
@@ -51,14 +55,16 @@ const ParentView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return user && user?.role === "Parent" ? (
     <ParentViewWrapper>
-      <ParentViewSideMenu>
-        <SideMenuButton>Edytuj konto</SideMenuButton>
-        <SideMenuButton onClick={handleToggleModal}>
-          Zarejestruj dziecko
-        </SideMenuButton>
-      </ParentViewSideMenu>
+      <ViewSideMenu>
+        <SideMenuNavigation />
+        <SpecificOptionsWrapper>
+          <SideMenuButton onClick={handleToggleModal}>
+            Zarejestruj dziecko
+          </SideMenuButton>
+        </SpecificOptionsWrapper>
+      </ViewSideMenu>
       <SectionsWrapper>
         <ParentViewSection label={"Zarejestrowane dzieci"}>
           {isConnecting && <SmallLoader />}
@@ -79,6 +85,8 @@ const ParentView = () => {
         />
       </Modal>
     </ParentViewWrapper>
+  ) : (
+    <Navigate to={user ? `/${user.role}` : login} />
   );
 };
 

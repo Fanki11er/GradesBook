@@ -14,6 +14,7 @@ namespace GradesBook.Entities
         public DbSet<Student> Students { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<ProgramSubject> ProgramSubjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,7 +56,7 @@ namespace GradesBook.Entities
             modelBuilder.Entity<Subject>(eb =>
             {
                 eb.Property(su => su.Name).IsRequired().HasMaxLength(50);
-                //eb.HasMany(su => su.Grades).WithOne(gr => gr.Subject);
+                eb.HasMany(su => su.ProgramSubjects).WithOne(gr => gr.Subject);
                 
                
             });
@@ -69,8 +70,10 @@ namespace GradesBook.Entities
 
             modelBuilder.Entity<Program>(eb =>
             {
-                eb.HasMany(pr => pr.Subjects).WithMany(su => su.Programs);
+                eb.HasMany(pr => pr.ProgramSubjects).WithOne(su => su.Program);
             });
+
+           
         }
 
       

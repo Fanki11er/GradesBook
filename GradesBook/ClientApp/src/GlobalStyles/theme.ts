@@ -12,6 +12,7 @@ const colorsSchemes: ColorsSchemes = {
     errorRed: "rgba(255, 131, 131, 1)",
     buttonsGray: "rgba(192, 199, 214, 1)",
     purple: "rgba(63, 61, 86)",
+    transparent: "transparent",
   },
   dark: {
     mainBackground: "rgba(47, 46, 65, 1)",
@@ -26,7 +27,32 @@ const colorsSchemes: ColorsSchemes = {
     errorRed: "",
     buttonsGray: "",
     purple: "",
+    transparent: "transparent",
   },
+};
+
+const fontSizes = {
+  normal: "16px",
+  medium: "20px",
+  large: "26px",
+};
+
+const devices = {
+  medium: `min-width: 640px`,
+  large: `min-width: 1000px`,
+  veryLarge: "min-width: 2500px",
+};
+
+export const lightTheme: Theme = {
+  colors: colorsSchemes.light,
+  fontSizes,
+  devices,
+};
+
+export const darkTheme: Theme = {
+  colors: colorsSchemes.dark,
+  fontSizes,
+  devices,
 };
 
 export type Colors = {
@@ -41,13 +67,17 @@ export type Colors = {
   yellow: string;
   errorRed: string;
   buttonsGray: string;
+  transparent: string;
   purple: string;
 };
 
-export const theme: Theme = {
-  colors: colorsSchemes.light,
+export let selectedColorScheme: ColorSchemasTypes = "light";
+
+/*export const theme: Theme = {
+  colors: colorsSchemes[selectedColorScheme],
   fontSizes: {
-    large: "50px",
+    normal: "16px",
+    medium: "20px",
   },
 
   devices: {
@@ -55,11 +85,13 @@ export const theme: Theme = {
     large: `min-width: 1000px`,
     veryLarge: "min-width: 2500px",
   },
-};
+};*/
 
 export type Theme = {
   colors: Colors;
   fontSizes: {
+    normal: string;
+    medium: string;
     large: string;
   };
 
@@ -68,6 +100,11 @@ export type Theme = {
     large: string;
     veryLarge: string;
   };
+};
+
+export const themes = {
+  light: lightTheme,
+  dark: darkTheme,
 };
 
 export type StyledTheme = {
@@ -79,10 +116,11 @@ export type ColorsSchemes = {
   dark: Colors;
 };
 
-type ColorSchemasTypes = "light" | "dark";
+export type ColorSchemasTypes = "light" | "dark";
 
-export const setColorsSchema = (scheme: ColorSchemasTypes) => {
-  theme.colors = colorsSchemes[scheme];
-};
+/*export const setColorsSchema = (scheme: ColorSchemasTypes) => {
+  //theme.colors = colorsSchemes[scheme];
+  selectedColorScheme = scheme;
+};*/
 
 //setColorsSchema("dark");

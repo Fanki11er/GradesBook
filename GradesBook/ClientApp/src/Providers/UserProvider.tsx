@@ -1,4 +1,5 @@
 import { createContext, PropsWithChildren, useCallback, useState } from "react";
+import {} from "../GlobalStyles/theme";
 import { User } from "../Types/Types";
 
 export const UserContext = createContext({
@@ -11,7 +12,7 @@ const UserProvider = (props: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>({
     id: 1,
     token: "T",
-    role: "parent",
+    role: "Teacher",
     //!!!!!!!!!!!!!!!!!!!!!
   });
 

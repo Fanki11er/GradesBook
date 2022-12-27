@@ -1,4 +1,5 @@
 ﻿using GradesBook.Entities;
+using GradesBook.Models;
 using GradesBook.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,10 +16,11 @@ namespace GradesBook.Controllers
             _programService = programService;
         }
 
-        public ActionResult<IEnumerable<Entities.Program>> GetAll()
+        public ActionResult<IEnumerable<SelectOption>> GetAll()
         {
             return Ok(_programService.GetAllPrograms());
         }
+
         [HttpGet("{id}")]
         public ActionResult<Entities.Program> Get([FromRoute] int id)
         {
@@ -29,6 +31,17 @@ namespace GradesBook.Controllers
                 return NotFound();
             }
             return Ok(program);
+        }
+
+        [HttpPost]
+        public ActionResult CreateProgram([FromBody] NewProgramDto dto)
+        {
+           var index =  _programService.CreateProgram(dto);
+           if(index >= 0)
+            {
+                return Ok();
+            }
+            return BadRequest();
         }
 
 

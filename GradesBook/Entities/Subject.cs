@@ -6,7 +6,7 @@
         public string Name { get; set; }
        virtual  public List<Grade> Grades { get; set; } = new List<Grade>();
        virtual public Teacher? Teacher { get; set; }
-       virtual   public List<Program> Programs { get; set; } = new List<Program>();
+       virtual   public List<ProgramSubject> ProgramSubjects { get; set; } = new List<ProgramSubject>();
 
     }
 }

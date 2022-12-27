@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import { ButtonGrades } from "../../../Atoms/Buttons/Buttons";
 import { DefaultListWrapper } from "../../../Atoms/DefaultListWrapper/DefaultListWrapper";
 import { EmptyListInfo } from "../../../Atoms/EmptyListInfo/EmptyListInfo";
+import { routes } from "../../../Routes/routes";
 import { StudentsWithClassAndGradesAverage } from "../../../Types/Types";
 import {
   ParentViewChildrenListElement,
@@ -14,6 +16,7 @@ type Props = {
 };
 
 const ParentViewChildrenList = (props: Props) => {
+  const { grades } = routes;
   const { childrenList } = props;
   const renderChildrenList = (
     childrenList: StudentsWithClassAndGradesAverage[]
@@ -28,7 +31,9 @@ const ParentViewChildrenList = (props: Props) => {
           <StudentClassInfo>
             {children.className ? children.className : ""}
           </StudentClassInfo>
-          <ButtonGrades>Oceny</ButtonGrades>
+          <ButtonGrades as={Link} to={`${grades}/${children.studentId}`}>
+            Oceny
+          </ButtonGrades>
         </ParentViewChildrenListElement>
       );
     });
