@@ -1,8 +1,10 @@
 import { Formik } from "formik";
 import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
+import useLoader from "../../Hooks/useLoader";
+import useProgram from "../../Hooks/useProgram";
 import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import InputField from "../../Molecules/InputField/InputField";
-import { SelectOption } from "../../Types/Types";
+import { NewProgramDto, SelectOption } from "../../Types/Types";
 
 import {
   AddProgramFormHeader,
@@ -16,11 +18,14 @@ type Props = {
 
 type MyFormValues = {
   programName: string;
-  addedSubjects: number[];
+  addedSubjects: string[];
 };
 
 const ProgramsForm = (props: Props) => {
   const { subjects } = props;
+  const { handleConnect, handleError, handleFinished, error, isConnecting } =
+    useLoader();
+  const { handleAddNewProgram } = useProgram();
 
   const initialValues: MyFormValues = {
     programName: "",
@@ -40,14 +45,48 @@ const ProgramsForm = (props: Props) => {
     });
   };
 
+  const validateValues = (values: MyFormValues) => {
+    if (values.programName.length < 3) {
+      return false;
+    }
+    if (!values.addedSubjects.length) {
+      return false;
+    }
+    return true;
+  };
+
+  const convertValuesToDto = (values: MyFormValues): NewProgramDto => {
+    return {
+      Name: values.programName,
+      SubjectsIds: values.addedSubjects.map((subject) => {
+        return Number(subject);
+      }),
+    };
+  };
+
   const handleSubmit = (values: MyFormValues) => {
-    console.log(values);
+    if (validateValues(values)) {
+      handleConnect();
+      const dto = convertValuesToDto(values);
+      handleAddNewProgram(dto)
+        .then(() => {
+          handleFinished();
+        })
+        .catch((e) => {
+          console.log(e);
+          handleError(e.message);
+        });
+    }
   };
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values) => {
+      onSubmit={(values, actions) => {
         handleSubmit(values);
+        if (!isConnecting && !error) {
+          actions.resetForm();
+        }
+        actions.setSubmitting(false);
       }}
     >
       <AddProgramFormWrapper>

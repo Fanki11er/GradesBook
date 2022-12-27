@@ -176,6 +176,29 @@ namespace GradesBook.Migrations
                     b.ToTable("Programs");
                 });
 
+            modelBuilder.Entity("GradesBook.Entities.ProgramSubject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProgramId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("ProgramSubjects");
+                });
+
             modelBuilder.Entity("GradesBook.Entities.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -269,21 +292,6 @@ namespace GradesBook.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("ProgramSubject", b =>
-                {
-                    b.Property<int>("ProgramsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ProgramsId", "SubjectsId");
-
-                    b.HasIndex("SubjectsId");
-
-                    b.ToTable("ProgramSubject");
-                });
-
             modelBuilder.Entity("GradesBook.Entities.Announcement", b =>
                 {
                     b.HasOne("GradesBook.Entities.AnnouncementType", "AnnouncementType")
@@ -328,6 +336,25 @@ namespace GradesBook.Migrations
                     b.Navigation("Subject");
                 });
 
+            modelBuilder.Entity("GradesBook.Entities.ProgramSubject", b =>
+                {
+                    b.HasOne("GradesBook.Entities.Program", "Program")
+                        .WithMany("ProgramSubjects")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GradesBook.Entities.Subject", "Subject")
+                        .WithMany("ProgramSubjects")
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Program");
+
+                    b.Navigation("Subject");
+                });
+
             modelBuilder.Entity("GradesBook.Entities.Student", b =>
                 {
                     b.HasOne("GradesBook.Entities.Class", "StudentClass")
@@ -354,21 +381,6 @@ namespace GradesBook.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("ProgramSubject", b =>
-                {
-                    b.HasOne("GradesBook.Entities.Program", null)
-                        .WithMany()
-                        .HasForeignKey("ProgramsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("GradesBook.Entities.Subject", null)
-                        .WithMany()
-                        .HasForeignKey("SubjectsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GradesBook.Entities.AnnouncementType", b =>
                 {
                     b.Navigation("Announcements");
@@ -387,6 +399,8 @@ namespace GradesBook.Migrations
             modelBuilder.Entity("GradesBook.Entities.Program", b =>
                 {
                     b.Navigation("Classs");
+
+                    b.Navigation("ProgramSubjects");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Student", b =>
@@ -397,6 +411,8 @@ namespace GradesBook.Migrations
             modelBuilder.Entity("GradesBook.Entities.Subject", b =>
                 {
                     b.Navigation("Grades");
+
+                    b.Navigation("ProgramSubjects");
 
                     b.Navigation("Teacher");
                 });

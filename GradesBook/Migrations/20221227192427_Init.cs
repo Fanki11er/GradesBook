@@ -89,24 +89,26 @@ namespace GradesBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProgramSubject",
+                name: "ProgramSubjects",
                 columns: table => new
                 {
-                    ProgramsId = table.Column<int>(type: "int", nullable: false),
-                    SubjectsId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProgramId = table.Column<int>(type: "int", nullable: false),
+                    SubjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProgramSubject", x => new { x.ProgramsId, x.SubjectsId });
+                    table.PrimaryKey("PK_ProgramSubjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProgramSubject_Programs_ProgramsId",
-                        column: x => x.ProgramsId,
+                        name: "FK_ProgramSubjects_Programs_ProgramId",
+                        column: x => x.ProgramId,
                         principalTable: "Programs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProgramSubject_Subjects_SubjectsId",
-                        column: x => x.SubjectsId,
+                        name: "FK_ProgramSubjects_Subjects_SubjectId",
+                        column: x => x.SubjectId,
                         principalTable: "Subjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -242,9 +244,14 @@ namespace GradesBook.Migrations
                 column: "SubjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramSubject_SubjectsId",
-                table: "ProgramSubject",
-                column: "SubjectsId");
+                name: "IX_ProgramSubjects_ProgramId",
+                table: "ProgramSubjects",
+                column: "ProgramId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramSubjects_SubjectId",
+                table: "ProgramSubjects",
+                column: "SubjectId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_ClassId",
@@ -274,7 +281,7 @@ namespace GradesBook.Migrations
                 name: "Grades");
 
             migrationBuilder.DropTable(
-                name: "ProgramSubject");
+                name: "ProgramSubjects");
 
             migrationBuilder.DropTable(
                 name: "AnnouncementTypes");

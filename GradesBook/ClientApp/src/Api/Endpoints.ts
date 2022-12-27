@@ -6,6 +6,7 @@ export const endpoints = {
   registerParentsChildren: "/Parent/RegisterChildren",
   getClassesList: "/Class/LightClassInfo",
   getSubjectsList: "/Subjects",
+  addProgram: "/Program",
   getUserCurrentSettings: (role: Roles, id: number) => {
     return `/${role}/Settings/${id}`;
   },

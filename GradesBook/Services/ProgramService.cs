@@ -8,6 +8,7 @@ namespace GradesBook.Services
    public interface IProgramService {
         public IEnumerable<SelectOption> GetAllPrograms();
         public Entities.Program GetProgram(int id);
+        public int CreateProgram(NewProgramDto dto);
     }
 
     public class ProgramService : IProgramService
@@ -35,6 +36,34 @@ namespace GradesBook.Services
                 return null;
             }
             return program;
+        }
+
+        public int CreateProgram(NewProgramDto dto)
+        {
+            var program = new Entities.Program()
+            {
+                Name = dto.Name,
+            };
+
+            _dbContext.Programs.Add(program);
+            _dbContext.SaveChanges();
+
+            var programSubjects = new List<ProgramSubject>();
+
+            dto.SubjectsIds.ForEach(id =>
+            {
+                programSubjects.Add(new ProgramSubject()
+                {
+                    SubjectId = id,
+                    ProgramId = program.Id
+                });
+
+            });
+            _dbContext.ProgramSubjects.AddRange(programSubjects);
+            _dbContext.SaveChanges();
+
+            return program.Id;
+          
         }
     }
 }

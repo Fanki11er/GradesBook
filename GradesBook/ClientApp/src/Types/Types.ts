@@ -75,3 +75,8 @@ export type SelectOption = {
   id: number;
   value: string;
 };
+
+export type NewProgramDto = {
+  Name: string;
+  SubjectsIds: number[];
+};

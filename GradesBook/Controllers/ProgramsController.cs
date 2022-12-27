@@ -33,6 +33,17 @@ namespace GradesBook.Controllers
             return Ok(program);
         }
 
+        [HttpPost]
+        public ActionResult CreateProgram([FromBody] NewProgramDto dto)
+        {
+           var index =  _programService.CreateProgram(dto);
+           if(index >= 0)
+            {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
 
     }
 }
