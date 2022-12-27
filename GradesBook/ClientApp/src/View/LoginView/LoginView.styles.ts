@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const LoginViewWrapper = styled.div`
   display: flex;
@@ -6,5 +7,6 @@ export const LoginViewWrapper = styled.div`
   align-items: center;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(47, 46, 65, 1);
+  background-color: ${(props: StyledTheme) =>
+    props.theme.colors.mainBackground};
 `;

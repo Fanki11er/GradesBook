@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Form } from "formik";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const RegistrationFormWrapper = styled(Form)`
   display: grid;
@@ -7,10 +8,13 @@ export const RegistrationFormWrapper = styled(Form)`
   grid-auto-columns: 1fr;
   grid-auto-rows: 60px;
   justify-items: center;
-  width: 400px;
+  width: fit-content;
   height: auto;
-  padding: 30px 0;
-  background-color: rgba(217, 217, 217, 1);
+  padding: 30px 50px;
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  border-radius: 10px;
 `;
 
-export const RegistrationHeader = styled.h2``;
+export const RegistrationHeader = styled.h2`
+  color: ${(props: StyledTheme) => props.theme.colors.transparentBlack};
+`;

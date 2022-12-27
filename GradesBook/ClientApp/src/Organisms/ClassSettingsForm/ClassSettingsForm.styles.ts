@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ClassSettingsFormWrapper = styled.div`
   width: 100%;
@@ -22,14 +23,11 @@ export const ClassSettingHeaderText = styled.h2`
   display: flex;
   align-items: flex-start;
   width: 150px;
-  color: white;
 `;
 
-//export const ImgClassSetting = styled.img``;
-export const ImgClassSetting = styled.div`
-  width: 50px;
-  height: 50px;
-  background-color: gray;
+export const ImgClassSetting = styled.img`
+  width: 40px;
+  height: 40px;
 `;
 
 export const TeacherInfoWrapper = styled.div`
@@ -44,7 +42,6 @@ export const ClassSettingText = styled.span`
   display: flex;
   align-items: flex-start;
   width: 270px;
-  color: white;
 `;
 
 export const ListsWrapper = styled.div`

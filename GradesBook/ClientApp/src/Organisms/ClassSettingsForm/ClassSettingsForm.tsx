@@ -14,6 +14,7 @@ import {
   ListsWrapper,
   TeacherInfoWrapper,
 } from "./ClassSettingsForm.styles";
+import ClassSettingImg from "../../Assets/Images/Teacher.png";
 
 const ClassSettingsForm = () => {
   const [data, setData] = useState<ClassStudentsSettings | null>(null);
@@ -38,7 +39,7 @@ const ClassSettingsForm = () => {
           {data ? `Klasa: ${data.name}` : "Klasa: "}
         </ClassSettingHeaderText>
         <TeacherInfoWrapper>
-          <ImgClassSetting />
+          <ImgClassSetting src={ClassSettingImg} alt="ClassSettingImg" />
           <ClassSettingText>
             {data?.supervisingTeacherName
               ? `Wychowawca: ${data.supervisingTeacherName}`

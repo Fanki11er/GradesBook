@@ -6,7 +6,7 @@ export const Button = styled.button`
   width: 200px;
   height: 50px;
   border-radius: 10px;
-  border: 2px solid black;
+  border: inherit;
   background-color: rgba(217, 217, 217, 1);
   transition: all 0.5s;
   outline: none;
@@ -23,6 +23,12 @@ export const Button = styled.button`
 export const ButtonEdit = styled(Button)`
   width: 100px;
   height: 30px;
+  border: inherit;
+  :hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
+  }
 `;
 
 export const ButtonItemList = styled(Button)`
@@ -47,12 +53,26 @@ export const ButtonAdded = styled.button`
   width: 60px;
   height: 60px;
   background-color: rgba(217, 217, 217, 1);
+  border-radius: 10px;
+  border: inherit;
+
+  :hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
+  }
 `;
 
 export const ButtonLogOut = styled(Button)`
-  width: 80px;
+  width: 100px;
   height: 30px;
-  background-color: rgba(217, 217, 217, 1);
+  border: inherit;
+
+  :hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    color: ${(props: StyledTheme) => props.theme.colors.white};
+    font-weight: bold;
+  }
 `;
 
 export const SideMenuButton = styled(Button)`
