@@ -3,7 +3,7 @@ const colorsSchemes: ColorsSchemes = {
     mainBackground: "rgba(247, 248, 250, 1)",
     menuBackground: "rgba(115, 124, 142, 1)",
     transparentBlack: "rgba(115, 124, 142, 0.8)",
-    white: "white",
+    white: "rgba(255,255,255,1)",
     lightBorder: "rgba(223, 226, 232, 1)",
     shadow: "rgba(0, 0, 0, 0.05)",
     red: "rgba(203, 133, 129, 1)",
@@ -11,6 +11,7 @@ const colorsSchemes: ColorsSchemes = {
     yellow: "rgba(225, 216, 136, 1)",
     errorRed: "rgba(255, 131, 131, 1)",
     buttonsGray: "rgba(192, 199, 214, 1)",
+    purple: "rgba(63, 61, 86)",
     transparent: "transparent",
   },
   dark: {
@@ -25,6 +26,7 @@ const colorsSchemes: ColorsSchemes = {
     yellow: "",
     errorRed: "",
     buttonsGray: "",
+    purple: "",
     transparent: "transparent",
   },
 };
@@ -66,6 +68,7 @@ export type Colors = {
   errorRed: string;
   buttonsGray: string;
   transparent: string;
+  purple: string;
 };
 
 export let selectedColorScheme: ColorSchemasTypes = "light";

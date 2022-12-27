@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const LoginFormWrapper = styled.form`
   display: grid;
@@ -6,10 +7,17 @@ export const LoginFormWrapper = styled.form`
   grid-auto-columns: 1fr;
   grid-auto-rows: 60px;
   justify-items: center;
-  width: 400px;
+  width: fit-content;
   height: auto;
-  padding: 30px 0;
-  background-color: rgba(217, 217, 217, 1);
+  padding: 30px 50px;
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  border-radius: 10px;
 `;
 
-export const LoginHeader = styled.h2``;
+export const LoginHeader = styled.h2`
+  color: ${(props: StyledTheme) => props.theme.colors.transparentBlack};
+`;
+
+export const ButtonLoginWrapper = styled.div`
+  margin-top: 20px;
+`;

@@ -8,7 +8,7 @@ export const NavigationWrapper = styled.nav`
     props.theme.colors.mainBackground};
   grid-row: 1/2;
   display: grid;
-  grid-template-columns: 100px 1fr 100px;
+  grid-template-columns: 100px 1fr 150px;
   grid-auto-rows: auto;
   align-items: center;
   border: 2px solid ${(props: StyledTheme) => props.theme.colors.lightBorder};

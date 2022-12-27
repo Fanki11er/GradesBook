@@ -112,11 +112,11 @@ export default ProgramsForm;
         <ProgramsHeaderText>{`Klasa: ${
           data ? data.className : ""
         }`}</ProgramsHeaderText>
-        <ImgPrograms />
+        <ImgPrograms src={ProgramsImg} alt="ProgramsImg" />
         <ProgramsText>{`Wychowawca: ${
           data && data.supervisingTeacher
             ? data.supervisingTeacher
-            : "Jan KOwalski"
+            : "Jan Kowalski"
         }`}</ProgramsText>
         <ButtonEdit>Edytuj</ButtonEdit>
       </ProgramsHeaderWrapper>
@@ -125,7 +125,7 @@ export default ProgramsForm;
         data && data.programName ? data.programName : ""
       }`}</ProgramsHeaderSmall>
 
-      <ButtonSend>Wyślij ogłoszenie</ButtonSend>
+      <SideMenuButton>Wyślij ogłoszenie</SideMenuButton>
 
       <ClassStudentListsForm
         studentsWithGradesAverages={data ? data.studentsList : []}

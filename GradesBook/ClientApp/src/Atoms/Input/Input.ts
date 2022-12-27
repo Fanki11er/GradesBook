@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const InputWrapper = styled(Field)`
-  border: 2px solid ${(props: StyledTheme) => props.theme.colors.menuBackground};
+  border: 2px solid ${(props: StyledTheme) => props.theme.colors.buttonsGray};
   border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   outline: none;

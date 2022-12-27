@@ -80,15 +80,17 @@ export const SubjectCheckboxWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin: 0 70px 0 0;
 `;
-export const ProgramsHeaderText = styled.h2`
-  color: white;
-`;
+export const ProgramsHeaderText = styled.h2``;
 
-export const ImgPrograms = styled.img``;
+export const ImgPrograms = styled.img`
+  width: 30px;
+  height: 30px;
+`;
 
 export const ProgramsText = styled.span`
-  color: white;
+  //color: white;
 `;
 
 export const ProgramsHeaderSmall = styled.h3`

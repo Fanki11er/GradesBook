@@ -1,8 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../Atoms/Buttons/Buttons";
+import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import InputField from "../../Molecules/InputField/InputField";
 import { routes } from "../../Routes/routes";
-import { LoginFormWrapper, LoginHeader } from "./LoginForm.styles";
+import {
+  ButtonLoginWrapper,
+  LoginFormWrapper,
+  LoginHeader,
+} from "./LoginForm.styles";
 import { useState } from "react";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
@@ -55,7 +59,9 @@ const LoginForm = () => {
           label="Hasło"
           type="password"
         />
-        <Button type="submit">Zaloguj</Button>
+        <ButtonLoginWrapper>
+          <SideMenuButton type="submit">Zaloguj</SideMenuButton>
+        </ButtonLoginWrapper>
       </LoginFormWrapper>
     </Formik>
   );
