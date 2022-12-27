@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ClassStudentListsFormWrapper = styled.ul`
   width: 100%;
   height: 100%;
-  background-color: rgba(217, 217, 217, 1);
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
 `;
 
 export const StudentList = styled.li`

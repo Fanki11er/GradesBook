@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "../../Atoms/Buttons/Buttons";
+import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import { ClassNameWithSupervisor } from "../../Types/Types";
 import ClassesList from "../ClassesList/ClassesList";
+import { ButtonLoginWrapper } from "../LoginForm/LoginForm.styles";
 import { ClassesFormWrapper, ClassesText } from "./ClassesForm.styles";
 
 const ClassesForm = () => {
@@ -23,7 +24,10 @@ const ClassesForm = () => {
   return (
     <ClassesFormWrapper>
       <ClassesText>Klasy</ClassesText>
-      <Button>Utwórz nową</Button>
+      <ButtonLoginWrapper>
+        <SideMenuButton>Utwórz nową</SideMenuButton>
+      </ButtonLoginWrapper>
+
       <ClassesList classList={data ? data : []} />
     </ClassesFormWrapper>
   );

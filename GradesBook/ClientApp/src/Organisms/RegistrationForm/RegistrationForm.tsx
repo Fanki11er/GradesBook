@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Button } from "../../Atoms/Buttons/Buttons";
+import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import { routes } from "../../Routes/routes";
 import {
   RegistrationFormWrapper,
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
 import InputField from "../../Molecules/InputField/InputField";
+import { ButtonLoginWrapper } from "../LoginForm/LoginForm.styles";
 
 interface MyFormValues {
   firstName: string;
@@ -76,7 +77,9 @@ const RegistrationForm = () => {
           label="Powtórz hasło"
           type="repeatPassword"
         />
-        <Button type={"submit"}>Zarejestruj</Button>
+        <ButtonLoginWrapper>
+          <SideMenuButton type={"submit"}>Zarejestruj</SideMenuButton>
+        </ButtonLoginWrapper>
       </RegistrationFormWrapper>
     </Formik>
   );

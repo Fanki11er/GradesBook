@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ClassesFormWrapper = styled.div`
   display: flex;
@@ -7,9 +8,10 @@ export const ClassesFormWrapper = styled.div`
   align-items: center;
   width: 500px;
   height: auto;
-  background-color: rgba(217, 217, 217, 1);
+  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  border-radius: 10px;
 `;
 
 export const ClassesText = styled.h2`
-  color: black;
+  color: ${(props: StyledTheme) => props.theme.colors.transparentBlack};
 `;

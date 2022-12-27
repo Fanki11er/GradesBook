@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const InputFieldWrapper = styled.div`
   display: grid;
@@ -9,4 +10,5 @@ export const InputFieldWrapper = styled.div`
 
 export const InputLabel = styled.label`
   font-size: 16px;
+  color: ${(props: StyledTheme) => props.theme.colors.transparentBlack};
 `;

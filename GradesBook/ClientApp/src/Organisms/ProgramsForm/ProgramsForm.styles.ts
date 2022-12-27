@@ -1,12 +1,14 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ProgramsFormWrapper = styled.div`
   display: grid;
-  grid-template-rows: 70px 70px 70px 1fr;
+  grid-template-rows: 70px 70px 70px 70px;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: fit-content;
+  height: auto;
 `;
 
 export const ProgramsHeaderWrapper = styled.div`
@@ -15,17 +17,19 @@ export const ProgramsHeaderWrapper = styled.div`
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin: 0 70px 0 0;
 `;
-export const ProgramsHeaderText = styled.h2`
-  color: white;
-`;
+export const ProgramsHeaderText = styled.h2``;
 
-export const ImgPrograms = styled.img``;
+export const ImgPrograms = styled.img`
+  width: 30px;
+  height: 30px;
+`;
 
 export const ProgramsText = styled.span`
-  color: white;
+  //color: white;
 `;
 
 export const ProgramsHeaderSmall = styled.h3`
-  color: white;
+  //color: white;
 `;
