@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { StyledTheme } from "../../GlobalStyles/theme";
-import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ClassesFormWrapper = styled.section`
   width: 500px;

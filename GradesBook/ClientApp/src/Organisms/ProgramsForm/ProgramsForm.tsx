@@ -11,7 +11,6 @@ import {
   AddProgramFormInputsWrapper,
   AddProgramFormWrapper,
 } from "./ProgramsForm.styles";
-import ProgramsImg from "../../Assets/Images/Teacher.png";
 
 type Props = {
   subjects: SelectOption[];

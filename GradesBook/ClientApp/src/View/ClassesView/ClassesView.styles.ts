@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ClassesViewWrapper = styled.div`
   width: 100%;
