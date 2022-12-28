@@ -8,12 +8,10 @@ import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
 import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
-import axios from "../../Api/axios";
 import { endpoints } from "../../Api/Endpoints";
 import useLoader from "../../Hooks/useLoader";
 import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
 import { AxiosError } from "axios";
-import useUser from "../../Hooks/useUser";
 import {
   SpecificOptionsWrapper,
   ViewSideMenu,
@@ -21,11 +19,15 @@ import {
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
 import { Navigate } from "react-router-dom";
 import { routes } from "../../Routes/routes";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
   const { login } = routes;
-  const { user } = useUser();
+  const { getUserFromStorage } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
+  const user = getUserFromStorage();
 
   const { error, isConnecting, handleConnect, handleError, handleFinished } =
     useLoader();
@@ -36,7 +38,7 @@ const ParentView = () => {
 
   const getData = () => {
     handleConnect();
-    axios
+    axiosPrivate
       .get(`${getParentsChildren}/${user?.id}`)
       .then((response) => {
         const data = response.data as StudentsWithClassAndGradesAverage[];
@@ -49,11 +51,10 @@ const ParentView = () => {
   };
 
   useEffect(() => {
-    //!!!!!!!!!!!!!!!! Change to axios Private
-    getData();
+    user && getData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   return user && user?.role === "Parent" ? (
     <ParentViewWrapper>

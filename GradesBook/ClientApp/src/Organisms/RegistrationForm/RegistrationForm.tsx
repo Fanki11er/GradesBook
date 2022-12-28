@@ -1,63 +1,109 @@
 import { useNavigate } from "react-router-dom";
-import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
+import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import { routes } from "../../Routes/routes";
 import {
   RegistrationFormWrapper,
   RegistrationHeader,
 } from "./RegistrationForm.styles";
-import { useState } from "react";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
 import InputField from "../../Molecules/InputField/InputField";
 import { ButtonLoginWrapper } from "../LoginForm/LoginForm.styles";
+import useLoader from "../../Hooks/useLoader";
+import useAuth from "../../Hooks/useAuth";
+import { RegisterUserDto } from "../../Types/Types";
 
 interface MyFormValues {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  repeatPassword: string;
+  repeatedPassword: string;
 }
 const RegistrationForm = () => {
+  const { login } = routes;
+  const {
+    //isConnecting,
+    error,
+    handleConnect,
+    handleError,
+    handleFinished,
+    handleResetError,
+  } = useLoader();
+  const { handleRegisterUser } = useAuth();
+
   const initialValues: MyFormValues = {
     firstName: "",
     lastName: "",
     email: "",
     password: "",
-    repeatPassword: "",
+    repeatedPassword: "",
   };
 
-  const { register } = routes;
-
   const navigate = useNavigate();
-  const [error, setError] = useState("");
 
-  const handleSubmit = async (value: MyFormValues) => {
-    console.log("test");
-    setError("");
-    navigate(register, { replace: true });
+  const validateFormValues = (values: MyFormValues) => {
+    handleResetError();
+    const entries = Object.values(values);
+    for (let i = 0; i < entries.length; i++) {
+      if (!entries[i]) {
+        handleError("Wszystkie pola są wymagane");
+        return;
+      }
+    }
+    if (values.password !== values.repeatedPassword) {
+      handleError("Hasła nie zgadzają się");
+      return;
+    }
+
+    if (
+      !values.email.match(/.+@parent.school.pl/) &&
+      !values.email.match(/.+@teacher.school.pl/)
+    ) {
+      handleError("Wymagana domena @parent.school.pl lub @teacher.school.pl");
+      return;
+    }
+  };
+
+  const convertToDto = (values: MyFormValues): RegisterUserDto => {
+    return {
+      FirstName: values.firstName,
+      LastName: values.lastName,
+      Email: values.email,
+      Password: values.password,
+      RepeatedPassword: values.repeatedPassword,
+    };
+  };
+
+  const handleSubmit = (values: MyFormValues) => {
+    const dto = convertToDto(values);
+    handleConnect();
+    handleRegisterUser(dto)
+      .then(() => {
+        handleFinished();
+        navigate(login);
+      })
+      .catch((e) => {
+        handleError(e.message);
+      });
   };
 
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={(values, action) => {
-        handleSubmit(values);
-        console.log("Submit");
-
+        validateFormValues(values);
+        if (!error) {
+          handleSubmit(values);
+        }
         action.setSubmitting(false);
       }}
     >
       <RegistrationFormWrapper>
         <RegistrationHeader>Rejestracja</RegistrationHeader>
-        {error ? (
-          <FormError>
-            Podane dane są nieprawidłowe. <br />
-            Upewnij się, że podane email i hasło są poprawne
-          </FormError>
-        ) : null}
-        <InputField name="name" placeholder="Imię" label="Imię" />
-        <InputField name="name" placeholder="Nazwisko" label="Nazwisko" />
+        {error ? <FormError>{error}</FormError> : null}
+        <InputField name="firstName" placeholder="Imię" label="Imię" />
+        <InputField name="lastName" placeholder="Nazwisko" label="Nazwisko" />
         <InputField
           name="email"
           placeholder="Email"
@@ -72,13 +118,13 @@ const RegistrationForm = () => {
           type="password"
         />
         <InputField
-          name="repeatpassword"
+          name="repeatedPassword"
           placeholder="Powtórz hasło"
           label="Powtórz hasło"
-          type="repeatPassword"
+          type="password"
         />
         <ButtonLoginWrapper>
-          <SideMenuButton type={"submit"}>Zarejestruj</SideMenuButton>
+          <FormButtonOk type={"submit"}>Zarejestruj</FormButtonOk>
         </ButtonLoginWrapper>
       </RegistrationFormWrapper>
     </Formik>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { ButtonAdded } from "../../Atoms/Buttons/Buttons";
 import { ClassStudentsSettings } from "../../Types/Types";
@@ -15,13 +14,17 @@ import {
   TeacherInfoWrapper,
 } from "./ClassSettingsForm.styles";
 import ClassSettingImg from "../../Assets/Images/Teacher.png";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import { endpoints } from "../../Api/Endpoints";
 
 const ClassSettingsForm = () => {
+  const axiosPrivate = useAxiosPrivate();
+  const { getClassSettings } = endpoints;
   const [data, setData] = useState<ClassStudentsSettings | null>(null);
 
   useEffect(() => {
-    axios
-      .get("https://localhost:7291/Class/Settings/1")
+    axiosPrivate
+      .get(getClassSettings(1)) //!! Change ID
       .then((response) => {
         const data = response.data as ClassStudentsSettings;
         console.log(data);
@@ -30,6 +33,8 @@ const ClassSettingsForm = () => {
       .catch((e) => {
         console.log(e);
       });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

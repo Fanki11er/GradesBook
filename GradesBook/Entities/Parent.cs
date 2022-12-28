@@ -4,7 +4,8 @@ namespace GradesBook.Entities
 {
     public class Parent: User
     {
-      virtual public List<Student> Students { get; set; } = new List<Student>(); 
+       override  public string Role { get; set; } = "Parent";
+        virtual public List<Student> Students { get; set; } = new List<Student>(); 
 
     }
 

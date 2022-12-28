@@ -1,11 +1,12 @@
 import { AxiosError } from "axios";
 import { Formik } from "formik";
-import axios from "../../Api/axios";
 import { endpoints } from "../../Api/Endpoints";
 import { FormButtonCancel, FormButtonOk } from "../../Atoms/Buttons/Buttons";
 
 import { FormButtonsWrapper } from "../../Atoms/FormButtonsWrapper/FormButtonsWrapper";
 import { FormError } from "../../Atoms/FormError/FormError";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 import useLoader from "../../Hooks/useLoader";
 import { RegisterUserDto } from "../../Types/Types";
 import InputField from "../InputField/InputField";
@@ -31,6 +32,8 @@ type MyFormValues = {
 const RegisterChildForm = (props: Props) => {
   const { handleModalToggle, refreshData } = props;
   const { registerParentsChildren } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
+  const { getUserFromStorage } = useAuth();
   const {
     isConnecting,
     error,
@@ -69,11 +72,15 @@ const RegisterChildForm = (props: Props) => {
 
   const handleSubmit = (values: MyFormValues) => {
     validateFormValues(values);
-    //!!!!!!!!!!!!!!!! Change to axios Private
+    const user = getUserFromStorage();
+    if (!user) {
+      handleError("Błąd authentykacji");
+      return;
+    }
     if (!error) {
       handleConnect();
-      axios
-        .post(`${registerParentsChildren}/1`, {
+      axiosPrivate
+        .post(`${registerParentsChildren}/${user.id}`, {
           FirstName: values.name,
           LastName: values.surname,
           Email: values.email,

@@ -67,9 +67,4 @@ const App = () => {
 
 export default App;
 
-/*
- <Route
-                path={`${teacherView}/${classes}`}
-                element={<ClassesView />}
-              />
-*/
+//Todo Move classes to hook

@@ -1,7 +1,8 @@
+import { Form } from "formik";
 import styled from "styled-components";
 import { StyledTheme } from "../../GlobalStyles/theme";
 
-export const LoginFormWrapper = styled.form`
+export const LoginFormWrapper = styled(Form)`
   display: grid;
   grid-row-gap: 15px;
   grid-auto-columns: 1fr;

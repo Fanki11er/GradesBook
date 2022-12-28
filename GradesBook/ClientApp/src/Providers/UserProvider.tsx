@@ -11,7 +11,7 @@ export const UserContext = createContext({
 const UserProvider = (props: PropsWithChildren) => {
   const [user, setUser] = useState<User | null>({
     id: 1,
-    token: "T",
+    name: "Kdz",
     role: "Teacher",
     //!!!!!!!!!!!!!!!!!!!!!
   });

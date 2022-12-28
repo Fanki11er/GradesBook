@@ -41,9 +41,16 @@ export type ClassWithStudentsAndProgram = {
 
 export type Roles = "Teacher" | "Parent" | "Student";
 
+export type UserWithToken = {
+  id: number;
+  name: string;
+  token: string;
+  role: Roles;
+};
+
 export type User = {
   id: number;
-  token: string;
+  name: string;
   role: Roles;
 };
 
@@ -53,6 +60,11 @@ export type RegisterUserDto = {
   Email: string;
   Password: string;
   RepeatedPassword: string;
+};
+
+export type LoginUserDto = {
+  Email: string;
+  Password: string;
 };
 
 export type UserCurrentSettingsDto = {

@@ -1,14 +1,15 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { ViewSideMenu } from "../../Atoms/SideMenu/SideMenu";
-import useUser from "../../Hooks/useUser";
+import useAuth from "../../Hooks/useAuth";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
 import TeacherSpecificSideMenu from "../../Molecules/TeacherSpecificSideMenu/TeacherSpecificSideMenu";
 import { routes } from "../../Routes/routes";
 import { TeacherViewWrapper } from "./TeacherView.styles";
 
 const TeacherView = () => {
-  const { user } = useUser();
+  const { getUserFromStorage } = useAuth();
   const { login } = routes;
+  const user = getUserFromStorage();
 
   return user && user.role === "Teacher" ? (
     <TeacherViewWrapper>

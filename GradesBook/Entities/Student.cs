@@ -7,7 +7,8 @@ namespace GradesBook.Entities
      
         public int? ClassId { get; set; }
         public int ParrentId { get; set; }
-       virtual public  Class? StudentClass { get; set; }
+        override public string Role { get; set; } = "Student";
+        virtual public  Class? StudentClass { get; set; }
         public  Parent Parent { get; set; }
        virtual public  List<Grade> Grades { get; set; } = new List<Grade>();
 
