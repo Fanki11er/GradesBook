@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import { ColorSchemasTypes } from "../../GlobalStyles/theme";
-import { UserSettingsContext } from "../../Providers/UserSettingsProvider";
 import LightThemeImage from "../../Assets/Images/LightTheme.svg";
 
 import {
@@ -10,13 +9,14 @@ import {
   ThemeSettingsFormHeader,
   ThemeSettingsFormWrapper,
 } from "./ThemeSettingsForm.styles";
+import useColorScheme from "../../Hooks/useColorScheme";
+import useUser from "../../Hooks/useUser";
 
 const ThemeSettingsForm = () => {
-  const { handleChangeColorsScheme, themeName } =
-    useContext(UserSettingsContext);
+  const { handleChangeColorsScheme, themeName } = useColorScheme();
   const [selectedSkin, setSelectedSkin] =
     useState<ColorSchemasTypes>(themeName);
-
+  const { user } = useUser();
   useEffect(() => {
     setSelectedSkin(themeName);
 
@@ -38,7 +38,9 @@ const ThemeSettingsForm = () => {
         />
         <SkinSelector isSelected={false} image={LightThemeImage} />
       </SkinsWrapper>
-      <FormButtonOk onClick={() => handleChangeColorsScheme(selectedSkin)}>
+      <FormButtonOk
+        onClick={() => handleChangeColorsScheme(selectedSkin, user!.id)}
+      >
         Zmień
       </FormButtonOk>
     </ThemeSettingsFormWrapper>

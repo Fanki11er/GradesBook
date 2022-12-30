@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GradesBook.Entities;
 using GradesBook.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace GradesBook.Services
@@ -18,10 +19,12 @@ namespace GradesBook.Services
     {
         private readonly GradesBookDbContext _dbContext;
         private readonly IMapper _mapper;
-        public ParenntService(GradesBookDbContext dbContext, IMapper mapper)
+        private readonly IPasswordHasher<User> _passwordHasher;
+        public ParenntService(GradesBookDbContext dbContext, IMapper mapper, IPasswordHasher<User> passwordHasher)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
         public IEnumerable<StudentWithClassAndGradesAverageDto> GetParentsChildren(int id) {
@@ -31,25 +34,7 @@ namespace GradesBook.Services
         }
 
 
-        /*public int RegisterChild(CreateUserDto dto, int id)
-        {
-
-            var parent = _dbContext.Parents.FirstOrDefault(p => p.Id == id);
-            if (parent == null) {
-                return -1;
-            }
-
-            var student = _mapper.Map<Student>(dto);
-            student.Parent = parent;
-            student.ParrentId = parent.Id;
-            
-            
-            _dbContext.Students.Add(student);
-            _dbContext.SaveChanges();
-
-            return student.Id;
-            
-        }*/
+    
 
        public UserCurrentSettingsDto GetCurrentUserSettings(int id)
         {
@@ -75,18 +60,13 @@ namespace GradesBook.Services
             {
                 return false;
             }
-            if(user.FirstName != dto.FirstName)
+            Helpers.ChangeuserSettings(user, dto);
+
+            if (dto.Password != "")
             {
-                user.FirstName = dto.FirstName;
+                Helpers.ChangeUserPassword(user, dto, _passwordHasher);
             }
-            if(user.LastName != dto.LastName)
-            {
-                user.LastName = dto.LastName;
-            }
-            if(dto.Email != dto.Email)
-            {
-                dto.Email = dto.Email;
-            }
+
             _dbContext.Update(user);
            var changes = _dbContext.SaveChanges();
 

@@ -36,7 +36,7 @@ namespace GradesBook.MappingProfiles
                 .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Count() == 0? 0 : x.Grades.Average(a => a.Value)))
                 .ForMember(s => s.ClassName, m => m.MapFrom(x => x.StudentClass == null ? "" : x.StudentClass.Name));
 
-            CreateMap<CreateUserDto, Student>();
+            CreateMap<RegisterUserDto, Student>();
 
 
             
@@ -49,7 +49,9 @@ namespace GradesBook.MappingProfiles
                 .ForMember(s => s.Id, m => m.MapFrom(p => p.Id))
                 .ForMember(s => s.Value, m => m.MapFrom(p => p.Name));
 
-           
+            CreateMap<User, SelectOption>()
+                 .ForMember(s => s.Id, m => m.MapFrom(p => p.Id))
+                 .ForMember(s => s.Value, m => m.MapFrom(p => p.FirstName + " " + p.LastName));
 
 
         }

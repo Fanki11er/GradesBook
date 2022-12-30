@@ -55,8 +55,9 @@ namespace GradesBook.Controllers
         }
 
         [HttpPost("Login")]
-        public ActionResult<AuthUserDto> LoginWorker([FromBody] LoginUserDto dto)
+        public ActionResult<AuthUserDto> LoginUser([FromBody] LoginUserDto dto)
         {
+            
             var user = _accountsService.LoginUser(dto);
             if (user == null)
             {

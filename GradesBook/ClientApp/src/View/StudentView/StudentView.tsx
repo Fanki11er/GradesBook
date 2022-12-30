@@ -2,26 +2,24 @@ import { Navigate, Outlet } from "react-router-dom";
 import { ViewSideMenu } from "../../Atoms/SideMenu/SideMenu";
 import useUser from "../../Hooks/useUser";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
-import TeacherSpecificSideMenu from "../../Molecules/TeacherSpecificSideMenu/TeacherSpecificSideMenu";
-import { TeacherViewWrapper } from "./TeacherView.styles";
+import { StudentViewWrapper } from "./StudentView.styles";
 
-const TeacherView = () => {
+const StudentView = () => {
   const { user } = useUser();
 
-  if (user && user.role !== "Teacher") {
+  if (user && user.role !== "Student") {
     return <Navigate to={`/${user.role}`} />;
   }
   return (
     user && (
-      <TeacherViewWrapper>
+      <StudentViewWrapper>
         <ViewSideMenu>
           <SideMenuNavigation />
-          <TeacherSpecificSideMenu />
         </ViewSideMenu>
         <Outlet />
-      </TeacherViewWrapper>
+      </StudentViewWrapper>
     )
   );
 };
 
-export default TeacherView;
+export default StudentView;

@@ -14,7 +14,7 @@ export const endpoints = {
     return `/${role}/Settings/${id}`;
   },
   setUserCurrentSettings: (role: Roles, id: number) => {
-    return `/${role}/SetSettings/${id}`;
+    return `/${role}/Settings/${id}`;
   },
 
   getUserSubjectsList: (id: number) => {

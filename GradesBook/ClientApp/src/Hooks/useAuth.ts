@@ -6,8 +6,10 @@ import {
   User,
   UserWithToken,
 } from "../Types/Types";
+import useUser from "./useUser";
 const useAuth = () => {
   const { registerUser, loginUser } = endpoints;
+  const { handleLogout } = useUser();
   const handleRegisterUser = (dto: RegisterUserDto) => {
     return axios.post(registerUser, dto);
   };
@@ -50,6 +52,7 @@ const useAuth = () => {
   const handleDeleteAuth = () => {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("token");
+    handleLogout();
   };
   return {
     handleRegisterUser,

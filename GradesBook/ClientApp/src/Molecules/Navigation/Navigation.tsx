@@ -14,13 +14,15 @@ import ImgName from "../../Assets/Images/User.png";
 import useAuth from "../../Hooks/useAuth";
 import { Roles } from "../../Types/Types";
 import { useNavigate } from "react-router-dom";
-import { endpoints } from "../../Api/Endpoints";
+import { routes } from "../../Routes/routes";
+import useUser from "../../Hooks/useUser";
 
 const Navigation = () => {
-  const { baseUrl } = endpoints;
+  const { baseRoute } = routes;
   const navigate = useNavigate();
-  const { getUserFromStorage, handleDeleteAuth } = useAuth();
-  const user = getUserFromStorage();
+  const { handleDeleteAuth } = useAuth();
+  //const user = getUserFromStorage();
+  const { user } = useUser();
 
   const convertRole = (role: Roles) => {
     switch (role) {
@@ -51,7 +53,7 @@ const Navigation = () => {
       <ButtonLogOut
         onClick={() => {
           handleDeleteAuth();
-          navigate(baseUrl);
+          navigate(baseRoute);
         }}
       >
         Wyloguj

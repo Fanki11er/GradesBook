@@ -5,42 +5,30 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GradesBook.Services
 {
-   
-
-        public interface IStudentService
-        {
-        public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id);
+    public interface ITeachersService
+    {
         public UserCurrentSettingsDto GetCurrentUserSettings(int id);
         public bool UpdateUserSettings(int id, NewUserSettingsDto dto);
+        public IEnumerable<SelectOption> GeAllTeachers();
 
+    }
+    public class TeachersService: ITeachersService
+    {
+        private readonly GradesBookDbContext _dbContext;
+        private readonly IMapper _mapper;
+        private readonly IPasswordHasher<User> _passwordHasher;
+        public TeachersService(GradesBookDbContext dbContext, IMapper mapper, IPasswordHasher<User> passwordHasher )
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
-        public class StudentService : IStudentService
-        {
-            private readonly GradesBookDbContext _dbContext;
-            private readonly IMapper _mapper;
-            private readonly IPasswordHasher<User> _passwordHasher;
-        public StudentService(GradesBookDbContext dbContext, IMapper mapper, IPasswordHasher<User> passwordHasher)
-            {
-                _dbContext = dbContext;
-                _mapper = mapper;
-                _passwordHasher = passwordHasher;
-            }
-
-            public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id)
-        {
-            var parent = _dbContext.Parents.FirstOrDefault(p => p.Id == id);
-            if (parent is null) return null;
-
-            var students = parent.Students.Select(p => _mapper.Map<StudentWithGradesAverageDto>(p)).ToList();
-            
-            return students;
-
-        }
+     
 
         public UserCurrentSettingsDto GetCurrentUserSettings(int id)
         {
-            var user = _dbContext.Students.FirstOrDefault(p => p.Id == id);
+            var user = _dbContext.Teachers.FirstOrDefault(p => p.Id == id);
             if (user != null)
             {
                 var settings = _mapper.Map<UserCurrentSettingsDto>(user);
@@ -56,7 +44,7 @@ namespace GradesBook.Services
                 return false;
             }
 
-            var user = _dbContext.Students.FirstOrDefault(u => u.Id == id);
+            var user = _dbContext.Teachers.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
             {
@@ -68,7 +56,6 @@ namespace GradesBook.Services
             {
                 Helpers.ChangeUserPassword(user, dto, _passwordHasher);
             }
-
             _dbContext.Update(user);
             var changes = _dbContext.SaveChanges();
 
@@ -79,8 +66,10 @@ namespace GradesBook.Services
             return true;
         }
 
-
-
+        public IEnumerable<SelectOption> GeAllTeachers()
+        {
+            var teachers = _mapper.Map<IEnumerable<SelectOption>>(_dbContext.Teachers);
+            return teachers;
+        }
     }
-    
 }

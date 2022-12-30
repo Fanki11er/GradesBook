@@ -18,16 +18,14 @@ import {
 } from "../../Atoms/SideMenu/SideMenu";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
 import { Navigate } from "react-router-dom";
-import { routes } from "../../Routes/routes";
-import useAuth from "../../Hooks/useAuth";
 import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import useUser from "../../Hooks/useUser";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
-  const { login } = routes;
-  const { getUserFromStorage } = useAuth();
+  //const { getUserFromStorage } = useAuth();
   const axiosPrivate = useAxiosPrivate();
-  const user = getUserFromStorage();
+  const { user } = useUser();
 
   const { error, isConnecting, handleConnect, handleError, handleFinished } =
     useLoader();
@@ -56,7 +54,10 @@ const ParentView = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
-  return user && user?.role === "Parent" ? (
+  if (user && user.role !== "Parent") {
+    return <Navigate to={`/${user.role}`} />;
+  }
+  return user ? (
     <ParentViewWrapper>
       <ViewSideMenu>
         <SideMenuNavigation />
@@ -86,9 +87,7 @@ const ParentView = () => {
         />
       </Modal>
     </ParentViewWrapper>
-  ) : (
-    <Navigate to={user ? `/${user.role}` : login} />
-  );
+  ) : null;
 };
 
 export default ParentView;

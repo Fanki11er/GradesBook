@@ -49,6 +49,7 @@ builder.Services.AddScoped<IParentService, ParenntService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IProgramService, ProgramService>();
 builder.Services.AddScoped<ISubjetcsService, SubjectsService>();
+builder.Services.AddScoped<ITeachersService, TeachersService>();
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 

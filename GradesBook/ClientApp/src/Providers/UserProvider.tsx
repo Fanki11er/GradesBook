@@ -1,5 +1,13 @@
-import { createContext, PropsWithChildren, useCallback, useState } from "react";
+import {
+  createContext,
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import {} from "../GlobalStyles/theme";
+import useAuth from "../Hooks/useAuth";
+import useColorScheme from "../Hooks/useColorScheme";
 import { User } from "../Types/Types";
 
 export const UserContext = createContext({
@@ -9,16 +17,22 @@ export const UserContext = createContext({
 });
 
 const UserProvider = (props: PropsWithChildren) => {
-  const [user, setUser] = useState<User | null>({
-    id: 1,
-    name: "Kdz",
-    role: "Teacher",
-    //!!!!!!!!!!!!!!!!!!!!!
-  });
-
+  const [user, setUser] = useState<User | null>(null);
+  const { getUserFromStorage } = useAuth();
+  const { loadPreferredTheme } = useColorScheme();
   const handleSetUser = useCallback((user: User) => {
     setUser(user);
   }, []);
+
+  useEffect(() => {
+    if (!user) {
+      const loadedUser = getUserFromStorage();
+      if (loadedUser) {
+        handleSetUser(loadedUser);
+        loadPreferredTheme(loadedUser.id);
+      }
+    }
+  });
 
   const handleLogout = () => {
     setUser(null);
@@ -32,7 +46,7 @@ const UserProvider = (props: PropsWithChildren) => {
 
   return (
     <UserContext.Provider value={context}>
-      {props.children}
+      {user && props.children}
     </UserContext.Provider>
   );
 };

@@ -163,6 +163,7 @@ namespace GradesBook.Services
             return authUser;
         }
 
+
         private User? FindUser(string email)
         {
             User? user = null;

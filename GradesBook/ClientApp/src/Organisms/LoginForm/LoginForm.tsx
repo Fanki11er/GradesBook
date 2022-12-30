@@ -20,7 +20,7 @@ interface MyFormValues {
 
 const LoginForm = () => {
   const initialValues: MyFormValues = { email: "", password: "" };
-  const { parentView, teacherView } = routes;
+  const { parentView, teacherView, studentView } = routes;
 
   const navigate = useNavigate();
   const { handleSetAuthenticatedUser, handleLoginUser } = useAuth();
@@ -40,7 +40,7 @@ const LoginForm = () => {
           navigate(teacherView);
         }
         if (user.role === "Student") {
-          console.log("Student");
+          navigate(studentView);
         }
       })
       .catch((e) => {

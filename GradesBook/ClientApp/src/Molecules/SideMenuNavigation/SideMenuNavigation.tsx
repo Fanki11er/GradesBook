@@ -9,7 +9,8 @@ const SideMenuNavigation = () => {
   const { getUserFromStorage } = useAuth();
   const user = getUserFromStorage();
 
-  const { parentView, setting, grades, teacherView, program } = routes;
+  const { parentView, setting, grades, teacherView, program, studentView } =
+    routes;
   return (
     <SideMenuNavigationWrapper>
       {user?.role === "Parent" && (
@@ -17,11 +18,17 @@ const SideMenuNavigation = () => {
           Panel rodzica
         </SideMenuButton>
       )}
+      {user?.role === "Student" && (
+        <SideMenuButton as={NavLink} to={studentView} end>
+          Oceny
+        </SideMenuButton>
+      )}
       {user?.role === "Teacher" && (
         <SideMenuButton as={NavLink} to={teacherView} end>
           Klasy
         </SideMenuButton>
       )}
+
       <SideMenuButton as={NavLink} to={setting} end>
         Ustawienia
       </SideMenuButton>

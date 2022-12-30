@@ -10,12 +10,12 @@ import AuthenticatedTemplate from "./View/Template/AuthenticatedTemplate/Authent
 import SettingsView from "./View/SettingsView/SettingsView";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyle";
-import { useContext } from "react";
-import { UserSettingsContext } from "./Providers/UserSettingsProvider";
 import StudentGradesView from "./View/StudentGradesView/StudentGradesView";
 import TeacherView from "./View/TeacherView/TeacherView";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
+import StudentView from "./View/StudentView/StudentView";
+import useColorScheme from "./Hooks/useColorScheme";
 
 const App = () => {
   const {
@@ -28,8 +28,9 @@ const App = () => {
     parentView,
     grades,
     teacherView,
+    studentView,
   } = routes;
-  const { theme } = useContext(UserSettingsContext);
+  const { theme } = useColorScheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -42,6 +43,7 @@ const App = () => {
           <Route element={<AuthenticatedTemplate />}>
             <Route path={setting} element={<SettingsView />} />
             <Route path={parentView} element={<ParentView />} />
+            <Route path={studentView} element={<StudentView />} />
             <Route element={<TeacherView />}>
               <Route path={teacherView} element={<ClassesView />} />
               <Route

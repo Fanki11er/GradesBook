@@ -7,5 +7,6 @@ export const routes = {
   parentView: "/Parent",
   program: "/Program",
   teacherView: "/Teacher",
+  studentView: "/Student",
   grades: "/Grades",
 };
