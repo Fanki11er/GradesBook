@@ -1,19 +1,21 @@
-import axios from "../Api/axios";
 import { endpoints } from "../Api/Endpoints";
+import useAxiosPrivate from "./useAxiosPrivate";
 
 const useSubject = () => {
-  const { getUserSubjectsList, getSubjectsList } = endpoints;
-
-  const handleGetUserSubjectsList = (userId: number) => {
-    return axios.get(getUserSubjectsList(userId));
-  };
+  const { getSubjectsList } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
 
   const handleGetAllSubjects = () => {
-    return axios.get(getSubjectsList);
+    return axiosPrivate.get(getSubjectsList);
+  };
+
+  const handleGetUserSubjectsList = (id: number) => {
+    //!!!!!!!!!!!!!!!!
+    return axiosPrivate.get(getSubjectsList);
   };
   return {
-    handleGetUserSubjectsList,
     handleGetAllSubjects,
+    handleGetUserSubjectsList,
   };
 };
 

@@ -16,12 +16,12 @@ import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
 import StudentView from "./View/StudentView/StudentView";
 import useColorScheme from "./Hooks/useColorScheme";
+import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
 
 const App = () => {
   const {
     baseRoute,
-    classes,
-    program,
+    programs,
     setting,
     register,
     login,
@@ -29,6 +29,8 @@ const App = () => {
     grades,
     teacherView,
     studentView,
+    classSettings,
+    teacherSubjects,
   } = routes;
   const { theme } = useColorScheme();
 
@@ -47,12 +49,13 @@ const App = () => {
             <Route element={<TeacherView />}>
               <Route path={teacherView} element={<ClassesView />} />
               <Route
-                path={`${teacherView}${classes}/:classId`}
+                path={`${classSettings}/:classId`}
                 element={<ClassSettings />}
               />
+              <Route path={programs} element={<ProgramsView />} />
               <Route
-                path={`${teacherView}${program}`}
-                element={<ProgramsView />}
+                path={teacherSubjects}
+                element={<TeachersSubjectsView />}
               />
             </Route>
             <Route

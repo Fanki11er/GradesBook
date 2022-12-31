@@ -55,5 +55,34 @@ namespace GradesBook.Controllers
 
 
         }
+
+        [HttpGet("Subject/{id}")]
+        public ActionResult<SelectOption> GetTeacherSubjects ([FromRoute] int id)
+        {
+            var subject = _teachersService.GetTeacherSubject(id);
+            if(subject == null)
+            {
+                return Ok(null);
+            }
+            
+            return Ok(subject);
+
+        }
+
+        [HttpPost("Subject/{userId}")]
+        public ActionResult ChangeUserSubject([FromRoute] int userId, [FromBody] int  subjectId)
+        {
+            var subject = _teachersService.ChangeUserSubject(userId, subjectId);
+            if (subject == 0)
+            {
+                return BadRequest();
+            }
+
+
+            return Ok();
+
+
+
+        }
     }
 }

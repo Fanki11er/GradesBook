@@ -17,8 +17,12 @@ export const endpoints = {
     return `/${role}/Settings/${id}`;
   },
 
-  getUserSubjectsList: (id: number) => {
-    return `/Subjects/${id}`;
+  getTeacherSubject: (id: number) => {
+    return `/Teacher/Subject/${id}`;
+  },
+
+  setTeacherSubject: (id: number) => {
+    return `/Teacher/Subject/${id}`;
   },
 
   getClassSettings: (id: number) => {

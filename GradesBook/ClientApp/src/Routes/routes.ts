@@ -5,8 +5,11 @@ export const routes = {
   register: "/Register",
   login: "/Login",
   parentView: "/Parent",
-  program: "/Program",
+  programs: "Teacher/Program",
   teacherView: "/Teacher",
   studentView: "/Student",
+  classSettings: "/Teacher/Class",
+  teacherSubjects: "/Teacher/Subject",
+
   grades: "/Grades",
 };
