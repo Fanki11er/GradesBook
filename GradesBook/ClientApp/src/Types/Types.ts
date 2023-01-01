@@ -96,6 +96,6 @@ export type NewProgramDto = {
 export type CreateNewClassDto = {
   Name: string;
   ProgramId: number;
-  SupervisingteacherId: number;
+  SupervisingTeacherId: number;
 };
 //additionalValue: number;

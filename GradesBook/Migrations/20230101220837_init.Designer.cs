@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GradesBook.Migrations
 {
     [DbContext(typeof(GradesBookDbContext))]
-    [Migration("20221228214456_init")]
+    [Migration("20230101220837_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -84,20 +84,17 @@ namespace GradesBook.Migrations
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
 
-                    b.Property<int?>("PrgoramId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("ProgramId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SupervisingteacherId")
+                    b.Property<int?>("SupervisingTeacherId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProgramId");
 
-                    b.HasIndex("SupervisingteacherId");
+                    b.HasIndex("SupervisingTeacherId");
 
                     b.ToTable("Classes");
                 });
@@ -324,13 +321,13 @@ namespace GradesBook.Migrations
                         .WithMany("Classs")
                         .HasForeignKey("ProgramId");
 
-                    b.HasOne("GradesBook.Entities.Teacher", "Supervisingteacher")
+                    b.HasOne("GradesBook.Entities.Teacher", "SupervisingTeacher")
                         .WithMany("SupervisingClasses")
-                        .HasForeignKey("SupervisingteacherId");
+                        .HasForeignKey("SupervisingTeacherId");
 
                     b.Navigation("Program");
 
-                    b.Navigation("Supervisingteacher");
+                    b.Navigation("SupervisingTeacher");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Grade", b =>

@@ -11,7 +11,7 @@ namespace GradesBook.MappingProfiles
             CreateMap<CreateClassDto, Class>();
 
             CreateMap<Class, ClassStuentsSettingsDto>()
-                .ForMember(x => x.SupervisingTeacherName, m => m.MapFrom(t => t.Supervisingteacher != null ? t.Supervisingteacher.FirstName + " " + t.Supervisingteacher.LastName: "" ));
+                .ForMember(x => x.SupervisingTeacherName, m => m.MapFrom(t => t.SupervisingTeacher != null ? t.SupervisingTeacher.FirstName + " " + t.SupervisingTeacher.LastName: "" ));
 
             CreateMap<Student, LightStudentDto>().ForMember(s => s.StudentName, m => m.MapFrom(x => x.FirstName + " " + x.LastName));
 
@@ -23,10 +23,10 @@ namespace GradesBook.MappingProfiles
             CreateMap<Class, ClassWithStudentsAndProgramDto>()
                 .ForMember(c => c.ClassName, m => m.MapFrom(v => v.Name))
                 .ForMember(c => c.ProgramName, m => m.MapFrom(v => v.Program != null ? v.Program.Name : null))
-                .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.Supervisingteacher != null ? v.Supervisingteacher.FirstName + " " + v.Supervisingteacher.LastName : null));
+                .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.SupervisingTeacher != null ? v.SupervisingTeacher.FirstName + " " + v.SupervisingTeacher.LastName : null));
 
             CreateMap<Class, ClassNameWithSupervisorDto>()
-                .ForMember(c => c.SupervisorName, m => m.MapFrom(s => s.Supervisingteacher != null ? s.Supervisingteacher.FirstName + " " + s.Supervisingteacher.LastName : " "))
+                .ForMember(c => c.SupervisorName, m => m.MapFrom(s => s.SupervisingTeacher != null ? s.SupervisingTeacher.FirstName + " " + s.SupervisingTeacher.LastName : ""))
                 .ForMember(c => c.StudentsNumber, m => m.MapFrom(s => s.Students != null? s.Students.Count() : 0   ));
 
             CreateMap<Student, StudentWithClassAndGradesAverageDto>()
@@ -58,10 +58,3 @@ namespace GradesBook.MappingProfiles
 
     }
 }
-/*
-  CreateMap<Class, ClassWithStudentsAndProgramDto>()
-                .ForMember(c => c.ClassName, m => m.MapFrom(v => v.Name))
-                .ForMember(c => c.ProgramName, m => m.MapFrom(v => v.Program != null ? v.Program.Name : null))
-                .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.Supervisingteacher != null ? v.Supervisingteacher.FirstName + " " + v.Supervisingteacher.LastName : null));
- 
- */

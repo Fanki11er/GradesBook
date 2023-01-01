@@ -145,9 +145,8 @@ namespace GradesBook.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    PrgoramId = table.Column<int>(type: "int", nullable: true),
-                    SupervisingteacherId = table.Column<int>(type: "int", nullable: true),
-                    ProgramId = table.Column<int>(type: "int", nullable: true)
+                    ProgramId = table.Column<int>(type: "int", nullable: true),
+                    SupervisingTeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -158,8 +157,8 @@ namespace GradesBook.Migrations
                         principalTable: "Programs",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Classes_Teachers_SupervisingteacherId",
-                        column: x => x.SupervisingteacherId,
+                        name: "FK_Classes_Teachers_SupervisingTeacherId",
+                        column: x => x.SupervisingTeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id");
                 });
@@ -232,9 +231,9 @@ namespace GradesBook.Migrations
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Classes_SupervisingteacherId",
+                name: "IX_Classes_SupervisingTeacherId",
                 table: "Classes",
-                column: "SupervisingteacherId");
+                column: "SupervisingTeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Grades_StudentId",

@@ -64,7 +64,7 @@ namespace GradesBook.Entities
 
             modelBuilder.Entity<Teacher>(eb =>
             {
-                eb.HasMany(tr => tr.SupervisingClasses).WithOne(cl => cl.Supervisingteacher);
+                eb.HasMany(tr => tr.SupervisingClasses).WithOne(cl => cl.SupervisingTeacher);
                 eb.HasOne(tr => tr.Subject).WithOne(su => su.Teacher).HasForeignKey<Teacher>(tr => tr.SubjectId);
             });
 

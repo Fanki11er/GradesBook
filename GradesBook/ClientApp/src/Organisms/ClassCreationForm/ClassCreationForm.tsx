@@ -1,9 +1,12 @@
 import { Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
+import useClass from "../../Hooks/useClass";
 //import { endpoints } from "../../Api/Endpoints";
 import useLoader from "../../Hooks/useLoader";
 import InputField from "../../Molecules/InputField/InputField";
 import SelectInputField from "../../Molecules/SelectInputField/SelectInputField";
+import { routes } from "../../Routes/routes";
 import { SelectOption } from "../../Types/Types";
 import {
   ClassCreationFormWrapper,
@@ -22,7 +25,17 @@ type MyFormValues = {
 
 const ClassCreationForm = (props: Props) => {
   const { programs, teachers } = props;
-  const { handleResetError } = useLoader();
+  const { teacherView } = routes;
+  const { handleAddNewClass } = useClass();
+  const navigate = useNavigate();
+  const {
+    handleResetError,
+    handleConnect,
+    handleFinished,
+    handleError,
+    isConnecting,
+    error,
+  } = useLoader();
   const initialValues: MyFormValues = {
     name: "",
     supervisorId: -1,
@@ -31,12 +44,32 @@ const ClassCreationForm = (props: Props) => {
 
   const validateFormValues = (values: MyFormValues) => {
     handleResetError();
-    const entries = Object.values(values);
+    if (!values.name.match(/^\d{1}[a-zA-Z]{1}$/)) {
+      return false;
+    }
+    if (values.programId === -1 || values.supervisorId === -1) {
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = (values: MyFormValues) => {
-    validateFormValues(values);
-    //!!!!!!!!!!!!!!!! Change to axios Private
+    if (validateFormValues(values)) {
+      handleConnect();
+      handleAddNewClass({
+        Name: values.name,
+        ProgramId: values.programId,
+        SupervisingTeacherId: values.supervisorId,
+      })
+        .then(() => {
+          handleFinished();
+          navigate(teacherView);
+        })
+        .catch((e) => {
+          handleError(e.message);
+          console.log(e.message);
+        });
+    }
   };
   return (
     <Formik
@@ -44,7 +77,8 @@ const ClassCreationForm = (props: Props) => {
       onSubmit={(values, actions) => {
         handleSubmit(values);
         actions.setSubmitting(false);
-        actions.resetForm();
+        if (!isConnecting && !error) {
+        }
       }}
     >
       <ClassCreationFormWrapper>
@@ -64,7 +98,7 @@ const ClassCreationForm = (props: Props) => {
           disabled={false}
         />
         <FormButtonOkWrapper>
-          <FormButtonOk>Dodaj</FormButtonOk>
+          <FormButtonOk type={"submit"}>Dodaj</FormButtonOk>
         </FormButtonOkWrapper>
       </ClassCreationFormWrapper>
     </Formik>
