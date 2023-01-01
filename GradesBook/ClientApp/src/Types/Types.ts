@@ -1,8 +1,7 @@
 export type ClassStudentsSettings = {
   id: number;
   name: string;
-  students: LightStudent[];
-  freeStudent: LightStudent[];
+  students: SelectOption[];
   supervisingTeacherName: string;
 };
 
@@ -13,6 +12,7 @@ export type LightStudent = {
 };
 
 export type ClassNameWithSupervisor = {
+  id: number;
   name: string;
   supervisorName: string | null;
   studentsNumber: number;
@@ -33,10 +33,10 @@ export type StudentsWithClassAndGradesAverage = {
 
 export type ClassWithStudentsAndProgram = {
   className: string;
-  classId: number;
-  supervisingTeacher: string | null;
-  programName: string | null;
-  studentsList: StudentsWithGradesAverage[];
+  id: number;
+  supervisingTeacher: string;
+  programName: string;
+  studentsList: SelectOption[];
 };
 
 export type Roles = "Teacher" | "Parent" | "Student";

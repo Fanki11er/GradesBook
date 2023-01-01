@@ -4,7 +4,7 @@ export const endpoints = {
   baseUrl: "https://localhost:7291",
   getParentsChildren: "/Parent/Children",
   registerParentsChildren: "/Accounts/RegisterChildren",
-  getClassesList: "/Class/LightClassInfo",
+  getClassesListEndpoint: "/Class/LightClassInfo",
   getSubjectsList: "/Subjects",
   addProgram: "/Program",
   registerUser: "/Accounts/Register",
@@ -25,7 +25,7 @@ export const endpoints = {
     return `/Teacher/Subject/${id}`;
   },
 
-  getClassSettings: (id: number) => {
-    return `/Class/Settings${id}`;
+  getClassSettingsEndpoint: (id: number) => {
+    return `/Class/ClassStudentsInfo/${id}`;
   },
 };

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { endpoints } from "../../Api/Endpoints";
-import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import useClass from "../../Hooks/useClass";
 
 import { ClassNameWithSupervisor } from "../../Types/Types";
 
@@ -8,13 +7,11 @@ import ClassesList from "../ClassesList/ClassesList";
 import { ClassesFormWrapper, ClassSectionHeader } from "./ClassesForm.styles";
 
 const ClassesForm = () => {
-  const { getClassesList } = endpoints;
-  const axiosPrivate = useAxiosPrivate();
+  const { getClassesList } = useClass();
   const [data, setData] = useState<ClassNameWithSupervisor[] | null>(null);
 
   useEffect(() => {
-    axiosPrivate
-      .get(getClassesList)
+    getClassesList()
       .then((response) => {
         const data = response.data as ClassNameWithSupervisor[];
         setData(data);

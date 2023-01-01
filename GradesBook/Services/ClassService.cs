@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GradesBook.Entities;
 using GradesBook.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GradesBook.Services
 {
@@ -65,13 +66,11 @@ namespace GradesBook.Services
             else
             {
 
-                var freeStudents = _dbContext.Students.Where(s => s.StudentClass != null);
                 var classStudents = _dbContext.Students.Where(s => s.StudentClass.Id == id);
 
                 var settings = _mapper.Map<ClassStuentsSettingsDto>(selectedClass);
 
-                settings.StudentsLIst = classStudents.Select(s => _mapper.Map<LightStudentDto>(s)).ToList();
-                settings.FreeStudentsList = freeStudents.Select(s => _mapper.Map<LightStudentDto>(s)).ToList();
+                settings.Students = classStudents.Select(s => _mapper.Map<SelectOption>(s)).ToList();
 
                return settings;
             }
@@ -86,7 +85,11 @@ namespace GradesBook.Services
 
         public ClassWithStudentsAndProgramDto GetClassStudentsInfo(int id)
         {
-            var selectedClass = _dbContext.Classes.FirstOrDefault((c) => c.Id == id);
+            var selectedClass = _dbContext.Classes
+                .Include(i => i.Students)
+                .Include(i => i.Program)
+                .Include(i => i.Supervisingteacher).  
+                FirstOrDefault((c) => c.Id == id);
 
             if (selectedClass == null)
             {
@@ -95,13 +98,13 @@ namespace GradesBook.Services
             else
             {
 
-                var classStudents = _dbContext.Students.Where(s => s.StudentClass != null && s.StudentClass.Id == id);
+                //var classStudents = _dbContext.Students.Where(s => s.StudentClass != null && s.StudentClass.Id == id);
 
-                var classStudentsWithGradesAverages = classStudents.Select(s => _mapper.Map<StudentWithGradesAverageDto>(s)).ToList();
+                //var classStudents = classStudents.Select(s => _mapper.Map<StudentWithGradesAverageDto>(s)).ToList();
 
                 var classStudentsInfo = _mapper.Map<ClassWithStudentsAndProgramDto>(selectedClass);
-
-                classStudentsInfo.StudentsList = classStudentsWithGradesAverages;
+                classStudentsInfo.StudentsList = _mapper.Map<List<SelectOption>>(selectedClass.Students);
+               
 
                 return classStudentsInfo;
             }

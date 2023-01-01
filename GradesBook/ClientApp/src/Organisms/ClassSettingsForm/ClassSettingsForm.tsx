@@ -1,65 +1,43 @@
-import { useState, useEffect } from "react";
-import { ButtonAdded } from "../../Atoms/Buttons/Buttons";
-import { ClassStudentsSettings } from "../../Types/Types";
-import StudentSettingsListForm from "../StudentSettingsListForm/StudentSettingsListForm";
+import { ClassWithStudentsAndProgram } from "../../Types/Types";
 
 import {
-  ButtonWrapper,
   ClassSettingHeaderText,
   ClassSettingHeaderWrapper,
   ClassSettingsFormWrapper,
   ClassSettingText,
+  ClassStudentsListWrapper,
   ImgClassSetting,
-  ListsWrapper,
   TeacherInfoWrapper,
 } from "./ClassSettingsForm.styles";
 import ClassSettingImg from "../../Assets/Images/Teacher.png";
-import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
-import { endpoints } from "../../Api/Endpoints";
+import ClassStudentsList from "../../Molecules/ClassStudentsList/ClassStudentsList";
 
-const ClassSettingsForm = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const { getClassSettings } = endpoints;
-  const [data, setData] = useState<ClassStudentsSettings | null>(null);
+type Props = {
+  classSettings: ClassWithStudentsAndProgram;
+};
 
-  useEffect(() => {
-    axiosPrivate
-      .get(getClassSettings(1)) //!! Change ID
-      .then((response) => {
-        const data = response.data as ClassStudentsSettings;
-        console.log(data);
-        setData(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+const ClassSettingsForm = (props: Props) => {
+  const { classSettings } = props;
 
   return (
     <ClassSettingsFormWrapper>
       <ClassSettingHeaderWrapper>
         <ClassSettingHeaderText>
-          {data ? `Klasa: ${data.name}` : "Klasa: "}
+          {`Klasa: ${classSettings.className}`}
         </ClassSettingHeaderText>
+        <ClassSettingText>
+          {`Program: ${classSettings.programName}`}
+        </ClassSettingText>
         <TeacherInfoWrapper>
           <ImgClassSetting src={ClassSettingImg} alt="ClassSettingImg" />
           <ClassSettingText>
-            {data?.supervisingTeacherName
-              ? `Wychowawca: ${data.supervisingTeacherName}`
-              : "Wychowawca: Jan Kowalski"}
+            {`Wychowawca: ${classSettings.supervisingTeacher}`}
           </ClassSettingText>
         </TeacherInfoWrapper>
       </ClassSettingHeaderWrapper>
-      <ListsWrapper>
-        <StudentSettingsListForm students={data ? data.students : []} />
-        <ButtonWrapper>
-          <ButtonAdded></ButtonAdded>
-          <ButtonAdded></ButtonAdded>
-        </ButtonWrapper>
-        <StudentSettingsListForm students={data ? data.freeStudent : []} />
-      </ListsWrapper>
+      <ClassStudentsListWrapper>
+        <ClassStudentsList studentsList={classSettings.studentsList} />
+      </ClassStudentsListWrapper>
     </ClassSettingsFormWrapper>
   );
 };
