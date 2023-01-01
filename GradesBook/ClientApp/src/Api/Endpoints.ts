@@ -9,6 +9,7 @@ export const endpoints = {
   addProgram: "/Program",
   registerUser: "/Accounts/Register",
   loginUser: "/Accounts/Login",
+  getFreeStudentsList: "/Student/FreeStudents",
 
   getUserCurrentSettings: (role: Roles, id: number) => {
     return `/${role}/Settings/${id}`;
@@ -27,5 +28,16 @@ export const endpoints = {
 
   getClassSettingsEndpoint: (id: number) => {
     return `/Class/ClassStudentsInfo/${id}`;
+  },
+
+  getClassStudentsList: (id: number) => {
+    return `/Student/ClassStudents/${id}`;
+  },
+
+  addStudentsToClass: (id: number) => {
+    return `/Class/AddStudents/${id}`;
+  },
+  removeStudentsFromClass: (id: number) => {
+    return `/Class/RemoveStudents/${id}`;
   },
 };

@@ -90,5 +90,35 @@ namespace GradesBook.Controllers
                 return Ok(info);    
         }
 
+        [HttpPost("AddStudents/{id}")]
+        public ActionResult AddStudentsToClass([FromRoute] int id,[FromBody] List<int> newStudents)
+        {
+            
+            var result = _classService.AddStudentsToClass(id, newStudents);
+            if (result == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
+
+        [HttpPost("RemoveStudents/{id}")]
+        public ActionResult RemoveStudentsFromClass([FromRoute] int id, [FromBody] List<int> removedStudents)
+        {
+
+            var result = _classService.RemoveStudentFromClass(id, removedStudents);
+            if (result == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok();
+        }
+
     }
 }
+
+
+

@@ -6,9 +6,9 @@ export const ClassStudentsListElement = styled.li`
   height: 100%;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   display: grid;
-  grid-template-columns: 1fr 100px 80px;
+  grid-template-columns: 1fr 80px;
   column-gap: 10px;
-  padding: 0 15px;
+  padding: 0 25px;
   border-bottom: 2px solid
     ${(props: StyledTheme) => props.theme.colors.lightBorder};
   align-items: center;

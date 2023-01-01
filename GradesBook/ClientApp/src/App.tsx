@@ -17,6 +17,8 @@ import ClassSettings from "./View/ClassSettings/ClassSettings";
 import StudentView from "./View/StudentView/StudentView";
 import useColorScheme from "./Hooks/useColorScheme";
 import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
+import ClassAddStudentsView from "./View/ClassAddStudentsView/ClassAddStudentsView";
+import ClassRemoveStudentView from "./View/ClassRemoveStudentView/ClassRemoveStudentView";
 
 const App = () => {
   const {
@@ -31,6 +33,8 @@ const App = () => {
     studentView,
     classSettings,
     teacherSubjects,
+    classAddStudents,
+    classRemoveStudents,
   } = routes;
   const { theme } = useColorScheme();
 
@@ -56,6 +60,14 @@ const App = () => {
               <Route
                 path={teacherSubjects}
                 element={<TeachersSubjectsView />}
+              />
+              <Route
+                path={`${classAddStudents}/:classId`}
+                element={<ClassAddStudentsView />}
+              />
+              <Route
+                path={`${classRemoveStudents}/:classId`}
+                element={<ClassRemoveStudentView />}
               />
             </Route>
             <Route

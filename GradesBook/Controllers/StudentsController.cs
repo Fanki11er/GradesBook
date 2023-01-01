@@ -50,5 +50,31 @@ namespace GradesBook.Controllers
 
         }
 
+        [HttpGet("FreeStudents")]
+        public ActionResult<IEnumerable<SelectOption>> GetFreeStudents()
+        {
+            var result = _studentService.GetFreeStudents();
+           
+            return Ok(result);
+
+
+
+        }
+
+        [HttpGet("ClassStudents/{id}")]
+        public ActionResult<IEnumerable<SelectOption>> GetClassStudents([FromRoute]int id)
+        {
+            var result  = _studentService.GetClassStudents(id);
+            
+           if(result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
+
+        }
+
+
+
     }
 }

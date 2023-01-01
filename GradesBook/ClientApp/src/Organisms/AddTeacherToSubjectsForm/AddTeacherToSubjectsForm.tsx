@@ -86,12 +86,3 @@ const AddTeacherToSubjectsForm = (props: Props) => {
 };
 
 export default AddTeacherToSubjectsForm;
-
-/*const convertValuesToDto = (values: MyFormValues): NewProgramDto => {
-        return {
-          Name: values.programName,
-          SubjectsIds: values.addedSubjects.map((subject) => {
-            return Number(subject);
-          }),
-        };
-      };*/

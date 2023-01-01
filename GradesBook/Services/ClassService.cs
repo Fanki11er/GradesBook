@@ -13,6 +13,8 @@ namespace GradesBook.Services
         public ClassStuentsSettingsDto GetClassSettings(int id);
         public IEnumerable<ClassNameWithSupervisorDto> GetClassnamesWithSupervisorDto();
         public ClassWithStudentsAndProgramDto GetClassStudentsInfo(int id);
+        public int AddStudentsToClass(int id, List<int> newStudents);
+        public int RemoveStudentFromClass(int id, List<int> removedStudents);
     }
 
     public class ClassService : IClassService
@@ -78,7 +80,7 @@ namespace GradesBook.Services
 
         public IEnumerable<ClassNameWithSupervisorDto> GetClassnamesWithSupervisorDto()
         {
-            var info = _dbContext.Classes.Select(s => _mapper.Map<ClassNameWithSupervisorDto>(s)).ToList();
+            var info = _dbContext.Classes.Include(i=> i.Students).Select(s => _mapper.Map<ClassNameWithSupervisorDto>(s)).ToList();
            
             return info;
         }
@@ -95,19 +97,66 @@ namespace GradesBook.Services
             {
                 return null;
             }
-            else
-            {
-
-                //var classStudents = _dbContext.Students.Where(s => s.StudentClass != null && s.StudentClass.Id == id);
-
-                //var classStudents = classStudents.Select(s => _mapper.Map<StudentWithGradesAverageDto>(s)).ToList();
-
+           
                 var classStudentsInfo = _mapper.Map<ClassWithStudentsAndProgramDto>(selectedClass);
                 classStudentsInfo.StudentsList = _mapper.Map<List<SelectOption>>(selectedClass.Students);
                
 
                 return classStudentsInfo;
+            
+
+           
+        }
+        public int AddStudentsToClass(int id, List<int> newStudents)
+        {
+            var newStudentsList = new List<Student>();
+            var selectedClass = _dbContext.Classes.Include(i=> i.Students).FirstOrDefault(s => s.Id == id);
+            if(selectedClass == null)
+            {
+                return 0;
             }
+
+            newStudents.ForEach(id =>
+            {
+                var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);
+                if(student != null)
+                {
+                    newStudentsList.Add(student);
+                }
+            });
+
+            selectedClass.Students.AddRange(newStudentsList);
+            _dbContext.Classes.Update(selectedClass);
+            var result = _dbContext.SaveChanges();
+
+            return result;
+
+            
+        }
+
+        public int RemoveStudentFromClass(int id, List<int> removedStudents)
+        {
+            var selectedClass = _dbContext.Classes.Include(i => i.Students).FirstOrDefault(s => s.Id == id);
+            if (selectedClass == null)
+            {
+                return 0;
+            }
+
+            removedStudents.ForEach(id =>
+            {
+                var student = _dbContext.Students.FirstOrDefault(s => s.Id == id);
+                if (student != null)
+                {
+                    selectedClass.Students.Remove(student);
+                }
+            });
+
+            _dbContext.Classes.Update(selectedClass);
+            var result = _dbContext.SaveChanges();
+
+            return result;
+
+
         }
     }
 }

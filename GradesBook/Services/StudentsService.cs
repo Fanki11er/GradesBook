@@ -2,6 +2,7 @@
 using GradesBook.Entities;
 using GradesBook.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace GradesBook.Services
 {
@@ -12,6 +13,8 @@ namespace GradesBook.Services
         public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id);
         public UserCurrentSettingsDto GetCurrentUserSettings(int id);
         public bool UpdateUserSettings(int id, NewUserSettingsDto dto);
+        public IEnumerable<SelectOption> GetFreeStudents();
+        public IEnumerable<SelectOption> GetClassStudents(int id);
 
         }
 
@@ -77,6 +80,26 @@ namespace GradesBook.Services
                 return false;
             }
             return true;
+        }
+
+        public IEnumerable<SelectOption> GetFreeStudents()
+        {
+            var freeStudents = _dbContext.Students.Where(sc => sc.ClassId == null);
+            return _mapper.Map<IEnumerable<SelectOption>>(freeStudents);
+        }
+
+        public IEnumerable<SelectOption> GetClassStudents(int id)
+        {
+            var selectedClass = _dbContext.Classes.Include(i=> i.Students).FirstOrDefault(c=> c.Id == id);
+           if(selectedClass != null)
+            {
+                return _mapper.Map<IEnumerable<SelectOption>>(selectedClass.Students);
+            }
+            return null;
+            
+            
+            //var classStudents = _dbContext.Students.Where(sc => sc.ClassId == id);
+            //return _mapper.Map<IEnumerable<SelectOption>>(classStudents);
         }
 
 

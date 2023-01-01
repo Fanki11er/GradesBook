@@ -1,12 +1,19 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import { SpecificOptionsWrapper } from "../../Atoms/SideMenu/SideMenu";
 import { routes } from "../../Routes/routes";
 
 const TeacherSpecificSideMenu = () => {
-  const { teacherView, teacherSubjects } = routes;
+  const {
+    teacherView,
+    teacherSubjects,
+    classAddStudents,
+    classRemoveStudents,
+    classSettings,
+  } = routes;
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { classId } = useParams();
 
   return (
     <SpecificOptionsWrapper>
@@ -19,13 +26,22 @@ const TeacherSpecificSideMenu = () => {
         </SideMenuButton>
       )}
       {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton onClick={() => navigate(teacherSubjects)}>
+        <SideMenuButton
+          onClick={() => navigate(`${classAddStudents}/${classId}`)}
+        >
           Dodaj uczniów
         </SideMenuButton>
       )}
       {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton onClick={() => navigate(teacherSubjects)}>
+        <SideMenuButton
+          onClick={() => navigate(`${classRemoveStudents}/${classId}`)}
+        >
           Usuń uczniów
+        </SideMenuButton>
+      )}
+      {pathname.match(/\/Teacher\/Class\/Students\/.*/) && (
+        <SideMenuButton onClick={() => navigate(`${classSettings}/${classId}`)}>
+          Powrót
         </SideMenuButton>
       )}
       {pathname.match(/\/Teacher\/Class\/\d/) && (

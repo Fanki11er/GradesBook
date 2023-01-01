@@ -10,6 +10,7 @@ export const routes = {
   studentView: "/Student",
   classSettings: "/Teacher/Class",
   teacherSubjects: "/Teacher/Subject",
-
+  classAddStudents: "/Teacher/Class/Students/Add",
+  classRemoveStudents: "/Teacher/Class/Students/Remove",
   grades: "/Grades",
 };
