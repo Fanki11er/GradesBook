@@ -76,17 +76,20 @@ const PersonalDataChangeForm = (props: Props) => {
     if (
       values.email === email &&
       values.firstName === firstName &&
-      values.lastName === lastName
+      values.lastName === lastName &&
+      values.oldPassword === ""
     ) {
       handleError("Nie dokonano żadnych zmian");
       return false;
     }
-    const entries = Object.values(values);
-    for (let i = 0; i < entries.length; i++) {
-      if (!entries[i]) {
-        handleError("Wszystkie pola są wymagane");
-        return false;
-      }
+
+    if (
+      values.email === "" ||
+      values.firstName === "" ||
+      values.lastName === ""
+    ) {
+      handleError("Wszystkie pola są wymagane");
+      return false;
     }
     return true;
   };

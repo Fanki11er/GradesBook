@@ -10,19 +10,21 @@ import AuthenticatedTemplate from "./View/Template/AuthenticatedTemplate/Authent
 import SettingsView from "./View/SettingsView/SettingsView";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./GlobalStyles/GlobalStyle";
-import { useContext } from "react";
-import { UserSettingsContext } from "./Providers/UserSettingsProvider";
 import StudentGradesView from "./View/StudentGradesView/StudentGradesView";
 import TeacherView from "./View/TeacherView/TeacherView";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
 import ClassCreationView from "./View/ClassCreationView/ClassCreationView";
+import StudentView from "./View/StudentView/StudentView";
+import useColorScheme from "./Hooks/useColorScheme";
+import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
+import ClassAddStudentsView from "./View/ClassAddStudentsView/ClassAddStudentsView";
+import ClassRemoveStudentView from "./View/ClassRemoveStudentView/ClassRemoveStudentView";
 
 const App = () => {
   const {
     baseRoute,
-    classes,
-    program,
+    programs,
     setting,
     register,
     login,
@@ -30,8 +32,13 @@ const App = () => {
     grades,
     teacherView,
     addClass,
+    studentView,
+    classSettings,
+    teacherSubjects,
+    classAddStudents,
+    classRemoveStudents,
   } = routes;
-  const { theme } = useContext(UserSettingsContext);
+  const { theme } = useColorScheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,15 +51,25 @@ const App = () => {
           <Route element={<AuthenticatedTemplate />}>
             <Route path={setting} element={<SettingsView />} />
             <Route path={parentView} element={<ParentView />} />
+            <Route path={studentView} element={<StudentView />} />
             <Route element={<TeacherView />}>
               <Route path={teacherView} element={<ClassesView />} />
               <Route
-                path={`${teacherView}${classes}/:classId`}
+                path={`${classSettings}/:classId`}
                 element={<ClassSettings />}
               />
+              <Route path={programs} element={<ProgramsView />} />
               <Route
-                path={`${teacherView}${program}`}
-                element={<ProgramsView />}
+                path={teacherSubjects}
+                element={<TeachersSubjectsView />}
+              />
+              <Route
+                path={`${classAddStudents}/:classId`}
+                element={<ClassAddStudentsView />}
+              />
+              <Route
+                path={`${classRemoveStudents}/:classId`}
+                element={<ClassRemoveStudentView />}
               />
               <Route path={addClass} element={<ClassCreationView />} />
             </Route>
@@ -70,9 +87,4 @@ const App = () => {
 
 export default App;
 
-/*
- <Route
-                path={`${teacherView}/${classes}`}
-                element={<ClassesView />}
-              />
-*/
+//Todo Move classes to hook

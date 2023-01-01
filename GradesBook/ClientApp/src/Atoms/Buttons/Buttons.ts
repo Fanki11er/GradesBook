@@ -41,6 +41,10 @@ export const ButtonSend = styled(Button)`
 `;
 
 export const ButtonGrades = styled(Button)`
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 60px;
   height: 30px;
   border-radius: 8px;

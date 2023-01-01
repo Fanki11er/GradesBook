@@ -106,28 +106,3 @@ const ProgramsForm = (props: Props) => {
 };
 
 export default ProgramsForm;
-
-/*
- <ProgramsHeaderWrapper>
-        <ProgramsHeaderText>{`Klasa: ${
-          data ? data.className : ""
-        }`}</ProgramsHeaderText>
-        <ImgPrograms src={ProgramsImg} alt="ProgramsImg" />
-        <ProgramsText>{`Wychowawca: ${
-          data && data.supervisingTeacher
-            ? data.supervisingTeacher
-            : "Jan Kowalski"
-        }`}</ProgramsText>
-        <ButtonEdit>Edytuj</ButtonEdit>
-      </ProgramsHeaderWrapper>
-
-      <ProgramsHeaderSmall>{`Program: ${
-        data && data.programName ? data.programName : ""
-      }`}</ProgramsHeaderSmall>
-
-      <SideMenuButton>Wyślij ogłoszenie</SideMenuButton>
-
-      <ClassStudentListsForm
-        studentsWithGradesAverages={data ? data.studentsList : []}
-      />
-*/

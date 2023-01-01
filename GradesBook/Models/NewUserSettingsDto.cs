@@ -10,11 +10,3 @@
         public string RepeatedPassword { get; set; }
     }
 }
-/*
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  OldPassword: string;
-  Password: string;
-  RepeatedPassword: string;
- */

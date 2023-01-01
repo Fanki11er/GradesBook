@@ -8,23 +8,23 @@ import { StudentsWithClassAndGradesAverage } from "../../Types/Types";
 import Modal from "../../Atoms/Modal/Modal";
 import useModal from "../../Hooks/useModal";
 import RegisterChildForm from "../../Molecules/RegisterChildForm/RegisterChildForm";
-import axios from "../../Api/axios";
 import { endpoints } from "../../Api/Endpoints";
 import useLoader from "../../Hooks/useLoader";
 import SmallLoader from "../../Molecules/SmallLoader/SmallLoader";
 import { AxiosError } from "axios";
-import useUser from "../../Hooks/useUser";
 import {
   SpecificOptionsWrapper,
   ViewSideMenu,
 } from "../../Atoms/SideMenu/SideMenu";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
 import { Navigate } from "react-router-dom";
-import { routes } from "../../Routes/routes";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
+import useUser from "../../Hooks/useUser";
 
 const ParentView = () => {
   const { getParentsChildren } = endpoints;
-  const { login } = routes;
+  //const { getUserFromStorage } = useAuth();
+  const axiosPrivate = useAxiosPrivate();
   const { user } = useUser();
 
   const { error, isConnecting, handleConnect, handleError, handleFinished } =
@@ -36,7 +36,7 @@ const ParentView = () => {
 
   const getData = () => {
     handleConnect();
-    axios
+    axiosPrivate
       .get(`${getParentsChildren}/${user?.id}`)
       .then((response) => {
         const data = response.data as StudentsWithClassAndGradesAverage[];
@@ -49,13 +49,15 @@ const ParentView = () => {
   };
 
   useEffect(() => {
-    //!!!!!!!!!!!!!!!! Change to axios Private
-    getData();
+    user && getData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
-  return user && user?.role === "Parent" ? (
+  if (user && user.role !== "Parent") {
+    return <Navigate to={`/${user.role}`} />;
+  }
+  return user ? (
     <ParentViewWrapper>
       <ViewSideMenu>
         <SideMenuNavigation />
@@ -85,9 +87,7 @@ const ParentView = () => {
         />
       </Modal>
     </ParentViewWrapper>
-  ) : (
-    <Navigate to={user ? `/${user.role}` : login} />
-  );
+  ) : null;
 };
 
 export default ParentView;

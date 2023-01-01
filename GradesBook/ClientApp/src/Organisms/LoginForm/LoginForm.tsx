@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
+import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import InputField from "../../Molecules/InputField/InputField";
 import { routes } from "../../Routes/routes";
 import {
@@ -7,9 +7,11 @@ import {
   LoginFormWrapper,
   LoginHeader,
 } from "./LoginForm.styles";
-import { useState } from "react";
 import { Formik } from "formik";
 import { FormError } from "../../Atoms/FormError/FormError";
+import useLoader from "../../Hooks/useLoader";
+import useAuth from "../../Hooks/useAuth";
+import { UserWithToken } from "../../Types/Types";
 
 interface MyFormValues {
   email: string;
@@ -17,21 +19,38 @@ interface MyFormValues {
 }
 
 const LoginForm = () => {
-  const initialVlaues: MyFormValues = { email: "", password: "" };
-  const { register } = routes;
+  const initialValues: MyFormValues = { email: "", password: "" };
+  const { parentView, teacherView, studentView } = routes;
 
   const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const { handleSetAuthenticatedUser, handleLoginUser } = useAuth();
+  const { error, handleConnect, handleFinished, handleError } = useLoader();
 
   const handleSubmit = (values: MyFormValues) => {
-    console.log("test");
-    setError("");
-    navigate(register, { replace: true });
+    handleConnect();
+    handleLoginUser({ Email: values.email, Password: values.password })
+      .then((response) => {
+        const user = response.data as UserWithToken;
+        handleSetAuthenticatedUser(user);
+        handleFinished();
+        if (user.role === "Parent") {
+          navigate(parentView);
+        }
+        if (user.role === "Teacher") {
+          navigate(teacherView);
+        }
+        if (user.role === "Student") {
+          navigate(studentView);
+        }
+      })
+      .catch((e) => {
+        handleError(e.message);
+      });
   };
 
   return (
     <Formik
-      initialValues={initialVlaues}
+      initialValues={initialValues}
       onSubmit={(values, action) => {
         handleSubmit(values);
 
@@ -40,12 +59,7 @@ const LoginForm = () => {
     >
       <LoginFormWrapper>
         <LoginHeader>Logowanie</LoginHeader>
-        {error ? (
-          <FormError>
-            Podane dane są nieprawidłowe. <br />
-            Upewnij się, że podane email i hasło są poprawne
-          </FormError>
-        ) : null}
+        {error ? <FormError>{error}</FormError> : null}
         <InputField
           name="email"
           placeholder="Email"
@@ -60,7 +74,7 @@ const LoginForm = () => {
           type="password"
         />
         <ButtonLoginWrapper>
-          <SideMenuButton type="submit">Zaloguj</SideMenuButton>
+          <FormButtonOk type="submit">Zaloguj</FormButtonOk>
         </ButtonLoginWrapper>
       </LoginFormWrapper>
     </Formik>

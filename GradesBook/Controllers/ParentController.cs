@@ -27,7 +27,7 @@ namespace GradesBook.Controllers
             return Ok(children);
         }
 
-        [HttpPost("RegisterChildren/{id}")]
+        /*[HttpPost("RegisterChildren/{id}")]
         public ActionResult RegisterChild([FromRoute] int id, [FromBody] CreateUserDto dto)
         {
 
@@ -46,7 +46,7 @@ namespace GradesBook.Controllers
             }
             return BadRequest();
            
-        }
+        }*/
 
         [HttpGet("Settings/{id}")]
         public ActionResult<UserCurrentSettingsDto> GetCurrentUserSettings ([FromRoute] int id)

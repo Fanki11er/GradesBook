@@ -2,27 +2,39 @@ import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import { SideMenuNavigationWrapper } from "./SideMenuNavigation.styles";
 import { NavLink, useLocation } from "react-router-dom";
 import { routes } from "../../Routes/routes";
-import useUser from "../../Hooks/useUser";
+import useAuth from "../../Hooks/useAuth";
 
 const SideMenuNavigation = () => {
   const location = useLocation();
-  const { user } = useUser();
-  const { parentView, setting, grades, teacherView, program } = routes;
+  const { getUserFromStorage } = useAuth();
+  const user = getUserFromStorage();
+
+  const { parentView, setting, grades, teacherView, programs, studentView } =
+    routes;
   return (
     <SideMenuNavigationWrapper>
-      <SideMenuButton as={NavLink} to={parentView} end>
-        Panel rodzica
-      </SideMenuButton>
-      <SideMenuButton as={NavLink} to={setting} end>
-        Ustawienia
-      </SideMenuButton>
+      {user?.role === "Parent" && (
+        <SideMenuButton as={NavLink} to={parentView} end>
+          Panel rodzica
+        </SideMenuButton>
+      )}
+      {user?.role === "Student" && (
+        <SideMenuButton as={NavLink} to={studentView} end>
+          Oceny
+        </SideMenuButton>
+      )}
       {user?.role === "Teacher" && (
         <SideMenuButton as={NavLink} to={teacherView} end>
           Klasy
         </SideMenuButton>
       )}
+
+      <SideMenuButton as={NavLink} to={setting} end>
+        Ustawienia
+      </SideMenuButton>
+
       {user?.role === "Teacher" && (
-        <SideMenuButton as={NavLink} to={`${teacherView}${program}`} end>
+        <SideMenuButton as={NavLink} to={programs} end>
           Listy przedmiotów
         </SideMenuButton>
       )}

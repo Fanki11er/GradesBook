@@ -13,11 +13,13 @@ const ClassesList = (props: Props) => {
   const navigate = useNavigate();
 
   const renderClassList = (classList: ClassNameWithSupervisor[]) => {
-    return classList.map((classElement, index) => {
+    return classList.map((classElement) => {
       return (
         <ListRowClass
-          key={index}
-          onClick={() => navigate(`${teacherView}${classes}/1`)}
+          key={classElement.id}
+          onClick={() =>
+            navigate(`${teacherView}${classes}/${classElement.id}`)
+          }
         >
           <ListText>{classElement.name}</ListText>
           <ListText>{`Uczniowie: ${classElement.studentsNumber}`}</ListText>

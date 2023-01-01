@@ -22,7 +22,6 @@ namespace GradesBook.MappingProfiles
 
             CreateMap<Class, ClassWithStudentsAndProgramDto>()
                 .ForMember(c => c.ClassName, m => m.MapFrom(v => v.Name))
-                .ForMember(c => c.ClassId, m => m.MapFrom(v => v.Id))
                 .ForMember(c => c.ProgramName, m => m.MapFrom(v => v.Program != null ? v.Program.Name : null))
                 .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.Supervisingteacher != null ? v.Supervisingteacher.FirstName + " " + v.Supervisingteacher.LastName : null));
 
@@ -36,7 +35,7 @@ namespace GradesBook.MappingProfiles
                 .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Count() == 0? 0 : x.Grades.Average(a => a.Value)))
                 .ForMember(s => s.ClassName, m => m.MapFrom(x => x.StudentClass == null ? "" : x.StudentClass.Name));
 
-            CreateMap<CreateUserDto, Student>();
+            CreateMap<RegisterUserDto, Student>();
 
 
             
@@ -49,7 +48,9 @@ namespace GradesBook.MappingProfiles
                 .ForMember(s => s.Id, m => m.MapFrom(p => p.Id))
                 .ForMember(s => s.Value, m => m.MapFrom(p => p.Name));
 
-           
+            CreateMap<User, SelectOption>()
+                 .ForMember(s => s.Id, m => m.MapFrom(p => p.Id))
+                 .ForMember(s => s.Value, m => m.MapFrom(p => p.FirstName + " " + p.LastName));
 
 
         }
@@ -57,3 +58,10 @@ namespace GradesBook.MappingProfiles
 
     }
 }
+/*
+  CreateMap<Class, ClassWithStudentsAndProgramDto>()
+                .ForMember(c => c.ClassName, m => m.MapFrom(v => v.Name))
+                .ForMember(c => c.ProgramName, m => m.MapFrom(v => v.Program != null ? v.Program.Name : null))
+                .ForMember(c => c.SupervisingTeacher, m => m.MapFrom(v => v.Supervisingteacher != null ? v.Supervisingteacher.FirstName + " " + v.Supervisingteacher.LastName : null));
+ 
+ */

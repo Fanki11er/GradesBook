@@ -1,12 +1,28 @@
-import axios from "../Api/axios";
 import { endpoints } from "../Api/Endpoints";
+import useAxiosPrivate from "./useAxiosPrivate";
+import useUser from "./useUser";
 
 const useTeacher = () => {
-  const { getAllTeachers } = endpoints;
-  const handleGetAllTeachers = () => {
-    return axios.get(getAllTeachers);
+  const { getTeacherSubject, setTeacherSubject, getAllTeachers } = endpoints;
+  const axiosPrivate = useAxiosPrivate();
+  const { user } = useUser();
+
+  const handleGetUserSubject = () => {
+    return axiosPrivate.get(getTeacherSubject(user!.id));
   };
-  return { handleGetAllTeachers };
+
+  const handleSetNewTeacherSubject = (subjectId: number) => {
+    return axiosPrivate.post(setTeacherSubject(user!.id), subjectId);
+  };
+
+  const handleGetAllTeachers = () => {
+    return axiosPrivate.get(getAllTeachers);
+  };
+  return {
+    handleGetUserSubject,
+    handleSetNewTeacherSubject,
+    handleGetAllTeachers,
+  };
 };
 
 export default useTeacher;

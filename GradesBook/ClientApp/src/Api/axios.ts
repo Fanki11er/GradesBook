@@ -9,3 +9,11 @@ export default axios.create({
     "Content-Type": "application/json",
   },
 });
+
+export const axiosPrivate = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true,
+});

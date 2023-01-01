@@ -7,10 +7,9 @@ namespace GradesBook.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public List<LightStudentDto> StudentsLIst { get; set; }
-        public List<LightStudentDto> FreeStudentsList { get; set; }
+        public List<SelectOption> Students { get; set; } = new List<SelectOption>();
 
-        public string? SupervisingTeacherName { get; set; }
+        public string SupervisingTeacherName { get; set; }
 
 
     }
