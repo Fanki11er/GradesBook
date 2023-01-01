@@ -2,7 +2,7 @@ const colorsSchemes: ColorsSchemes = {
   light: {
     mainBackground: "rgba(247, 248, 250, 1)",
     menuBackground: "rgba(115, 124, 142, 1)",
-    buttonAddHover: "rgba(131,179,59,1)",
+    buttonAddHover: "rgba(143, 203, 128, 1)",
     buttonAdd: "rgba(192, 199, 214, 1)",
     transparentBlack: "rgba(115, 124, 142, 0.8)",
     white: "rgba(255,255,255,1)",
