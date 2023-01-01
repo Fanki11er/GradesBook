@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import { ColorSchemasTypes } from "../../GlobalStyles/theme";
 import { UserSettingsContext } from "../../Providers/UserSettingsProvider";
-import LightThemeImage from "../../Assets/Images/LightTheme.svg";
-
+import LightThemeImage from "../../Assets/Images/SkinsWhite.svg";
+import NightThemeImage from "../../Assets/Images/SkinsNight.svg";
+import PinkThemeImage from "../../Assets/Images/SkinsPink.svg";
 import {
   SkinSelector,
   SkinsWrapper,
@@ -34,9 +35,13 @@ const ThemeSettingsForm = () => {
         <SkinSelector
           isSelected={selectedSkin === "dark" ? true : false}
           onClick={() => setSelectedSkin("dark")}
-          image={LightThemeImage}
+          image={NightThemeImage}
         />
-        <SkinSelector isSelected={false} image={LightThemeImage} />
+        <SkinSelector
+          isSelected={selectedSkin === "pink" ? true : false}
+          image={PinkThemeImage}
+          onClick={() => setSelectedSkin("pink")}
+        />
       </SkinsWrapper>
       <FormButtonOk onClick={() => handleChangeColorsScheme(selectedSkin)}>
         Zmień

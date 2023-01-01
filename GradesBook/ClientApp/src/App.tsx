@@ -16,6 +16,7 @@ import StudentGradesView from "./View/StudentGradesView/StudentGradesView";
 import TeacherView from "./View/TeacherView/TeacherView";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
+import ClassCreationView from "./View/ClassCreationView/ClassCreationView";
 
 const App = () => {
   const {
@@ -28,6 +29,7 @@ const App = () => {
     parentView,
     grades,
     teacherView,
+    addClass,
   } = routes;
   const { theme } = useContext(UserSettingsContext);
 
@@ -52,6 +54,7 @@ const App = () => {
                 path={`${teacherView}${program}`}
                 element={<ProgramsView />}
               />
+              <Route path={addClass} element={<ClassCreationView />} />
             </Route>
             <Route
               path={`${grades}/:studentId`}

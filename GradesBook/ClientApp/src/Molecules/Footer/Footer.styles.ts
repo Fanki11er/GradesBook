@@ -11,8 +11,8 @@ export const FooterWrapper = styled.footer`
   min-height: 100%;
   background-color: ${(props: StyledTheme) =>
     props.theme.colors.mainBackground};
-  color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
-  border: 2px solid ${(props: StyledTheme) => props.theme.colors.lightBorder};
+  color: ${(props: StyledTheme) => props.theme.colors.footerText};
+  border-top: 2px solid ${(props: StyledTheme) => props.theme.colors.footerLine};
 `;
 
 export const FooterText = styled.span`

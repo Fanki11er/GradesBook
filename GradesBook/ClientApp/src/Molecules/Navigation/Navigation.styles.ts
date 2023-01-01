@@ -11,7 +11,8 @@ export const NavigationWrapper = styled.nav`
   grid-template-columns: 100px 1fr 150px;
   grid-auto-rows: auto;
   align-items: center;
-  border: 2px solid ${(props: StyledTheme) => props.theme.colors.lightBorder};
+  border-bottom: 2px solid
+    ${(props: StyledTheme) => props.theme.colors.footerLine};
 `;
 
 export const LogoImg = styled.img`
@@ -34,6 +35,7 @@ export const NameImg = styled.img`
 
 export const NavigationText = styled.span`
   width: 500px;
+  color: ${(props: StyledTheme) => props.theme.colors.navigationText};
 `;
 
 export const RoleAndTextNavigationWrapper = styled.div`

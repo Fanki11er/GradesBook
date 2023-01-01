@@ -7,6 +7,10 @@ export const endpoints = {
   getClassesList: "/Class/LightClassInfo",
   getSubjectsList: "/Subjects",
   addProgram: "/Program",
+  addNewClass: "/Class",
+  getAllPrograms: "/Program",
+  getAllTeachers: "/Teacher",
+
   getUserCurrentSettings: (role: Roles, id: number) => {
     return `/${role}/Settings/${id}`;
   },

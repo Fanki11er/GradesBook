@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { ViewSideMenu } from "../../Atoms/SideMenu/SideMenu";
 import useUser from "../../Hooks/useUser";
 import SideMenuNavigation from "../../Molecules/SideMenuNavigation/SideMenuNavigation";
@@ -16,6 +16,7 @@ const TeacherView = () => {
         <SideMenuNavigation />
         <TeacherSpecificSideMenu />
       </ViewSideMenu>
+
       <Outlet />
     </TeacherViewWrapper>
   ) : (

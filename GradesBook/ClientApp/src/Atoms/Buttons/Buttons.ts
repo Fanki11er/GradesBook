@@ -13,7 +13,7 @@ export const Button = styled.button`
   :hover {
     //border: 2px solid orange;
     background-color: ${(props: StyledTheme) =>
-      props.theme.colors.menuBackground};
+      props.theme.colors.buttonAddHover};
     color: ${(props: StyledTheme) => props.theme.colors.white};
     font-weight: bold;
     cursor: pointer;
@@ -67,6 +67,7 @@ export const ButtonLogOut = styled(Button)`
   width: 100px;
   height: 30px;
   border: inherit;
+  border: none;
 
   :hover {
     background-color: ${(props: StyledTheme) => props.theme.colors.green};
@@ -84,6 +85,7 @@ export const SideMenuButton = styled(Button)`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonsGray};
 
   :hover {
     background-color: ${(props: StyledTheme) => props.theme.colors.green};
@@ -119,8 +121,8 @@ export const FormButtonOk = styled(Button)`
   justify-content: center;
   align-items: center;
   border: 2px solid transparent;
-  background-color: ${(props: StyledTheme) => props.theme.colors.green};
-  color: ${(props: StyledTheme) => props.theme.colors.white};
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonAdd};
+  color: inherit;
   font-weight: bold;
 `;
 
