@@ -92,3 +92,10 @@ export type NewProgramDto = {
   Name: string;
   SubjectsIds: number[];
 };
+
+export type CreateNewClassDto = {
+  Name: string;
+  ProgramId: number;
+  SupervisingteacherId: number;
+};
+//additionalValue: number;

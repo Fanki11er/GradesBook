@@ -10,15 +10,17 @@ const TeacherSpecificSideMenu = () => {
     classAddStudents,
     classRemoveStudents,
     classSettings,
+    addClass,
   } = routes;
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { classId } = useParams();
-
   return (
     <SpecificOptionsWrapper>
       {pathname === teacherView && (
-        <SideMenuButton>Stwórz klasę</SideMenuButton>
+        <SideMenuButton onClick={() => navigate(addClass)}>
+          Stwórz klasę
+        </SideMenuButton>
       )}
       {pathname === teacherView && (
         <SideMenuButton onClick={() => navigate(teacherSubjects)}>

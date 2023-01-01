@@ -3,7 +3,7 @@ import useAxiosPrivate from "./useAxiosPrivate";
 import useUser from "./useUser";
 
 const useTeacher = () => {
-  const { getTeacherSubject, setTeacherSubject } = endpoints;
+  const { getTeacherSubject, setTeacherSubject, getAllTeachers } = endpoints;
   const axiosPrivate = useAxiosPrivate();
   const { user } = useUser();
 
@@ -14,9 +14,14 @@ const useTeacher = () => {
   const handleSetNewTeacherSubject = (subjectId: number) => {
     return axiosPrivate.post(setTeacherSubject(user!.id), subjectId);
   };
+
+  const handleGetAllTeachers = () => {
+    return axiosPrivate.get(getAllTeachers);
+  };
   return {
     handleGetUserSubject,
     handleSetNewTeacherSubject,
+    handleGetAllTeachers,
   };
 };
 

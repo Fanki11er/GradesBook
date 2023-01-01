@@ -11,4 +11,5 @@ export const InputFieldWrapper = styled.div`
 export const InputLabel = styled.label`
   font-size: 16px;
   color: ${(props: StyledTheme) => props.theme.colors.transparentBlack};
+  font-weight: bold;
 `;

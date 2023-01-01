@@ -7,7 +7,7 @@ export const InputWrapper = styled(Field)`
   border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
   outline: none;
-  width: 100%;
+  width: 200px;
   height: 100%;
   box-shadow: -2px 4px 10px 0
     ${(props: StyledTheme) => props.theme.colors.shadow};

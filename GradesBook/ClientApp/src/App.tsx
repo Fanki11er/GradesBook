@@ -14,6 +14,7 @@ import StudentGradesView from "./View/StudentGradesView/StudentGradesView";
 import TeacherView from "./View/TeacherView/TeacherView";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
+import ClassCreationView from "./View/ClassCreationView/ClassCreationView";
 import StudentView from "./View/StudentView/StudentView";
 import useColorScheme from "./Hooks/useColorScheme";
 import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
@@ -30,6 +31,7 @@ const App = () => {
     parentView,
     grades,
     teacherView,
+    addClass,
     studentView,
     classSettings,
     teacherSubjects,
@@ -69,6 +71,7 @@ const App = () => {
                 path={`${classRemoveStudents}/:classId`}
                 element={<ClassRemoveStudentView />}
               />
+              <Route path={addClass} element={<ClassCreationView />} />
             </Route>
             <Route
               path={`${grades}/:studentId`}

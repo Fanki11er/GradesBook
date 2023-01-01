@@ -7,6 +7,10 @@ export const endpoints = {
   getClassesListEndpoint: "/Class/LightClassInfo",
   getSubjectsList: "/Subjects",
   addProgram: "/Program",
+  addNewClass: "/Class",
+  getAllPrograms: "/Program",
+  getAllTeachers: "/Teacher",
+
   registerUser: "/Accounts/Register",
   loginUser: "/Accounts/Login",
   getFreeStudentsList: "/Student/FreeStudents",
