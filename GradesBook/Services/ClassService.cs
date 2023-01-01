@@ -45,8 +45,8 @@ namespace GradesBook.Services
 
         public int CreateClass(CreateClassDto dto)
         {
-            var test = _dbContext.Classes.FirstOrDefault(c => c.Name == dto.Name);
-            if (test == null)
+            var exists = _dbContext.Classes.FirstOrDefault(c => c.Name == dto.Name);
+            if (exists == null)
             {
                 var newClass = _mapper.Map<Class>(dto);
                 _dbContext.Classes.Add(newClass);
@@ -80,7 +80,7 @@ namespace GradesBook.Services
 
         public IEnumerable<ClassNameWithSupervisorDto> GetClassnamesWithSupervisorDto()
         {
-            var info = _dbContext.Classes.Include(i=> i.Students).Select(s => _mapper.Map<ClassNameWithSupervisorDto>(s)).ToList();
+            var info = _dbContext.Classes.Include(i=> i.Students).Include(i=> i.SupervisingTeacher).Select(s => _mapper.Map<ClassNameWithSupervisorDto>(s)).ToList();
            
             return info;
         }
@@ -90,7 +90,7 @@ namespace GradesBook.Services
             var selectedClass = _dbContext.Classes
                 .Include(i => i.Students)
                 .Include(i => i.Program)
-                .Include(i => i.Supervisingteacher).  
+                .Include(i => i.SupervisingTeacher).  
                 FirstOrDefault((c) => c.Id == id);
 
             if (selectedClass == null)

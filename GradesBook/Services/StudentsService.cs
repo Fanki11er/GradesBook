@@ -97,9 +97,7 @@ namespace GradesBook.Services
             }
             return null;
             
-            
-            //var classStudents = _dbContext.Students.Where(sc => sc.ClassId == id);
-            //return _mapper.Map<IEnumerable<SelectOption>>(classStudents);
+          
         }
 
 
