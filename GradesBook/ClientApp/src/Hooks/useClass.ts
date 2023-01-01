@@ -1,9 +1,11 @@
 import { useParams } from "react-router-dom";
 import { endpoints } from "../Api/Endpoints";
+import { CreateNewClassDto } from "../Types/Types";
 import useAxiosPrivate from "./useAxiosPrivate";
 
 const useClass = () => {
-  const { getClassSettingsEndpoint, getClassesListEndpoint } = endpoints;
+  const { getClassSettingsEndpoint, getClassesListEndpoint, addNewClass } =
+    endpoints;
   const axiosPrivate = useAxiosPrivate();
   const { classId } = useParams();
 
@@ -17,9 +19,14 @@ const useClass = () => {
     );
   };
 
+  const handleAddNewClass = (dto: CreateNewClassDto) => {
+    return axiosPrivate.post(addNewClass, dto);
+  };
+
   return {
     getClassSettings,
     getClassesList,
+    handleAddNewClass,
   };
 };
 

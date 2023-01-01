@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
-import useClasses from "../../Hooks/useClasses";
+import useClass from "../../Hooks/useClass";
+
 import ClassesForm from "../../Organisms/ClassesForm/ClassesForm";
 import { ClassNameWithSupervisor } from "../../Types/Types";
 import { ClassesViewWrapper } from "./ClassesView.styles";
 
 const ClassesView = () => {
-  const { handleGetAllClasses } = useClasses();
+  const { getClassesList } = useClass();
   const [classes, setClasses] = useState<ClassNameWithSupervisor[]>([]);
   useEffect(() => {
-    handleGetAllClasses()
+    getClassesList()
       .then((response) => {
         const data = response.data as ClassNameWithSupervisor[];
         setClasses(data);

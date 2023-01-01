@@ -58,7 +58,7 @@ const ClassCreationForm = (props: Props) => {
         />
         <SelectInputField
           label={"Wybierz wychowawcę"}
-          name={"sepervisorId"}
+          name={"supervisorId"}
           options={teachers}
           placeholder={"Wybierz wychowawcę"}
           disabled={false}

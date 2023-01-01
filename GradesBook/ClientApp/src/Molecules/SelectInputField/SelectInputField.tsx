@@ -38,7 +38,7 @@ const SelectInputField = (props: Props) => {
         onChange={field.onChange}
         disabled={disabled}
       >
-        <HiddenStyledOption disabled value={0}>
+        <HiddenStyledOption disabled value={-1}>
           {placeholder}
         </HiddenStyledOption>
         {renderOptions(options)}

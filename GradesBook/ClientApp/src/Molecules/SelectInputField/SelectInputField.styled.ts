@@ -4,7 +4,7 @@ import Arrow from "../../Assets/Images/Arrow.svg";
 import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const SelectInputFieldWrapper = styled.div`
-  width: 200px;
+  width: 250px;
   height: auto;
   display: grid;
   grid-template-columns: 100%;

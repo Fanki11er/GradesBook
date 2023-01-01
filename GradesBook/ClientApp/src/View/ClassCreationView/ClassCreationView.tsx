@@ -19,6 +19,7 @@ const ClassCreationView = () => {
       .catch((e) => {
         console.log(e.message);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -30,20 +31,12 @@ const ClassCreationView = () => {
       .catch((e) => {
         console.log(e.message);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <ClassCreationViewWrapper>
-      <ClassCreationForm
-        programs={[
-          { id: 1, value: "test1" },
-          { id: 2, value: "test2" },
-        ]}
-        teachers={[
-          { id: 1, value: "test1" },
-          { id: 2, value: "test2" },
-        ]}
-      />
+      <ClassCreationForm programs={programs} teachers={teachers} />
     </ClassCreationViewWrapper>
   );
 };

@@ -51,35 +51,6 @@ const TeacherSpecificSideMenu = () => {
           Wiadomość klasowa
         </SideMenuButton>
       )}
-      {pathname === teacherView && (
-        <SideMenuButton onClick={() => navigate(teacherSubjects)}>
-          Edytuj przedmioty
-        </SideMenuButton>
-      )}
-      {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton
-          onClick={() => navigate(`${classAddStudents}/${classId}`)}
-        >
-          Dodaj uczniów
-        </SideMenuButton>
-      )}
-      {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton
-          onClick={() => navigate(`${classRemoveStudents}/${classId}`)}
-        >
-          Usuń uczniów
-        </SideMenuButton>
-      )}
-      {pathname.match(/\/Teacher\/Class\/Students\/.*/) && (
-        <SideMenuButton onClick={() => navigate(`${classSettings}/${classId}`)}>
-          Powrót
-        </SideMenuButton>
-      )}
-      {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton onClick={() => navigate(teacherSubjects)}>
-          Wiadomość klasowa
-        </SideMenuButton>
-      )}
     </SpecificOptionsWrapper>
   );
 };
