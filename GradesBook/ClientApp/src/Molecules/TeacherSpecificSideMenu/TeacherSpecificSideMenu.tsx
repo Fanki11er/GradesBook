@@ -1,15 +1,18 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SideMenuButton } from "../../Atoms/Buttons/Buttons";
 import { SpecificOptionsWrapper } from "../../Atoms/SideMenu/SideMenu";
 import { routes } from "../../Routes/routes";
 
 const TeacherSpecificSideMenu = () => {
-  const { teacherView } = routes;
+  const { teacherView, addClass } = routes;
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   return (
     <SpecificOptionsWrapper>
       {pathname === teacherView && (
-        <SideMenuButton>Stwórz klasę</SideMenuButton>
+        <SideMenuButton onClick={() => navigate(addClass)}>
+          Stwórz klasę
+        </SideMenuButton>
       )}
     </SpecificOptionsWrapper>
   );

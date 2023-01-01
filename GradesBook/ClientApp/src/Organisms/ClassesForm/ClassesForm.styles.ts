@@ -11,7 +11,7 @@ export const ClassesFormWrapper = styled.section`
   align-self: center;
   max-height: 400px;
   justify-items: center;
-  color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
+  color: ${(props: StyledTheme) => props.theme.colors.textHeader};
 `;
 
 export const ClassSectionHeader = styled.h2`

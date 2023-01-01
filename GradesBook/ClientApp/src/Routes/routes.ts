@@ -8,4 +8,5 @@ export const routes = {
   program: "/Program",
   teacherView: "/Teacher",
   grades: "/Grades",
+  addClass: "/Teacher/AddClass",
 };

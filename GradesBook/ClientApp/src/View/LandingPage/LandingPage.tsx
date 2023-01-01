@@ -8,6 +8,7 @@ import {
   LandingPageWrapper,
 } from "./LandingPage.styles";
 import LogoLandingPage from "../../Assets/Images/BigLogo.svg";
+import NoticeBoard from "../../Molecules/NoticeBoard/NoticeBoard";
 
 const LandingPage = () => {
   const { setting, classes, parentView, program, login, register } = routes;
@@ -19,7 +20,7 @@ const LandingPage = () => {
         <SideMenuButton>Logowanie</SideMenuButton>
         <SideMenuButton>Rejestracja</SideMenuButton>
       </ButtonLogOutWrapper>
-
+      <NoticeBoard />
       <LandingPageOptions>
         <LinkButton to={classes}>Klasy</LinkButton>
         <LinkButton to={setting}>Ustawienia</LinkButton>
