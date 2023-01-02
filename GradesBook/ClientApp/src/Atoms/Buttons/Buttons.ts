@@ -126,7 +126,7 @@ export const FormButtonOk = styled(Button)`
   align-items: center;
   border: 2px solid transparent;
   background-color: ${(props: StyledTheme) => props.theme.colors.buttonAdd};
-  color: inherit;
+  color: ${(props: StyledTheme) => props.theme.colors.buttonAddColor};
   font-weight: bold;
 `;
 

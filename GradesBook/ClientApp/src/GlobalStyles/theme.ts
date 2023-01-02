@@ -19,6 +19,9 @@ const colorsSchemes: ColorsSchemes = {
     footerText: "rgba(115, 124, 142, 1)",
     footerLine: "rgba(223, 226, 232, 1)",
     textHeader: "rgba(115, 124, 142, 1)",
+    inputGray: "rgba(115, 124, 142, 1)",
+    buttonAddColor: "rgba(0,0,0,1)",
+    subject: "rgba(115, 124, 142, 1)",
   },
   dark: {
     mainBackground: "rgba(1,13,38, 1)",
@@ -40,6 +43,9 @@ const colorsSchemes: ColorsSchemes = {
     footerText: "rgba(115, 124, 142, 1)",
     footerLine: "rgba(19,179,242,1)",
     textHeader: "rgba(19,179,242,1)",
+    inputGray: "rgba(115, 124, 142, 1)",
+    buttonAddColor: "rgba(0,0,0,1)",
+    subject: "rgba(131,179,59,1)",
   },
   pink: {
     mainBackground: "rgba(202,166,166,1)",
@@ -61,6 +67,9 @@ const colorsSchemes: ColorsSchemes = {
     footerText: "rgba(115, 124, 142, 1)",
     footerLine: "rgba(217, 217, 217, 1)",
     textHeader: "rgba(115, 124, 142, 1)",
+    inputGray: "rgba(115, 124, 142, 1)",
+    buttonAddColor: "rgba(0,0,0,1)",
+    subject: "rgba(0,0,0,1)",
   },
 };
 
@@ -114,6 +123,9 @@ export type Colors = {
   textHeader: string;
   buttonAddHover: string;
   buttonAdd: string;
+  inputGray: string;
+  buttonAddColor: string;
+  subject: string;
 };
 
 export let selectedColorScheme: ColorSchemasTypes = "light";
