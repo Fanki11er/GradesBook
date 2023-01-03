@@ -52,4 +52,8 @@ export const endpoints = {
   rateStudent: (id: number) => {
     return `/Grades/Rate/${id}`;
   },
+
+  getStudentGradesFromPeriod: (id: number) => {
+    return `/Grades/StudentGrades/${id}`;
+  },
 };

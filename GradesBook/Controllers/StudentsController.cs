@@ -14,14 +14,14 @@ namespace GradesBook.Controllers
             _studentService = studentService;
         }
 
-        [HttpGet("{id}")]
+       /* [HttpGet("{id}")]
 
         public ActionResult<IEnumerable<StudentWithGradesAverageDto>> GetParentChidren([FromRoute] int id)
         {
             var students = _studentService.GetParentStudents(id);
             if(students is null) return NotFound();
             return Ok(students);
-        }
+        }*/
 
         [HttpGet("Settings/{id}")]
         public ActionResult<UserCurrentSettingsDto> GetCurrentUserSettings([FromRoute] int id)

@@ -103,4 +103,22 @@ export type StudentRateDto = {
   Value: number;
   SubjectId: number;
 };
+
+export type GetStudentGradesFromPeriodDto = {
+  Subjects: number[];
+  StartDate: string;
+  EndDate: string;
+};
+
+export type StudentGrades = {
+  subjectName: string;
+  grades: number[];
+};
+
+export type StudentGradesStatistics = {
+  studentName: string;
+  studentGrades: StudentGrades[];
+  periodStart: string;
+  periodEnd: string;
+};
 //additionalValue: number;
