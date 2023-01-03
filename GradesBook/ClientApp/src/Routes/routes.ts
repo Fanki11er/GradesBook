@@ -13,5 +13,8 @@ export const routes = {
   classAddStudents: "/Teacher/Class/Students/Add",
   classRemoveStudents: "/Teacher/Class/Students/Remove",
   grades: "/Grades",
+  addAnnouncement: "/NewAnnouncement",
+  addClassAnnouncement: "/Class/NewAnnouncement",
   addClass: "/Teacher/AddClass",
+  rateStudent: "/Teacher/RateStudent",
 };

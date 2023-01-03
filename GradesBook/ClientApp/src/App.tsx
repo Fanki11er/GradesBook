@@ -20,6 +20,7 @@ import useColorScheme from "./Hooks/useColorScheme";
 import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
 import ClassAddStudentsView from "./View/ClassAddStudentsView/ClassAddStudentsView";
 import ClassRemoveStudentView from "./View/ClassRemoveStudentView/ClassRemoveStudentView";
+import RateStudentView from "./View/RateStuentView/RateStudentView";
 
 const App = () => {
   const {
@@ -37,6 +38,7 @@ const App = () => {
     teacherSubjects,
     classAddStudents,
     classRemoveStudents,
+    rateStudent,
   } = routes;
   const { theme } = useColorScheme();
 
@@ -72,6 +74,10 @@ const App = () => {
                 element={<ClassRemoveStudentView />}
               />
               <Route path={addClass} element={<ClassCreationView />} />
+              <Route
+                path={`${rateStudent}/:studentId`}
+                element={<RateStudentView />}
+              />
             </Route>
             <Route
               path={`${grades}/:studentId`}
@@ -86,5 +92,3 @@ const App = () => {
 };
 
 export default App;
-
-//Todo Move classes to hook

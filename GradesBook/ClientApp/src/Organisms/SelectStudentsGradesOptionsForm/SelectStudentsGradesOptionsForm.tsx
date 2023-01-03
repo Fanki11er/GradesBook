@@ -17,11 +17,11 @@ type MyFormValues = {
 const SelectStudentsGradesOptionsForm = () => {
   const [subjectsList, setSubjectsLIst] = useState<SelectOption[]>([]);
   const { studentId } = useParams();
-  const { handleGetUserSubjectsList } = useSubject();
+  const { handleGetStudentSubjectsList } = useSubject();
 
   useEffect(() => {
     studentId &&
-      handleGetUserSubjectsList(Number(studentId)).then((response) => {
+      handleGetStudentSubjectsList(Number(studentId)).then((response) => {
         const data = response.data as SelectOption[];
         setSubjectsLIst(data);
       });

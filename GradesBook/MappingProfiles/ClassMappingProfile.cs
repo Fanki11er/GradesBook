@@ -52,7 +52,11 @@ namespace GradesBook.MappingProfiles
                  .ForMember(s => s.Id, m => m.MapFrom(p => p.Id))
                  .ForMember(s => s.Value, m => m.MapFrom(p => p.FirstName + " " + p.LastName));
 
+            CreateMap<int, SelectOption>()
+                .ForMember(s => s.Id, m => m.MapFrom(t => t))
+                .ForMember(s => s.Value, m=> m.MapFrom(t=> t.ToString()));
 
+            CreateMap<StudentRateDto, Grade>();
         }
 
 

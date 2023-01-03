@@ -98,4 +98,9 @@ export type CreateNewClassDto = {
   ProgramId: number;
   SupervisingTeacherId: number;
 };
+
+export type StudentRateDto = {
+  Value: number;
+  SubjectId: number;
+};
 //additionalValue: number;
