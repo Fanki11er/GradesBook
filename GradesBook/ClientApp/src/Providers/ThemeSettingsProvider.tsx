@@ -6,8 +6,8 @@ import { routes } from "../Routes/routes";
 export const ThemeSettingsContext = createContext({
   theme: themes.light as Theme,
   themeName: "light" as ColorSchemasTypes,
-  handleChangeColorsScheme: (scheme: ColorSchemasTypes, userId: number) => {},
-  loadPreferredTheme: (userId: number) => {},
+  handleChangeColorsScheme: (scheme: ColorSchemasTypes, userId: string) => {},
+  loadPreferredTheme: (userId: string) => {},
 });
 
 const ThemeSettingsProvider = (props: PropsWithChildren) => {
@@ -16,7 +16,7 @@ const ThemeSettingsProvider = (props: PropsWithChildren) => {
   const [theme, setTheme] = useState<Theme>(themes[themeName]);
   const { pathname } = useLocation();
 
-  const loadPreferredTheme = (userId: number) => {
+  const loadPreferredTheme = (userId: string) => {
     const savedColorScheme = localStorage.getItem(
       `propertiesUser${userId}`
     ) as ColorSchemasTypes | null;
@@ -36,7 +36,7 @@ const ThemeSettingsProvider = (props: PropsWithChildren) => {
 
   const handleChangeColorsScheme = (
     scheme: ColorSchemasTypes,
-    userId: number
+    userId: string
   ) => {
     localStorage.setItem(`propertiesUser${userId}`, scheme);
     setThemeName(scheme);
