@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StudentGradesStatistics } from "../../Types/Types";
 import SelectStudentsGradesOptionsForm from "../SelectStudentsGradesOptionsForm/SelectStudentsGradesOptionsForm";
+import StudentGradesList from "../StudentGradesList/StudentGradesList";
 import { StudentsGradesInfoWrapper } from "./StudentsGradesInfo.styles";
 
 const StudentsGradesInfo = () => {
@@ -15,6 +16,9 @@ const StudentsGradesInfo = () => {
       <SelectStudentsGradesOptionsForm
         handleSetFunction={handleSetStatistics}
       />
+      {studentGradesStatistics ? (
+        <StudentGradesList studentGrades={studentGradesStatistics} />
+      ) : null}
     </StudentsGradesInfoWrapper>
   );
 };

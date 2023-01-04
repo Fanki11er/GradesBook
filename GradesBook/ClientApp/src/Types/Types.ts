@@ -118,7 +118,7 @@ export type StudentGrades = {
 export type StudentGradesStatistics = {
   studentName: string;
   studentGrades: StudentGrades[];
-  periodStart: string;
-  periodEnd: string;
+  //periodStart: string;
+  //periodEnd: string;
 };
 //additionalValue: number;

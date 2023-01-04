@@ -31,5 +31,15 @@ namespace GradesBook.Controllers
             return Ok();
         }
 
+        [HttpPost("StudentGrades/{id}")]
+        public ActionResult<StudentGradesStatistics> GetStudentGrades([FromRoute] int id, [FromBody] GetStudentGradesFromPeriodDto dto)
+        {
+           var statistics = _gradesService.GetStudentGrades(id, dto);
+            if(statistics == null) { 
+                return NotFound(); 
+            }
+            return Ok(statistics);
+        }
+
     }
 }

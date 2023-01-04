@@ -5,9 +5,9 @@ import { FormButtonOk } from "../../Atoms/Buttons/Buttons";
 import useGrades from "../../Hooks/useGrades";
 import useLoader from "../../Hooks/useLoader";
 import useSubject from "../../Hooks/useSubject";
+import useUser from "../../Hooks/useUser";
 import CheckboxField from "../../Molecules/CheckboxField/CheckboxField";
 import DateInputField from "../../Molecules/DateInputField/DateInputField";
-import { DateInputFieldWrapper } from "../../Molecules/DateInputField/DateInputField.styles";
 import { SelectOption, StudentGradesStatistics } from "../../Types/Types";
 import {
   ButtonWrapper,
@@ -30,15 +30,18 @@ const SelectStudentsGradesOptionsForm = (props: Props) => {
   const { handleSetFunction } = props;
   const [subjectsList, setSubjectsLIst] = useState<SelectOption[]>([]);
   const { studentId } = useParams();
+  const { user } = useUser();
   const { handleGetStudentSubjectsList } = useSubject();
   const { handleGetStudentGradesFromPeriod } = useGrades();
   const { handleConnect, handleFinished, handleError, handleResetError } =
     useLoader();
 
   useEffect(() => {
-    if (studentId) {
+    if (studentId || user?.id) {
       handleConnect();
-      handleGetStudentSubjectsList(Number(studentId))
+      handleGetStudentSubjectsList(
+        user?.role === "Student" ? user.id : Number(studentId)
+      )
         .then((response) => {
           const data = response.data as SelectOption[];
           setSubjectsLIst(data);
@@ -82,13 +85,16 @@ const SelectStudentsGradesOptionsForm = (props: Props) => {
 
   const handleSubmit = (values: MyFormValues) => {
     if (validateForm(values)) {
-      handleGetStudentGradesFromPeriod(Number(studentId), {
-        StartDate: values.startDate,
-        EndDate: values.endDate,
-        Subjects: values.subjects.map((subject) => {
-          return Number(subject);
-        }),
-      })
+      handleGetStudentGradesFromPeriod(
+        user?.role === "Student" ? user.id : Number(studentId),
+        {
+          StartDate: values.startDate,
+          EndDate: values.endDate,
+          Subjects: values.subjects.map((subject) => {
+            return Number(subject);
+          }),
+        }
+      )
         .then((response) => {
           const data = response.data as StudentGradesStatistics;
           handleSetFunction(data);

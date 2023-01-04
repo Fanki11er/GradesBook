@@ -10,6 +10,7 @@ namespace GradesBook.Services
     {
         public IEnumerable<SelectOption> GetPossibleGrades();
         public int RateStudent(int id, StudentRateDto dto);
+        public StudentGradesStatistics GetStudentGrades(int id, GetStudentGradesFromPeriodDto dto);
 
     }
     public class GradesService: IGradesService
@@ -57,6 +58,44 @@ namespace GradesBook.Services
             var result = _dbContext.SaveChanges();
 
             return result;
+        }
+
+        public StudentGradesStatistics GetStudentGrades(int id, GetStudentGradesFromPeriodDto dto)
+        {
+
+
+            var student = _dbContext.Students.Include(i => i.Grades).FirstOrDefault(s => s.Id == id);
+            if (student == null)
+            {
+                return null;
+            }
+
+            var statistics = new StudentGradesStatistics()
+            {
+                StudentName = student.FirstName + " " + student.LastName,
+                StudentGrades = new List<StudentGrades>()
+
+            };
+            var startDate = DateTime.Parse(dto.StartDate);
+            var endDate = DateTime.Parse(dto.EndDate);
+
+            dto.Subjects.ForEach(subjectId =>
+            {
+
+                var subject = _dbContext.Subjects.FirstOrDefault(s => s.Id == subjectId);
+                if (subject != null)
+                {
+                    var grades = new StudentGrades()
+                    {
+                        SubjectName = subject.Name,
+                        Grades = student.Grades.Where(g => g.SubjectId == subject.Id && g.Date >= startDate && g.Date <= endDate).Select(g => g.Value).ToList(),
+
+                    };
+                    statistics.StudentGrades.Add(grades);
+                };
+               
+            });
+            return statistics;
         }
     }
 }
