@@ -8,7 +8,7 @@ const colorsSchemes: ColorsSchemes = {
     white: "rgba(255,255,255,1)",
     lightBorder: "rgba(223, 226, 232, 1)",
     shadow: "rgba(0, 0, 0, 0.05)",
-    red: "rgba(203, 133, 129, 1)",
+    red: "rgba(192, 199, 214, 1)",
     green: "rgba(143, 203, 128, 1)",
     yellow: "rgba(225, 216, 136, 1)",
     errorRed: "rgba(255, 131, 131, 1)",
@@ -22,6 +22,11 @@ const colorsSchemes: ColorsSchemes = {
     inputGray: "rgba(115, 124, 142, 1)",
     buttonAddColor: "rgba(0,0,0,1)",
     subject: "rgba(115, 124, 142, 1)",
+    gray: "rgba(115, 124, 142, 0.8)",
+    greenTable: "rgba(247, 248, 250, 1)",
+    buttonGrades: "rgba(192, 199, 214, 1)",
+    buttonGradesHover: "",
+    header: "",
   },
   dark: {
     mainBackground: "rgba(1,13,38, 1)",
@@ -46,6 +51,11 @@ const colorsSchemes: ColorsSchemes = {
     inputGray: "rgba(115, 124, 142, 1)",
     buttonAddColor: "rgba(0,0,0,1)",
     subject: "rgba(131,179,59,1)",
+    gray: "rgba(19,179,242,1)",
+    greenTable: "rgba(131,179,59,1)",
+    buttonGrades: "rgba(19,179,242,1)",
+    buttonGradesHover: "",
+    header: "rgba(2,40,115,1)",
   },
   pink: {
     mainBackground: "rgba(202,166,166,1)",
@@ -70,6 +80,11 @@ const colorsSchemes: ColorsSchemes = {
     inputGray: "rgba(115, 124, 142, 1)",
     buttonAddColor: "rgba(0,0,0,1)",
     subject: "rgba(0,0,0,1)",
+    gray: "rgba(200,151,151,1)",
+    greenTable: "rgba(202,166,166,1)",
+    buttonGrades: "rgba(200,151,151,1)",
+    buttonGradesHover: "(rgba(202,166,166,1)",
+    header: "",
   },
 };
 
@@ -126,6 +141,11 @@ export type Colors = {
   inputGray: string;
   buttonAddColor: string;
   subject: string;
+  gray: string;
+  greenTable: string;
+  buttonGrades: string;
+  buttonGradesHover: string;
+  header: string;
 };
 
 export let selectedColorScheme: ColorSchemasTypes = "light";

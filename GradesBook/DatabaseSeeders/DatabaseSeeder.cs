@@ -21,6 +21,8 @@ namespace GradesBook.DatabaseSeaders
             
             if (_dbContext.Database.CanConnect())
             {
+             
+
                 if (!_dbContext.Subjects.Any())
                 {
                     var subjects = GetSubjects();
@@ -213,6 +215,6 @@ namespace GradesBook.DatabaseSeaders
 
         }
 
-
+        
     }
 }
