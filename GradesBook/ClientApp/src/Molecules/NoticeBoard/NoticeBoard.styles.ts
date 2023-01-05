@@ -7,13 +7,29 @@ export const NoticeBoardWrapper = styled.div`
   display: flex;
   justify-self: center;
 `;
-export const NoticeBoardList = styled.li``;
+export const NoticeBoardList = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  row-gap: 20px;
+`;
 
-export const NoticeBoardContent = styled.p`
+export const NoticeBoardContentWrapper = styled.li`
   background-image: url(${BoardImg});
-  min-height: 500px;
+  height: 220px;
   background-size: contain;
   background-repeat: no-repeat;
   padding: 30px;
   color: white;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 30px 1fr;
+  row-gap: 20px;
 `;
+
+export const NoticeBoardContent = styled.p`
+  height: 100%;
+  margin: 0;
+`;
+
+export const NoticeBoardContentDate = styled.span``;

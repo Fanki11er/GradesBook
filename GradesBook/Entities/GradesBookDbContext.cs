@@ -6,7 +6,6 @@ namespace GradesBook.Entities
     {
         public GradesBookDbContext(DbContextOptions<GradesBookDbContext> options): base(options) { }
         public DbSet<Announcement> Announcements { get; set; }
-        public DbSet<AnnouncementType> AnnouncementTypes { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Grade> Grades { get; set; }
         public DbSet<Parent> Parents { get; set; }
@@ -15,6 +14,7 @@ namespace GradesBook.Entities
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<ProgramSubject> ProgramSubjects { get; set; }
+        public DbSet<ClassAnnouncement> ClassAnnouncements { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,19 +29,17 @@ namespace GradesBook.Entities
             {
                 eb.Property(an => an.Value).IsRequired();
                 //eb.Property(an => an.AnnouncementType).IsRequired();
-                eb.HasOne(an => an.AnnouncementType).WithMany(ant => ant.Announcements);
+              
             });
 
-            modelBuilder.Entity<AnnouncementType>(eb =>
-            {
-                eb.Property(at => at.Type).IsRequired();
-            });
+           
 
             modelBuilder.Entity<Class>(eb =>
             {
                 eb.Property(cl => cl.Name).IsRequired().HasMaxLength(2);
                 eb.HasMany(cl => cl.Students).WithOne(st => st.StudentClass);
                 eb.HasOne(cl => cl.Program).WithMany(pr => pr.Classs);
+                eb.HasMany(cl => cl.ClassAnnouncements).WithOne(ca => ca.Class);
             });
 
 

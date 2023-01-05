@@ -30,15 +30,8 @@ namespace GradesBook.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AnnouncementTypeId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("TypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Value")
                         .IsRequired()
@@ -46,26 +39,7 @@ namespace GradesBook.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnnouncementTypeId");
-
                     b.ToTable("Announcements");
-                });
-
-            modelBuilder.Entity("GradesBook.Entities.AnnouncementType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AnnouncementTypes");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Class", b =>
@@ -94,6 +68,31 @@ namespace GradesBook.Migrations
                     b.HasIndex("SupervisingTeacherId");
 
                     b.ToTable("Classes");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.ClassAnnouncement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("ClassAnnouncements");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Grade", b =>
@@ -301,17 +300,6 @@ namespace GradesBook.Migrations
                     b.ToTable("Teachers");
                 });
 
-            modelBuilder.Entity("GradesBook.Entities.Announcement", b =>
-                {
-                    b.HasOne("GradesBook.Entities.AnnouncementType", "AnnouncementType")
-                        .WithMany("Announcements")
-                        .HasForeignKey("AnnouncementTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AnnouncementType");
-                });
-
             modelBuilder.Entity("GradesBook.Entities.Class", b =>
                 {
                     b.HasOne("GradesBook.Entities.Program", "Program")
@@ -325,6 +313,17 @@ namespace GradesBook.Migrations
                     b.Navigation("Program");
 
                     b.Navigation("SupervisingTeacher");
+                });
+
+            modelBuilder.Entity("GradesBook.Entities.ClassAnnouncement", b =>
+                {
+                    b.HasOne("GradesBook.Entities.Class", "Class")
+                        .WithMany("ClassAnnouncements")
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
                 });
 
             modelBuilder.Entity("GradesBook.Entities.Grade", b =>
@@ -390,13 +389,10 @@ namespace GradesBook.Migrations
                     b.Navigation("Subject");
                 });
 
-            modelBuilder.Entity("GradesBook.Entities.AnnouncementType", b =>
-                {
-                    b.Navigation("Announcements");
-                });
-
             modelBuilder.Entity("GradesBook.Entities.Class", b =>
                 {
+                    b.Navigation("ClassAnnouncements");
+
                     b.Navigation("Students");
                 });
 

@@ -1,4 +1,5 @@
-﻿namespace GradesBook.Entities
+﻿
+namespace GradesBook.Entities
 {
     public class Class
     {
@@ -9,5 +10,6 @@
         virtual public  List<Student> Students { get; set; } = new List<Student>();
         virtual public  Program? Program { get; set; }
         virtual public  Teacher? SupervisingTeacher { get; set; }
+        virtual public List<ClassAnnouncement> ClassAnnouncements { get; set; } = new List<ClassAnnouncement>();
     }
 }

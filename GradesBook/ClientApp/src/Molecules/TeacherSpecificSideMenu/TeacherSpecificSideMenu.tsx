@@ -11,6 +11,7 @@ const TeacherSpecificSideMenu = () => {
     classRemoveStudents,
     classSettings,
     addClass,
+    addClassAnnouncement,
   } = routes;
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -47,7 +48,9 @@ const TeacherSpecificSideMenu = () => {
         </SideMenuButton>
       )}
       {pathname.match(/\/Teacher\/Class\/\d/) && (
-        <SideMenuButton onClick={() => navigate(teacherSubjects)}>
+        <SideMenuButton
+          onClick={() => navigate(`${addClassAnnouncement}/${classId}`)}
+        >
           Wiadomość klasowa
         </SideMenuButton>
       )}

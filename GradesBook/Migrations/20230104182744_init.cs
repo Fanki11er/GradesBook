@@ -12,16 +12,17 @@ namespace GradesBook.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AnnouncementTypes",
+                name: "Announcements",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnnouncementTypes", x => x.Id);
+                    table.PrimaryKey("PK_Announcements", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -65,28 +66,6 @@ namespace GradesBook.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Subjects", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Announcements",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TypeId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AnnouncementTypeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Announcements", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Announcements_AnnouncementTypes_AnnouncementTypeId",
-                        column: x => x.AnnouncementTypeId,
-                        principalTable: "AnnouncementTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -164,6 +143,27 @@ namespace GradesBook.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClassAnnouncements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClassId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassAnnouncements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClassAnnouncements_Classes_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "Classes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Students",
                 columns: table => new
                 {
@@ -221,9 +221,9 @@ namespace GradesBook.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Announcements_AnnouncementTypeId",
-                table: "Announcements",
-                column: "AnnouncementTypeId");
+                name: "IX_ClassAnnouncements_ClassId",
+                table: "ClassAnnouncements",
+                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Classes_ProgramId",
@@ -280,13 +280,13 @@ namespace GradesBook.Migrations
                 name: "Announcements");
 
             migrationBuilder.DropTable(
+                name: "ClassAnnouncements");
+
+            migrationBuilder.DropTable(
                 name: "Grades");
 
             migrationBuilder.DropTable(
                 name: "ProgramSubjects");
-
-            migrationBuilder.DropTable(
-                name: "AnnouncementTypes");
 
             migrationBuilder.DropTable(
                 name: "Students");

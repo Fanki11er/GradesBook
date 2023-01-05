@@ -14,7 +14,7 @@ export const AddTeacherToSubjectsFormWrapper = styled(Form)`
   max-height: 505px;
   border-radius: 10px;
   background-color: ${(props: StyledTheme) => props.theme.colors.white};
-  color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
+  color: ${(props: StyledTheme) => props.theme.colors.subject};
   row-gap: 40px;
   box-shadow: -5px 5px 5px 1px
     ${(props: StyledTheme) => props.theme.colors.shadow};
