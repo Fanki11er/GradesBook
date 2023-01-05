@@ -19,6 +19,8 @@ import useColorScheme from "./Hooks/useColorScheme";
 import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
 import ClassAddStudentsView from "./View/ClassAddStudentsView/ClassAddStudentsView";
 import ClassRemoveStudentView from "./View/ClassRemoveStudentView/ClassRemoveStudentView";
+import AddAnnouncementToMainPage from "./View/AddAnnouncementToMainPage/AddAnnouncementToMainPage";
+import AddAnnouncementToClass from "./View/AddAnnouncementToClass/AddAnnouncementToClass";
 import RateStudentView from "./View/RateStuentView/RateStudentView";
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
     teacherSubjects,
     classAddStudents,
     classRemoveStudents,
+    addAnnouncement,
+    addClassAnnouncement,
     rateStudent,
   } = routes;
   const { theme } = useColorScheme();
@@ -71,6 +75,14 @@ const App = () => {
               <Route
                 path={`${classRemoveStudents}/:classId`}
                 element={<ClassRemoveStudentView />}
+              />
+              <Route
+                path={addAnnouncement}
+                element={<AddAnnouncementToMainPage />}
+              />
+              <Route
+                path={`${addClassAnnouncement}/:classId`}
+                element={<AddAnnouncementToClass />}
               />
               <Route path={addClass} element={<ClassCreationView />} />
               <Route

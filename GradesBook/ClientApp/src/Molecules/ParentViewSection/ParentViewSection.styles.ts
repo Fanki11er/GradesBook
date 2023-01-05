@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { StyledTheme } from "../../GlobalStyles/theme";
 
 export const ParentViewSectionWrapper = styled.section`
   display: grid;
@@ -12,4 +13,5 @@ export const ParentViewSectionWrapper = styled.section`
 export const ParentViewSectionHeader = styled.h2`
   font-weight: bold;
   font-size: 20px;
+  color: ${(props: StyledTheme) => props.theme.colors.header};
 `;

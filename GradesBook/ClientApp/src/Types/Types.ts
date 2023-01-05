@@ -121,4 +121,18 @@ export type StudentGradesStatistics = {
   //periodStart: string;
   //periodEnd: string;
 };
+
+export type GeneralAnnouncement = {
+  id: number;
+  value: string;
+  date: string;
+};
+
+export type ClassAnnouncement = {
+  id: number;
+  value: string;
+  date: string;
+  className: string;
+};
+
 //additionalValue: number;

@@ -14,6 +14,8 @@ export const endpoints = {
   registerUser: "/Accounts/Register",
   loginUser: "/Accounts/Login",
   getFreeStudentsList: "/Student/FreeStudents",
+  postAnnouncementToMainPage: "/Announcement/Main",
+  getMainPageAnnouncements: "/Announcement/Main",
 
   getUserCurrentSettings: (role: Roles, id: number) => {
     return `/${role}/Settings/${id}`;
@@ -55,5 +57,11 @@ export const endpoints = {
 
   getStudentGradesFromPeriod: (id: number) => {
     return `/Grades/StudentGrades/${id}`;
+  },
+  postAnnouncementToClass: (id: number) => {
+    return `/Announcement/Class/${id}`;
+  },
+  getClassAnnouncements: (id: number) => {
+    return `/Announcement/Class/${id}`;
   },
 };

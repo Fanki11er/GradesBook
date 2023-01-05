@@ -49,7 +49,7 @@ export const ButtonGrades = styled(Button)`
   height: 30px;
   border-radius: 8px;
   border: 2px solid transparent;
-  background-color: ${(props: StyledTheme) => props.theme.colors.buttonsGray};
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonGrades};
   color: ${(props: StyledTheme) => props.theme.colors.white};
 `;
 
@@ -126,7 +126,7 @@ export const FormButtonOk = styled(Button)`
   align-items: center;
   border: 2px solid transparent;
   background-color: ${(props: StyledTheme) => props.theme.colors.buttonAdd};
-  color: inherit;
+  color: ${(props: StyledTheme) => props.theme.colors.buttonAddColor};
   font-weight: bold;
 `;
 

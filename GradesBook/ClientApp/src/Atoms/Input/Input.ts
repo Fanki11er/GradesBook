@@ -12,4 +12,5 @@ export const InputWrapper = styled(Field)`
   box-shadow: -2px 4px 10px 0
     ${(props: StyledTheme) => props.theme.colors.shadow};
   padding: 0 20px;
+  color: ${(props: StyledTheme) => props.theme.colors.inputGray};
 `;
