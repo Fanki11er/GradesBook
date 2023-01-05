@@ -10,7 +10,7 @@ namespace GradesBook.Services
 
         public interface IStudentService
         {
-        public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id);
+        //public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id);
         public UserCurrentSettingsDto GetCurrentUserSettings(int id);
         public bool UpdateUserSettings(int id, NewUserSettingsDto dto);
         public IEnumerable<SelectOption> GetFreeStudents();
@@ -30,16 +30,16 @@ namespace GradesBook.Services
                 _passwordHasher = passwordHasher;
             }
 
-            public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id)
+         /*   public IEnumerable<StudentWithGradesAverageDto> GetParentStudents(int id)
         {
-            var parent = _dbContext.Parents.FirstOrDefault(p => p.Id == id);
+            var parent = _dbContext.Parents.Include(i=> i.Students).FirstOrDefault(p => p.Id == id);
             if (parent is null) return null;
 
-            var students = parent.Students.Select(p => _mapper.Map<StudentWithGradesAverageDto>(p)).ToList();
+            var students = _mapper.Map<IEnumerable<StudentWithGradesAverageDto>>(parent.Students);
             
             return students;
 
-        }
+        }*/
 
         public UserCurrentSettingsDto GetCurrentUserSettings(int id)
         {
@@ -100,8 +100,8 @@ namespace GradesBook.Services
           
         }
 
+       
 
-
-    }
-    
+        }
+   
 }

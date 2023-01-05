@@ -44,7 +44,9 @@ const ThemeSettingsForm = () => {
         />
       </SkinsWrapper>
       <FormButtonOk
-        onClick={() => handleChangeColorsScheme(selectedSkin, user!.id)}
+        onClick={() =>
+          handleChangeColorsScheme(selectedSkin, `${user?.role}.${user?.id}`)
+        }
       >
         Zmień
       </FormButtonOk>

@@ -9,8 +9,15 @@ const SideMenuNavigation = () => {
   const { getUserFromStorage } = useAuth();
   const user = getUserFromStorage();
 
-  const { parentView, setting, grades, teacherView, programs, studentView } =
-    routes;
+  const {
+    parentView,
+    setting,
+    grades,
+    teacherView,
+    programs,
+    studentView,
+    addAnnouncement,
+  } = routes;
   return (
     <SideMenuNavigationWrapper>
       {user?.role === "Parent" && (
@@ -36,6 +43,12 @@ const SideMenuNavigation = () => {
       {user?.role === "Teacher" && (
         <SideMenuButton as={NavLink} to={programs} end>
           Listy przedmiotów
+        </SideMenuButton>
+      )}
+
+      {user?.role === "Teacher" && (
+        <SideMenuButton as={NavLink} to={addAnnouncement} end>
+          Ogłoszenie
         </SideMenuButton>
       )}
       {location.pathname.match(grades) && (

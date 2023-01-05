@@ -10,6 +10,7 @@ export const endpoints = {
   addNewClass: "/Class",
   getAllPrograms: "/Program",
   getAllTeachers: "/Teacher",
+  getPossibleGrades: "/Grades/PossibleGrades",
   registerUser: "/Accounts/Register",
   loginUser: "/Accounts/Login",
   getFreeStudentsList: "/Student/FreeStudents",
@@ -44,6 +45,18 @@ export const endpoints = {
   },
   removeStudentsFromClass: (id: number) => {
     return `/Class/RemoveStudents/${id}`;
+  },
+
+  getStudentsSubjects: (id: number) => {
+    return `/Subjects/StudentsSubjects/${id}`;
+  },
+
+  rateStudent: (id: number) => {
+    return `/Grades/Rate/${id}`;
+  },
+
+  getStudentGradesFromPeriod: (id: number) => {
+    return `/Grades/StudentGrades/${id}`;
   },
   postAnnouncementToClass: (id: number) => {
     return `/Announcement/Class/${id}`;

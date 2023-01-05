@@ -15,13 +15,13 @@ import TeacherView from "./View/TeacherView/TeacherView";
 import ClassesView from "./View/ClassesView/ClassesView";
 import ClassSettings from "./View/ClassSettings/ClassSettings";
 import ClassCreationView from "./View/ClassCreationView/ClassCreationView";
-import StudentView from "./View/StudentView/StudentView";
 import useColorScheme from "./Hooks/useColorScheme";
 import TeachersSubjectsView from "./View/TeachersSubjectsView/TeachersSubjectsView";
 import ClassAddStudentsView from "./View/ClassAddStudentsView/ClassAddStudentsView";
 import ClassRemoveStudentView from "./View/ClassRemoveStudentView/ClassRemoveStudentView";
 import AddAnnouncementToMainPage from "./View/AddAnnouncementToMainPage/AddAnnouncementToMainPage";
 import AddAnnouncementToClass from "./View/AddAnnouncementToClass/AddAnnouncementToClass";
+import RateStudentView from "./View/RateStuentView/RateStudentView";
 
 const App = () => {
   const {
@@ -41,6 +41,7 @@ const App = () => {
     classRemoveStudents,
     addAnnouncement,
     addClassAnnouncement,
+    rateStudent,
   } = routes;
   const { theme } = useColorScheme();
 
@@ -55,7 +56,7 @@ const App = () => {
           <Route element={<AuthenticatedTemplate />}>
             <Route path={setting} element={<SettingsView />} />
             <Route path={parentView} element={<ParentView />} />
-            <Route path={studentView} element={<StudentView />} />
+            <Route path={studentView} element={<StudentGradesView />}></Route>
             <Route element={<TeacherView />}>
               <Route path={teacherView} element={<ClassesView />} />
               <Route
@@ -84,6 +85,10 @@ const App = () => {
                 element={<AddAnnouncementToClass />}
               />
               <Route path={addClass} element={<ClassCreationView />} />
+              <Route
+                path={`${rateStudent}/:studentId`}
+                element={<RateStudentView />}
+              />
             </Route>
             <Route
               path={`${grades}/:studentId`}
@@ -98,5 +103,3 @@ const App = () => {
 };
 
 export default App;
-
-//Todo Move classes to hook

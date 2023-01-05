@@ -54,10 +54,14 @@ namespace GradesBook.MappingProfiles
 
             CreateMap<Announcement, GeneralAnnouncement>()
                 .ForMember(d=>d.Date, m => m.MapFrom(d => d.Date.ToString("dd-MM-yyyy")));
+            CreateMap<int, SelectOption>()
+                .ForMember(s => s.Id, m => m.MapFrom(t => t))
+                .ForMember(s => s.Value, m=> m.MapFrom(t=> t.ToString()));
 
             CreateMap<ClassAnnouncement, ClassAnnouncementDto>()
               .ForMember(d => d.Date, m => m.MapFrom(d => d.Date.ToString("dd-MM-yyyy")))
               .ForMember(d => d.ClassName, m => m.MapFrom(n => n.Class.Name));
+            CreateMap<StudentRateDto, Grade>();
         }
 
 

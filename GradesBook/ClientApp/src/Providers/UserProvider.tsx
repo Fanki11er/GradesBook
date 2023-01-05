@@ -29,7 +29,7 @@ const UserProvider = (props: PropsWithChildren) => {
       const loadedUser = getUserFromStorage();
       if (loadedUser) {
         handleSetUser(loadedUser);
-        loadPreferredTheme(loadedUser.id);
+        loadPreferredTheme(`${loadedUser?.role}.${loadedUser?.id}`);
       }
     }
   });

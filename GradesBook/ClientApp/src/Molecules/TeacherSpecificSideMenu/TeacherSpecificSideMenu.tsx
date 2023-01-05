@@ -42,6 +42,7 @@ const TeacherSpecificSideMenu = () => {
           Usuń uczniów
         </SideMenuButton>
       )}
+
       {pathname.match(/\/Teacher\/Class\/Students\/.*/) && (
         <SideMenuButton onClick={() => navigate(`${classSettings}/${classId}`)}>
           Powrót

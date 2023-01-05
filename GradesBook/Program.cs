@@ -52,6 +52,7 @@ builder.Services.AddScoped<ISubjetcsService, SubjectsService>();
 builder.Services.AddScoped<ITeachersService, TeachersService>();
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddScoped<IAnnouncementsService, AnnouncementsService>();
+builder.Services.AddScoped<IGradesService, GradesService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 var app = builder.Build();

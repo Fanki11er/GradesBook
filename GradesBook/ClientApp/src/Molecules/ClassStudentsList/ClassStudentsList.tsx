@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ClassStudentsList = (props: Props) => {
-  const {} = routes;
+  const { rateStudent, grades } = routes;
   const { studentsList } = props;
   const renderChildrenList = (childrenList: SelectOption[]) => {
     return childrenList.map((student) => {
@@ -22,8 +22,11 @@ const ClassStudentsList = (props: Props) => {
         <ClassStudentsListElement key={student.id}>
           <StudentNameInfo>{student.value}</StudentNameInfo>
 
-          <ButtonGrades as={Link} to={``}>
+          <ButtonGrades as={Link} to={`${rateStudent}/${student.id}`}>
             Oceń
+          </ButtonGrades>
+          <ButtonGrades as={Link} to={`${grades}/${student.id}`}>
+            Oceny
           </ButtonGrades>
         </ClassStudentsListElement>
       );

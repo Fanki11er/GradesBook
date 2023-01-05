@@ -38,8 +38,8 @@ const ClassCreationForm = (props: Props) => {
   } = useLoader();
   const initialValues: MyFormValues = {
     name: "",
-    supervisorId: -1,
-    programId: -1,
+    supervisorId: 0,
+    programId: 0,
   };
 
   const validateFormValues = (values: MyFormValues) => {
@@ -47,7 +47,7 @@ const ClassCreationForm = (props: Props) => {
     if (!values.name.match(/^\d{1}[a-zA-Z]{1}$/)) {
       return false;
     }
-    if (values.programId === -1 || values.supervisorId === -1) {
+    if (values.programId === 0 || values.supervisorId === 0) {
       return false;
     }
     return true;

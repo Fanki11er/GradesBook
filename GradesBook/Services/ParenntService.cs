@@ -28,7 +28,7 @@ namespace GradesBook.Services
         }
 
         public IEnumerable<StudentWithClassAndGradesAverageDto> GetParentsChildren(int id) {
-            var children = _dbContext.Students.Where(s => s.ParrentId == id);
+            var children = _dbContext.Students.Include(i=> i.Grades).Where(s => s.ParrentId == id);
             var students =  _mapper.Map<IEnumerable<StudentWithClassAndGradesAverageDto>>(children).ToList();
             return students;
         }

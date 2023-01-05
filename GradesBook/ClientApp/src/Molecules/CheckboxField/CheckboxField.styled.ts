@@ -9,11 +9,14 @@ export const CheckBoxFieldWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 30px;
   grid-template-rows: 1fr;
-  grid-column-gap: 5px;
+  column-gap: 5px;
   align-items: center;
-  padding: 10px 0;
-  border-bottom: 2px solid
-    ${(props: StyledTheme) => props.theme.colors.lightBorder};
+  padding: 10px;
+  border: 2px solid ${(props: StyledTheme) => props.theme.colors.lightBorder};
+  border-radius: 10px;
+  :hover {
+    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+  }
 `;
 
 export const CheckboxFieldLabel = styled.label``;
