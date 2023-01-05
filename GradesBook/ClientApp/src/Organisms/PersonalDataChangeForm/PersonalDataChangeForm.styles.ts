@@ -32,7 +32,7 @@ export const PersonalDataChangeFormHeader = styled.h3`
 `;
 
 export const PersonalDataChangeFormInputsWrapper = styled.div`
-  width: 70%;
+  width: 100%;
   min-width: 200px;
   max-width: 250px;
   height: 100%;
