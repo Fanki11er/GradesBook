@@ -11,7 +11,6 @@ const ClassesList = (props: Props) => {
   const { classList } = props;
   const { teacherView, classes } = routes;
   const navigate = useNavigate();
-  console.log(classList);
 
   const renderClassList = (classList: ClassNameWithSupervisor[]) => {
     return classList.map((classElement) => {

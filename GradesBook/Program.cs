@@ -6,6 +6,7 @@ using GradesBook.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using SendGrid.Extensions.DependencyInjection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +34,13 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
+builder.Services.AddSendGrid(options =>
+{
+    options.ApiKey = builder.Configuration["Email:SendGridApiKey"];
+});
+
+
+
 
 // Add services to the container.
 
@@ -41,6 +49,8 @@ builder.Services.AddDbContext<GradesBookDbContext>(
     option => option.UseSqlServer(builder.Configuration.GetConnectionString("GradesBookConnectionString"))
    
     );
+
+
 
 builder.Services.AddScoped<DatabaseSeeder, DatabaseSeeder>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -53,7 +63,10 @@ builder.Services.AddScoped<ITeachersService, TeachersService>();
 builder.Services.AddScoped<IAccountsService, AccountsService>();
 builder.Services.AddScoped<IAnnouncementsService, AnnouncementsService>();
 builder.Services.AddScoped<IGradesService, GradesService>();
+builder.Services.AddScoped<IEmailSrvice, EmailService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddHostedService<PeriodicService>();
+
 
 var app = builder.Build();
 
@@ -69,6 +82,8 @@ SeedDatabase();
         dbInitializer.Seed();
     };
 }
+
+
 
 
 // Configure the HTTP request pipeline.

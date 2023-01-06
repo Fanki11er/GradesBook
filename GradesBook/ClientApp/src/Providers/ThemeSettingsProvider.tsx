@@ -21,7 +21,6 @@ const ThemeSettingsProvider = (props: PropsWithChildren) => {
       `propertiesUser${userId}`
     ) as ColorSchemasTypes | null;
     if (savedColorScheme && savedColorScheme !== themeName) {
-      console.log(savedColorScheme);
       setThemeName(savedColorScheme);
       setTheme(themes[savedColorScheme]);
     }

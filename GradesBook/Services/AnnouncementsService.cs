@@ -10,8 +10,8 @@ namespace GradesBook.Services
         public int AddAnnouncementToMainPage(string content);
         public IEnumerable<GeneralAnnouncement> GetMainPageAnnouncements();
         public int AddAnnouncementToClass(int id, string content);
-
         public IEnumerable<ClassAnnouncementDto> GetClassAnnouncements(int id);
+        public EmailAnnouncementDto PrepareEmailAnnouncement(int id, string content);
     };
     public class AnnouncementsService : IAnnouncementsService
     {
@@ -23,7 +23,6 @@ namespace GradesBook.Services
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
         public IEnumerable<GeneralAnnouncement> GetMainPageAnnouncements()
         {
             var announcements = _dbContext.Announcements;
@@ -85,6 +84,36 @@ namespace GradesBook.Services
             });
 
             return announcements.Distinct().Select(a => a).ToList();
+
+        }
+
+        public EmailAnnouncementDto PrepareEmailAnnouncement(int id, string content)
+        {
+            var selectedClass = _dbContext.Classes.Include(i=> i.Students).FirstOrDefault(c => c.Id == id);
+            if (selectedClass == null)
+            {
+                return null;
+            }
+            var parents = _dbContext.Students.Include(i => i.Parent).Select(s => s.Parent).Distinct().ToList();
+      
+            if (parents.Any())
+            {
+                var recipent = "";
+                parents.ForEach(p =>
+                {
+                    recipent += p.FirstName + " " + p.LastName + "\n";
+                });
+
+                var email = new EmailAnnouncementDto()
+                {
+                    Content = content,
+                    FromClass = selectedClass.Name,
+                    Recipient = recipent
+                };
+                return email;
+            }
+
+            return null;
 
         }
     }
