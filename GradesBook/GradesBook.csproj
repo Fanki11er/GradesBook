@@ -11,6 +11,7 @@
     <SpaProxyServerUrl>https://localhost:44496</SpaProxyServerUrl>
     <SpaProxyLaunchCommand>npm start</SpaProxyLaunchCommand>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>7d2edef5-47a5-47c3-94fd-63befc834cf0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +24,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.1" />
+    <PackageReference Include="SendGrid.SmtpApi" Version="1.4.6" />
   </ItemGroup>
 
   <ItemGroup>

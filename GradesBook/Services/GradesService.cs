@@ -77,7 +77,7 @@ namespace GradesBook.Services
 
             };
             var startDate = DateTime.Parse(dto.StartDate);
-            var endDate = DateTime.Parse(dto.EndDate);
+            var endDate = DateTime.Parse(dto.EndDate).AddHours(24);
 
             dto.Subjects.ForEach(subjectId =>
             {

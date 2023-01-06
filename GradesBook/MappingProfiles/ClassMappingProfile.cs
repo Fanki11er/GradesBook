@@ -32,7 +32,7 @@ namespace GradesBook.MappingProfiles
             CreateMap<Student, StudentWithClassAndGradesAverageDto>()
                 .ForMember(s => s.StudentId, m => m.MapFrom(x => x.Id))
                 .ForMember(s => s.StudentName, m => m.MapFrom(x => x.FirstName + " " + x.LastName))
-                .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Count() == 0? 0 : x.Grades.Average(a => a.Value)))
+                .ForMember(s => s.GradesAverage, m => m.MapFrom(x => x.Grades.Count() == 0? 0 : float.Parse(x.Grades.Average(a => a.Value).ToString("0.0"))))
                 .ForMember(s => s.ClassName, m => m.MapFrom(x => x.StudentClass == null ? "" : x.StudentClass.Name));
 
             CreateMap<RegisterUserDto, Student>();
@@ -61,7 +61,10 @@ namespace GradesBook.MappingProfiles
             CreateMap<ClassAnnouncement, ClassAnnouncementDto>()
               .ForMember(d => d.Date, m => m.MapFrom(d => d.Date.ToString("dd-MM-yyyy")))
               .ForMember(d => d.ClassName, m => m.MapFrom(n => n.Class.Name));
+            
             CreateMap<StudentRateDto, Grade>();
+
+
         }
 
 

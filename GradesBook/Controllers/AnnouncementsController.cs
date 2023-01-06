@@ -8,10 +8,12 @@ namespace GradesBook.Controllers
     public class AnnouncementsController : ControllerBase
     {
         private readonly IAnnouncementsService _announcementsService;
+        private readonly IEmailSrvice _emailSrvice;
 
-        public AnnouncementsController (IAnnouncementsService announcementsService)
+        public AnnouncementsController (IAnnouncementsService announcementsService, IEmailSrvice emailSrvice)
         {
             _announcementsService = announcementsService;   
+            _emailSrvice = emailSrvice;
         }
 
         [HttpGet("Main")]
@@ -40,6 +42,14 @@ namespace GradesBook.Controllers
             var result = _announcementsService.AddAnnouncementToClass(id, content); 
             if (result > 0)
             {
+
+                var email = _announcementsService.PrepareEmailAnnouncement(id, content);
+                if(email != null)
+                {
+                    _emailSrvice.SendClassAnnoncemnent(email);
+                }
+                
+
                 return Ok();
             }
             return BadRequest();

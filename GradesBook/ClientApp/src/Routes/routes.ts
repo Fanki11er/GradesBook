@@ -5,7 +5,7 @@ export const routes = {
   register: "/Register",
   login: "/Login",
   parentView: "/Parent",
-  programs: "Teacher/Program",
+  programs: "/Teacher/Program",
   teacherView: "/Teacher",
   studentView: "/Student",
   classSettings: "/Teacher/Class",
