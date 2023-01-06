@@ -65,7 +65,9 @@ builder.Services.AddScoped<IAnnouncementsService, AnnouncementsService>();
 builder.Services.AddScoped<IGradesService, GradesService>();
 builder.Services.AddScoped<IEmailSrvice, EmailService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-builder.Services.AddHostedService<PeriodicService>();
+
+//Turn off or on periodic sending Emails
+//builder.Services.AddHostedService<PeriodicService>();
 
 
 var app = builder.Build();

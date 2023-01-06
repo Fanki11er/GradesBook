@@ -30,26 +30,18 @@ namespace GradesBook.Services
             return subjects;
         }
 
+
         public IEnumerable<SelectOption> GetStudentsSubjects(int id)
         {
             var student = _dbContext.Students.FirstOrDefault(x => x.Id == id);
-            if(student == null)
+            if (student == null)
             {
                 return null;
             }
-            var studentClass = _dbContext.Classes.FirstOrDefault(c=> c.Id == student.ClassId);
-            if(studentClass == null)
-            {
-                return null;
-            }
-            var program = _dbContext.Programs.FirstOrDefault(p=> p.Id == studentClass.ProgramId);
-            if(program == null)
-            {
-                return null;
-            }
-            var subjects = _dbContext.ProgramSubjects.Include(i => i.Subject).Where(ps => ps.ProgramId == program.Id).Select(i => i.Subject).ToList();
+            var studentSubjects = _dbContext.Grades.Include(i=> i.Subject).Where(g=> g.StudentId == student.Id).Select(g=> g.Subject).Distinct().ToList();
+          
 
-            return _mapper.Map<IEnumerable<SelectOption>>(subjects);
+            return _mapper.Map<IEnumerable<SelectOption>>(studentSubjects);
         }
 
     }
