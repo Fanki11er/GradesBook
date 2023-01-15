@@ -26,7 +26,23 @@ const colorsSchemes: ColorsSchemes = {
     greenTable: "rgba(247, 248, 250, 1)",
     buttonGrades: "rgba(192, 199, 214, 1)",
     buttonGradesHover: "",
-    header: "",
+    header: "rgba(115, 124, 142, 1)",
+    headerAnnouncement: "",
+    labelNameList: "rgba(115, 124, 142, 1)",
+    changeData: "rgba(115, 124, 142, 1)",
+    selectLabel: "rgba(192, 199, 214, 1)",
+    addAnnouncement: "rgba(115, 124, 142, 1)",
+    addTeacherClass: "rgba(143, 203, 128, 1)",
+    hoverColorAddTeacherClass: "",
+    subjectName: "",
+    newList: "rgba(255,255,255,1)",
+    backgroundCheckbox: "",
+    labelCheckbox: "",
+    hoverLabelCheckbox: "",
+    textAreaContainer: "",
+    textAreaBorder: "rgba(192, 199, 214, 1)",
+    registerChildWrapper: "rgba(115, 124, 142, 0.8)",
+    registerChildrenHeader: "rgba(115, 124, 142, 1)",
   },
   dark: {
     mainBackground: "rgba(1,13,38, 1)",
@@ -40,7 +56,7 @@ const colorsSchemes: ColorsSchemes = {
     red: "",
     green: "rgba(131,179,59,1)",
     yellow: "",
-    errorRed: "",
+    errorRed: "rgba(255, 131, 131, 1)",
     buttonsGray: "rgba(19,179,242,1)",
     purple: "",
     transparent: "transparent",
@@ -55,7 +71,23 @@ const colorsSchemes: ColorsSchemes = {
     greenTable: "rgba(131,179,59,1)",
     buttonGrades: "rgba(19,179,242,1)",
     buttonGradesHover: "",
-    header: "rgba(2,40,115,1)",
+    header: "rgba(19,179,242,1)",
+    headerAnnouncement: "rgba(19,179,242,1)",
+    labelNameList: "rgba(19,179,242,1)",
+    changeData: "rgba(19,179,242,1)",
+    selectLabel: "rgba(19,179,242,1)",
+    addAnnouncement: "rgba(19,179,242,1)",
+    addTeacherClass: "rgba(131,179,59,1)",
+    hoverColorAddTeacherClass: "rgba(0,0,0,1)",
+    subjectName: "rgba(131,179,59,1)",
+    newList: "rgba(2,40,115,1)",
+    backgroundCheckbox: "",
+    labelCheckbox: "rgba(19,179,242,1)",
+    hoverLabelCheckbox: "rgba(2,40,115,1)",
+    textAreaContainer: "rgba(1,13,38, 1)",
+    textAreaBorder: "rgba(131,179,59,1)",
+    registerChildWrapper: "rgba(1,13,38, 1)",
+    registerChildrenHeader: "rgba(19,179,242,1)",
   },
   pink: {
     mainBackground: "rgba(202,166,166,1)",
@@ -69,7 +101,7 @@ const colorsSchemes: ColorsSchemes = {
     red: "",
     green: "rgba(201,132,132,1)",
     yellow: "",
-    errorRed: "",
+    errorRed: "rgba(255, 131, 131, 1)",
     buttonsGray: "",
     purple: "rgba(63, 61, 86)",
     transparent: "transparent",
@@ -84,7 +116,23 @@ const colorsSchemes: ColorsSchemes = {
     greenTable: "rgba(202,166,166,1)",
     buttonGrades: "rgba(200,151,151,1)",
     buttonGradesHover: "(rgba(202,166,166,1)",
-    header: "",
+    header: "rgba(115, 124, 142, 1)",
+    headerAnnouncement: "rgba(200,151,151,1)",
+    labelNameList: "rgba(115, 124, 142, 1)",
+    changeData: "rgba(200,151,151,1)",
+    selectLabel: "rgba(202,166,166,1)",
+    addAnnouncement: "rgba(115, 124, 142, 1)",
+    addTeacherClass: "rgba(202,166,166,1)",
+    hoverColorAddTeacherClass: "",
+    subjectName: "rgba(115, 124, 142, 1)",
+    newList: "",
+    backgroundCheckbox: "",
+    labelCheckbox: "rgba(115, 124, 142, 1)",
+    hoverLabelCheckbox: "rgba(217, 217, 217, 1)",
+    textAreaContainer: "rgba(217, 217, 217, 1)",
+    textAreaBorder: "",
+    registerChildWrapper: "rgba(115, 124, 142, 0.8)",
+    registerChildrenHeader: "rgba(200,151,151,1)",
   },
 };
 
@@ -146,6 +194,22 @@ export type Colors = {
   buttonGrades: string;
   buttonGradesHover: string;
   header: string;
+  headerAnnouncement: string;
+  labelNameList: string;
+  changeData: string;
+  selectLabel: string;
+  addAnnouncement: string;
+  addTeacherClass: string;
+  hoverColorAddTeacherClass: string;
+  subjectName: string;
+  newList: string;
+  backgroundCheckbox: string;
+  labelCheckbox: string;
+  hoverLabelCheckbox: string;
+  textAreaContainer: string;
+  textAreaBorder: string;
+  registerChildWrapper: string;
+  registerChildrenHeader: string;
 };
 
 export let selectedColorScheme: ColorSchemasTypes = "light";

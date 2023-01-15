@@ -23,6 +23,7 @@ export const AddProgramFormWrapper = styled(Form)`
 export const AddProgramFormHeader = styled.h2`
   margin: 0;
   font-size: ${(props: StyledTheme) => props.theme.fontSizes.large};
+  color: ${(props: StyledTheme) => props.theme.colors.headerAnnouncement};
 `;
 
 export const AddProgramFormInputsWrapper = styled.div`

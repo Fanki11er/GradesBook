@@ -19,7 +19,8 @@ export const ListRowClass = styled.li`
   transition: all 0.3s;
 
   :hover {
-    background-color: ${(props: StyledTheme) => props.theme.colors.green};
+    background-color: ${(props: StyledTheme) =>
+      props.theme.colors.addTeacherClass};
     border-radius: 10px;
     cursor: pointer;
   }

@@ -5,7 +5,7 @@ import { StyledTheme } from "../../GlobalStyles/theme";
 export const InputWrapper = styled(Field)`
   border: 2px solid ${(props: StyledTheme) => props.theme.colors.buttonsGray};
   border-radius: 10px;
-  background-color: ${(props: StyledTheme) => props.theme.colors.white};
+  background-color: ${(props: StyledTheme) => props.theme.colors.newList};
   outline: none;
   width: 250px;
   height: 100%;
