@@ -30,7 +30,7 @@ namespace GradesBook.Services
 
 
 
-                await Task.Delay(1200000);
+                await Task.Delay(300000);
             }
         }
     }
