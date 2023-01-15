@@ -107,7 +107,7 @@ const RegisterChildForm = (props: Props) => {
       }}
     >
       <RegisterChildFormWrapper>
-        <FormHeader>Register children</FormHeader>
+        <FormHeader>Zarejestruj dziecko</FormHeader>
         {error && <FormError>{error}</FormError>}
         <RegisterChildFormInputsWrapper>
           <InputField name="name" placeholder="Imię" label="Imię" />
@@ -135,7 +135,7 @@ const RegisterChildForm = (props: Props) => {
           <SmallLoader />
         ) : (
           <FormButtonsWrapper>
-            <FormButtonOk type={"submit"}>Register</FormButtonOk>
+            <FormButtonOk type={"submit"}>Zarejestruj</FormButtonOk>
             <FormButtonCancel
               type="button"
               onClick={() => {
@@ -143,7 +143,7 @@ const RegisterChildForm = (props: Props) => {
                 handleModalToggle();
               }}
             >
-              Back
+              Powrót
             </FormButtonCancel>
           </FormButtonsWrapper>
         )}

@@ -24,7 +24,7 @@ export const PersonalDataChangeFormHeader = styled.h3`
   display: flex;
   width: 100%;
   height: 100%;
-  color: ${(props: StyledTheme) => props.theme.colors.menuBackground};
+  color: ${(props: StyledTheme) => props.theme.colors.changeData};
   font-size: ${(props: StyledTheme) => props.theme.fontSizes.medium};
   justify-content: center;
   align-items: center;

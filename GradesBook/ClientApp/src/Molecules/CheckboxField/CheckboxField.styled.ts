@@ -14,12 +14,20 @@ export const CheckBoxFieldWrapper = styled.div`
   padding: 10px;
   border: 2px solid ${(props: StyledTheme) => props.theme.colors.lightBorder};
   border-radius: 10px;
+  background-color: ${(props: StyledTheme) =>
+    props.theme.colors.backgroundCheckbox};
   :hover {
     background-color: ${(props: StyledTheme) => props.theme.colors.green};
   }
 `;
 
-export const CheckboxFieldLabel = styled.label``;
+export const CheckboxFieldLabel = styled.label`
+  color: ${(props: StyledTheme) => props.theme.colors.labelCheckbox};
+
+  :hover {
+    color: ${(props: StyledTheme) => props.theme.colors.hoverLabelCheckbox};
+  }
+`;
 
 export const CheckboxInput = styled(Field)`
   width: 25px;

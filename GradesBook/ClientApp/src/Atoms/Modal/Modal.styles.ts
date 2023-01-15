@@ -10,7 +10,7 @@ export const ModalWrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${(props: StyledTheme) =>
-    props.theme.colors.transparentBlack};
+    props.theme.colors.registerChildWrapper};
   top: 0;
   left: 0;
   transform: ${(props: Props & StyledTheme) =>

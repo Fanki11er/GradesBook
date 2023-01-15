@@ -24,7 +24,7 @@ export const SelectInputFieldLabel = styled.label`
 export const StyledSelect = styled(Field)`
   width: 100%;
   height: 100%;
-  background-color: ${(props: StyledTheme) => props.theme.colors.buttonsGray};
+  background-color: ${(props: StyledTheme) => props.theme.colors.selectLabel};
   outline: none;
   appearance: none;
   border-radius: 10px;

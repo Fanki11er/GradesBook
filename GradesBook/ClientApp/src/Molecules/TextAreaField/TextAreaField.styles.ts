@@ -7,10 +7,11 @@ export const TextArea = styled(Field)`
   height: 100%;
   border-radius: 10px;
   background-color: ${(props: StyledTheme) =>
-    props.theme.colors.mainBackground};
+    props.theme.colors.textAreaContainer};
   resize: none;
   outline: none;
   padding: 15px;
+  border: 2px solid ${(props: StyledTheme) => props.theme.colors.textAreaBorder};
 `;
 
 export const TextAreaFieldWrapper = styled.div`
@@ -22,6 +23,7 @@ export const TextAreaFieldWrapper = styled.div`
   grid-row-gap: 10px;
   justify-content: center;
   justify-self: flex-end;
+  padding: 0 0 20px 0;
 `;
 
 export const TextAreaFieldLabel = styled.label`
@@ -31,4 +33,5 @@ export const TextAreaFieldLabel = styled.label`
   justify-self: flex-start;
   align-items: center;
   font-weight: bold;
+  color: ${(props: StyledTheme) => props.theme.colors.addAnnouncement};
 `;

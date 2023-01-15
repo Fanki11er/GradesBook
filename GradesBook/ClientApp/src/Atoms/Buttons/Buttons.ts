@@ -72,6 +72,7 @@ export const ButtonLogOut = styled(Button)`
   height: 30px;
   border: inherit;
   border: none;
+  background-color: ${(props: StyledTheme) => props.theme.colors.buttonAdd};
 
   :hover {
     background-color: ${(props: StyledTheme) => props.theme.colors.green};

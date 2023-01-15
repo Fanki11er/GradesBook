@@ -16,7 +16,9 @@ export const RadioFieldWrapper = styled.div`
     ${(props: StyledTheme) => props.theme.colors.lightBorder};
 `;
 
-export const RadioFieldLabel = styled.label``;
+export const RadioFieldLabel = styled.label`
+  color: ${(props: StyledTheme) => props.theme.colors.subjectName};
+`;
 
 export const RadioInput = styled(Field)`
   width: 25px;
